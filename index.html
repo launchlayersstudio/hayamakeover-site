@@ -22,13 +22,6 @@ html{scroll-behavior:smooth;}
 body{background:var(--ivory);color:var(--dark);font-family:'Nunito',sans-serif;overflow-x:hidden;}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
-/* TOP BAR */
-.topbar{position:relative;z-index:103;background:var(--rose);padding:0.45rem 3.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:rgba(255,255,255,0.88);font-weight:600;letter-spacing:0.02em;}
-.topbar a{color:rgba(255,255,255,0.88);text-decoration:none;transition:color 0.2s;}
-.topbar a:hover{color:#fff;}
-.topbar-left{display:flex;gap:1.75rem;align-items:center;}
-.topbar-right{display:flex;gap:1.25rem;align-items:center;}
-
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:transparent;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all 0.42s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
 nav.scrolled{background:rgba(253,249,245,0.97);backdrop-filter:blur(24px);border-bottom-color:var(--border);box-shadow:0 4px 32px rgba(30,14,20,0.09);}
@@ -346,19 +339,6 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 </style>
 </head>
 <body>
-
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="topbar-left">
-    <a href="tel:+916394584794">📞 +91 63945 84794</a>
-    <a href="mailto:info@hayamakeover.com">✉ info@hayamakeover.com</a>
-  </div>
-  <div class="topbar-right">
-    <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
-    <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
-    <a href="https://www.youtube.com/channel/UCH2iXzsNbjP-nDBo3WXXiGw" target="_blank">YouTube</a>
-  </div>
-</div>
 
 <!-- OVERLAY + SIDEBAR -->
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
@@ -815,7 +795,7 @@ gsap.registerPlugin(ScrollTrigger);
 /* NAV — fade in + scroll transition */
 gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
 window.addEventListener('scroll',function(){
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40);
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
 },{passive:true});
 
 /* HERO CAROUSEL */
