@@ -23,14 +23,14 @@ body{background:var(--ivory);color:var(--dark);font-family:'Nunito',sans-serif;o
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
 /* TOP BAR */
-.topbar{background:var(--rose);padding:0.45rem 3.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:rgba(255,255,255,0.88);font-weight:600;letter-spacing:0.02em;}
+.topbar{position:relative;z-index:103;background:var(--rose);padding:0.45rem 3.5rem;display:flex;align-items:center;justify-content:space-between;font-size:0.72rem;color:rgba(255,255,255,0.88);font-weight:600;letter-spacing:0.02em;}
 .topbar a{color:rgba(255,255,255,0.88);text-decoration:none;transition:color 0.2s;}
 .topbar a:hover{color:#fff;}
 .topbar-left{display:flex;gap:1.75rem;align-items:center;}
 .topbar-right{display:flex;gap:1.25rem;align-items:center;}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:transparent;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all 0.42s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:transparent;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);border-bottom:1px solid transparent;transition:all 0.42s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
 nav.scrolled{background:rgba(253,249,245,0.97);backdrop-filter:blur(24px);border-bottom-color:var(--border);box-shadow:0 4px 32px rgba(30,14,20,0.09);}
 nav.scrolled .nav-logo{color:var(--dark);}
 nav.scrolled .nav-tagline{color:var(--gold);}
