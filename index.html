@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-  .nav-logo-img{height:44px;width:auto;object-fit:contain;display:block;}
+  .nav-logo-img{height:54px;width:auto;object-fit:contain;display:block;padding:4px 6px;}
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --ivory:#FDF9F5;--ivory2:#F7F1EA;--ivory3:#EFE6DA;
@@ -347,14 +347,14 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
     <button class="sidebar-close" onclick="closeSidebar()">✕</button>
   </div>
   <div class="sidebar-body">
-    <nav class="sb-links">
+    <div class="sb-links">
       <a href="#about"        onclick="closeSidebar()">About</a>
       <a href="#services"     onclick="closeSidebar()">Services</a>
       <a href="#portfolio"    onclick="closeSidebar()">Portfolio</a>
       <a href="#packages"     onclick="closeSidebar()">Packages</a>
       <a href="#testimonials" onclick="closeSidebar()">Memberships</a>
       <a href="#contact"      onclick="closeSidebar()">Contact Us</a>
-    </nav>
+    </div>
     <a href="#contact" class="sb-book" onclick="closeSidebar()">Book Appointment →</a>
     <div class="sb-foot">
       <div class="sb-foot-info">
@@ -372,18 +372,17 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-brand">
+ <a href="#" class="nav-brand">
     <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img">
-<div class="nav-tagline">Luxury Home Salon · Lucknow</div>
   </a>
   <div class="nav-links">
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#packages">Packages</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#contact">Contact</a>
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a>
+    <a href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'});return false;">About</a>
+    <a href="#services" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});return false;">Services</a>
+    <a href="#portfolio" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'});return false;">Portfolio</a>
+    <a href="#packages" onclick="document.getElementById('packages').scrollIntoView({behavior:'smooth'});return false;">Packages</a>
+    <a href="#testimonials" onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'});return false;">Reviews</a>
+    <a href="#contact" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});return false;">Contact</a>
   </div>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Appointment →</button>
   <button class="nav-ham" id="ham" onclick="toggleSidebar()" aria-label="Menu">
