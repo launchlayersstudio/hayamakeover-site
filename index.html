@@ -10,6 +10,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
   .nav-logo-img{height:54px;width:auto;object-fit:contain;display:block;padding:4px 6px;}
+  .nav-brand{display:flex;align-items:center;gap:0.5rem;}
+.nav-brand-name{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.25rem;letter-spacing:0.06em;color:var(--dark);line-height:1;display:none;}
+.nav-brand-name em{font-style:italic;color:var(--rose);}
+@media(max-width:768px){.nav-brand-name{display:block;}}
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --ivory:#FDF9F5;--ivory2:#F7F1EA;--ivory3:#EFE6DA;
@@ -24,7 +28,7 @@ body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;o
 
 /* NAV */
 nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.5rem 0.75rem 1.25rem;background:#fff;border-radius:50px;box-shadow:0 4px 32px rgba(30,14,20,0.12);border:1px solid rgba(184,149,106,0.15);width:calc(100% - 3rem);max-width:1200px;transition:all 0.42s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
-nav.scrolled{box-shadow:0 8px 40px rgba(30,14,20,0.16);}
+nav.scrolled{box-shadow:0 8px 40px rgba(30,14,20,0.2);border-color:rgba(184,149,106,0.3);transform:translateX(-50%) translateY(2px);}
 .nav-brand{text-decoration:none;display:block;}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;letter-spacing:0.1em;color:var(--dark);line-height:1;}
 .nav-logo span{color:var(--rose);}
@@ -369,6 +373,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <nav id="nav">
  <a href="#" class="nav-brand">
     <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img">
+    <span class="nav-brand-name">Haya <em>Makeover</em></span>
   </a>
   <div class="nav-links">
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a>
@@ -725,7 +730,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 
 <!-- FOOTER -->
 <footer>
-  <img src="/logo.png" alt="Haya Makeover" style="height:36px;width:auto;filter:brightness(0) invert(1);">
+  <img src="/logo.png" alt="Haya Makeover" style="height:56px;width:auto;filter:brightness(0) invert(1);">
   <span class="ft-copy">© 2025 Haya Makeover · All rights reserved.</span>
   <div class="ft-links">
     <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
