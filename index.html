@@ -73,13 +73,8 @@ nav.scrolled{box-shadow:0 8px 40px rgba(30,14,20,0.16);}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s cubic-bezier(0.4,0,0.2,1);}
 .hero-slide.active{opacity:1;}
 .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
-.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(108deg,rgba(30,14,20,0.76) 0%,rgba(30,14,20,0.42) 55%,rgba(30,14,20,0.15) 100%),linear-gradient(to top,rgba(30,14,20,0.45) 0%,transparent 48%);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
-.hero-slide .slide-badge,.hero-slide .slide-h,.hero-slide .slide-sub,.hero-slide .slide-btns{opacity:0;}
-.hero-slide.active .slide-badge{animation:fadeUp 0.7s 0.35s both ease-out;}
-.hero-slide.active .slide-h{animation:fadeUp 0.85s 0.55s both ease-out;}
-.hero-slide.active .slide-sub{animation:fadeUp 0.7s 0.72s both ease-out;}
-.hero-slide.active .slide-btns{animation:fadeUp 0.7s 0.88s both ease-out;}
+.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(108deg,rgba(30,14,20,0.76) 0%,rgba(30,14,20,0.42) 55%,rgba(30,14,20,0.15) 100%),linear-gradient(to top,rgba(30,14,20,0.45) 0%,transparent 48%);pointer-events:none;}
+.slide-badge,.slide-h,.slide-sub,.slide-btns{opacity:1;}
 .hero-content{position:absolute;inset:0;z-index:2;display:flex;align-items:center;padding:6rem 5rem 0;pointer-events:none;}
 .hero-text{max-width:600px;pointer-events:all;}
 .slide-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.5rem;}
@@ -308,9 +303,9 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .nav-links,.nav-cta{display:none!important;}
   .nav-ham{display:flex;}
   .hero{height:80vh;min-height:460px;}
-  .hero-content{padding:0 1.5rem;}
+  .hero-content{padding:5rem 1.5rem 2rem;}
   .hero-arrow{display:none;}
-  .offer-badge{bottom:4.5rem;right:1rem;padding:0.875rem 1.25rem;}
+  .offer-badge{display:none;}
   .ob-main{font-size:1.875rem;}
   .about,.services,.promo,.portfolio,.testimonials,.offers,.whyus,.brands{padding-top:3.5rem;padding-bottom:3.5rem;}
   .svc-grid{grid-template-columns:1fr 1fr;gap:0.875rem;}
@@ -393,66 +388,21 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <!-- HERO CAROUSEL -->
 <section class="hero" id="home">
   <div class="hero-slides">
-
-    <div class="hero-slide active">
-      <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1400&q=85" alt="Bridal Makeup">
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="slide-badge">Premium Home Salon · Est. Lucknow</p>
-          <h1 class="slide-h">Book Your <em>Bridal Makeup</em><br>&amp; Get Mom's Makeup <span class="free-txt">FREE</span></h1>
-          <p class="slide-sub">Celebrating love, one family at a time. Book your bridal package and treat Mom to a complimentary makeover on us.</p>
-          <div class="slide-btns">
-            <a href="#contact" class="btn-gold">Book Now →</a>
-            <a href="#services" class="btn-wire-light">Explore Services</a>
-          </div>
-        </div>
-      </div>
-      <div class="offer-badge">
-        <div class="ob-label">Limited Offer</div>
-        <div class="ob-main">FREE</div>
-        <div class="ob-label">Mom's Makeup</div>
+    <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1400&q=85" alt="Bridal Makeup"></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1400&q=85" alt="Salon Services"></div>
+    <div class="hero-slide"><img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1400&q=85" alt="Pre-Bridal"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <p class="slide-badge" id="hbadge">Premium Home Salon · Est. Lucknow</p>
+      <h1 class="slide-h" id="hhead">Book Your <em>Bridal Makeup</em><br>&amp; Get Mom's Makeup <span class="free-txt">FREE</span></h1>
+      <p class="slide-sub" id="hsub">Celebrating love, one family at a time. Book your bridal package and treat Mom to a complimentary makeover on us.</p>
+      <div class="slide-btns" id="hbtns">
+        <a href="#contact" class="btn-gold">Book Now →</a>
+        <a href="#services" class="btn-wire-light">Explore Services</a>
       </div>
     </div>
-
-    <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1400&q=85" alt="Salon Services">
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="slide-badge">Home Salon Services · Lucknow</p>
-          <h1 class="slide-h"><em>Flat 15% Off</em><br>All Home Salon Services</h1>
-          <p class="slide-sub">Facials, hair, makeup, mehendi — premium beauty at your doorstep. Limited time offer for Lucknow residents.</p>
-          <div class="slide-btns">
-            <a href="#contact" class="btn-gold">Claim Offer →</a>
-            <a href="#packages" class="btn-wire-light">View Packages</a>
-          </div>
-        </div>
-      </div>
-      <div class="offer-badge">
-        <div class="ob-main">15%</div>
-        <div class="ob-label">OFF Everything</div>
-      </div>
-    </div>
-
-    <div class="hero-slide">
-      <img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1400&q=85" alt="Pre-Bridal">
-      <div class="hero-content">
-        <div class="hero-text">
-          <p class="slide-badge">Bridal Packages · Lucknow's Finest</p>
-          <h1 class="slide-h">Pre-Bridal Packages<br>Starting at <em>₹2,499</em></h1>
-          <p class="slide-sub">Customised pre-wedding skincare &amp; makeup packages designed to make you glow from within, months before the big day.</p>
-          <div class="slide-btns">
-            <a href="#contact" class="btn-gold">Book Package →</a>
-            <a href="#portfolio" class="btn-wire-light">See Our Work</a>
-          </div>
-        </div>
-      </div>
-      <div class="offer-badge">
-        <div class="ob-label">Starting at</div>
-        <div class="ob-main">₹2,499</div>
-        <div class="ob-label">Pre-Bridal</div>
-      </div>
-    </div>
-
   </div>
   <button class="hero-arrow hero-prev" id="h-prev">&#8249;</button>
   <button class="hero-arrow hero-next" id="h-next">&#8250;</button>
@@ -797,12 +747,22 @@ window.addEventListener('scroll',function(){
 var slides=document.querySelectorAll('.hero-slide');
 var dots=document.querySelectorAll('.hero-dot');
 var cur=0,timer;
+var slideData=[
+  {badge:'Premium Home Salon · Est. Lucknow',head:'Book Your <em>Bridal Makeup</em><br>&amp; Get Mom\'s Makeup <span class="free-txt">FREE</span>',sub:'Celebrating love, one family at a time. Book your bridal package and treat Mom to a complimentary makeover on us.',btns:'<a href="#contact" class="btn-gold">Book Now →</a><a href="#services" class="btn-wire-light">Explore Services</a>'},
+  {badge:'Home Salon Services · Lucknow',head:'<em>Flat 15% Off</em><br>All Home Salon Services',sub:'Facials, hair, makeup, mehendi — premium beauty at your doorstep. Limited time offer for Lucknow residents.',btns:'<a href="#contact" class="btn-gold">Claim Offer →</a><a href="#packages" class="btn-wire-light">View Packages</a>'},
+  {badge:'Bridal Packages · Lucknow\'s Finest',head:'Pre-Bridal Packages<br>Starting at <em>₹2,499</em>',sub:'Customised pre-wedding skincare &amp; makeup packages designed to make you glow from within, months before the big day.',btns:'<a href="#contact" class="btn-gold">Book Package →</a><a href="#portfolio" class="btn-wire-light">See Our Work</a>'}
+];
 function goTo(n){
   slides[cur].classList.remove('active');
   dots[cur].classList.remove('active');
   cur=(n+slides.length)%slides.length;
   slides[cur].classList.add('active');
   dots[cur].classList.add('active');
+  var d=slideData[cur];
+  document.getElementById('hbadge').innerHTML=d.badge;
+  document.getElementById('hhead').innerHTML=d.head;
+  document.getElementById('hsub').innerHTML=d.sub;
+  document.getElementById('hbtns').innerHTML=d.btns;
 }
 timer=setInterval(function(){goTo(cur+1);},5500);
 document.getElementById('h-prev').onclick=function(){clearInterval(timer);goTo(cur-1);timer=setInterval(function(){goTo(cur+1);},5500);};
