@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/SplitText.min.js"></script>
 <style>
 .nav-logo-img{height:36px;width:36px;object-fit:contain;display:block;flex-shrink:0;}
 .nav-brand{display:flex;flex-direction:row;align-items:center;gap:0.5rem;text-decoration:none;flex-wrap:nowrap;}
@@ -754,28 +753,15 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
 <script>
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-/* SPLIT TEXT ON HEADINGS */
-document.fonts.ready.then(function(){
-  gsap.utils.toArray('.sec-h, .why-h, .cta-h, .promo-h').forEach(function(el){
-    el.classList.remove('g0');
-    gsap.set(el,{opacity:1});
-    SplitText.create(el,{
-      type:'words,lines',
-      mask:'lines',
-      autoSplit:true,
-      onSplit:function(instance){
-        return gsap.from(instance.lines,{
-          yPercent:120,
-          stagger:0.08,
-          scrollTrigger:{
-            trigger:el,
-            scrub:true,
-            start:'clamp(top 80%)',
-            end:'clamp(bottom 60%)'
-          }
-        });
-      }
-    });
+/* HEADING REVEAL */
+document.querySelectorAll('.sec-h,.why-h,.cta-h,.promo-h').forEach(function(el){
+  el.classList.remove('g0');
+  gsap.set(el,{opacity:1,clipPath:'inset(0 0 100% 0)'});
+  gsap.to(el,{
+    clipPath:'inset(0 0 0% 0)',
+    duration:1,
+    ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}
   });
 });
 
