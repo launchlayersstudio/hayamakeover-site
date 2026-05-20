@@ -757,6 +757,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 /* SPLIT TEXT ON HEADINGS */
 document.fonts.ready.then(function(){
   gsap.utils.toArray('.sec-h, .why-h, .cta-h, .promo-h').forEach(function(el){
+    el.classList.remove('g0');
     gsap.set(el,{opacity:1});
     SplitText.create(el,{
       type:'words,lines',
@@ -832,7 +833,7 @@ if(window.innerWidth>768){
 }
 
 /* SCROLL REVEAL */
-document.querySelectorAll('.g0').forEach(function(el){
+document.querySelectorAll('.g0:not(.sec-h):not(.why-h):not(.cta-h):not(.promo-h)').forEach(function(el){
   gsap.fromTo(el,{opacity:0,y:32},{opacity:1,y:0,duration:0.88,ease:'power3.out',
     scrollTrigger:{trigger:el,start:'top 92%',toggleActions:'play none none none'}});
 });
