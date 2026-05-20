@@ -781,8 +781,10 @@ function goTo(n){
   document.getElementById('hbtns').innerHTML=d.btns;
 }
 timer=setInterval(function(){goTo(cur+1);},5500);
-document.getElementById('h-prev').onclick=function(){clearInterval(timer);goTo(cur-1);timer=setInterval(function(){goTo(cur+1);},5500);};
-document.getElementById('h-next').onclick=function(){clearInterval(timer);goTo(cur+1);timer=setInterval(function(){goTo(cur+1);},5500);};
+var hprev=document.getElementById('h-prev');
+var hnext=document.getElementById('h-next');
+if(hprev)hprev.onclick=function(){clearInterval(timer);goTo(cur-1);timer=setInterval(function(){goTo(cur+1);},5500);};
+if(hnext)hnext.onclick=function(){clearInterval(timer);goTo(cur+1);timer=setInterval(function(){goTo(cur+1);},5500);};
 dots.forEach(function(d,i){d.onclick=function(){clearInterval(timer);goTo(i);timer=setInterval(function(){goTo(cur+1);},5500);};});
 document.querySelector('.hero').addEventListener('mouseenter',function(){clearInterval(timer);});
 document.querySelector('.hero').addEventListener('mouseleave',function(){timer=setInterval(function(){goTo(cur+1);},5500);});
