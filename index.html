@@ -280,6 +280,9 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 .ft-links{display:flex;gap:1.25rem;}
 .ft-links a{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
 
+/* PANEL STACK */
+.svc-strip{position:relative;z-index:2;}.about{z-index:3;}.services{z-index:4;}.promo{z-index:5;}.portfolio{z-index:6;}.photo-strip{position:relative;z-index:7;}.testimonials{z-index:8;}.offers{z-index:9;}.whyus{z-index:10;}.brands{position:relative;z-index:11;}.cta-sec{z-index:12;}footer{position:relative;z-index:13;}
+
 /* RESPONSIVE */
 @media(max-width:1024px){
   .topbar{padding-left:2rem;padding-right:2rem;}
@@ -776,10 +779,16 @@ dots.forEach(function(d,i){d.onclick=function(){clearInterval(timer);goTo(i);tim
 document.querySelector('.hero').addEventListener('mouseenter',function(){clearInterval(timer);});
 document.querySelector('.hero').addEventListener('mouseleave',function(){timer=setInterval(function(){goTo(cur+1);},5500);});
 
+/* PINNED PANELS */
+['.hero','.svc-strip','.about','.services','.promo','.portfolio','.photo-strip','.testimonials','.offers','.whyus','.brands','.cta-sec','footer'].forEach(function(sel){
+  var el=document.querySelector(sel);
+  if(el)ScrollTrigger.create({trigger:el,start:'top top',pin:true,pinSpacing:false});
+});
+
 /* SCROLL REVEAL */
 document.querySelectorAll('.g0').forEach(function(el){
-  gsap.fromTo(el,{opacity:0,y:44},{opacity:1,y:0,duration:0.88,ease:'power3.out',
-    scrollTrigger:{trigger:el,start:'top 90%',toggleActions:'play none none none'}});
+  gsap.fromTo(el,{opacity:0,y:32},{opacity:1,y:0,duration:0.88,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 92%',toggleActions:'play none none none'}});
 });
 
 /* SVC CARD TILT */
