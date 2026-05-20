@@ -83,7 +83,7 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .slide-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.5rem;}
 .slide-badge::before{content:'';width:1.5rem;height:1px;background:var(--gold2);}
 .slide-badge::after{content:'✦';font-size:0.55rem;}
-.slide-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(2.5rem,5.5vw,4.5rem);line-height:1.04;color:#fff;margin-bottom:1.25rem;letter-spacing:0.06em;}
+.slide-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3.8vw,3.5rem);line-height:1.12;color:#fff;margin-bottom:1.25rem;letter-spacing:0.08em;}
 .slide-h em{font-style:italic;color:var(--gold2);}
 .slide-h .free-txt{color:#FFD4E4;}
 .slide-sub{font-size:0.9375rem;color:rgba(255,255,255,0.64);max-width:420px;line-height:1.85;margin-bottom:2rem;font-weight:500;}
@@ -92,13 +92,20 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .hero-slide.active .offer-badge{opacity:1;transform:translateY(0);}
 .ob-main{font-family:'Aboreto',serif;font-weight:700;font-size:2.25rem;line-height:1;color:#fff;}
 .ob-label{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.82);font-weight:800;margin-top:2px;}
-.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:rgba(253,249,245,0.1);border:1px solid rgba(255,255,255,0.22);color:#fff;width:52px;height:52px;border-radius:50%;cursor:pointer;font-size:1.375rem;display:flex;align-items:center;justify-content:center;transition:all 0.25s;backdrop-filter:blur(8px);}
+.hero-arrow{display:none;}
 .hero-arrow:hover{background:var(--rose);border-color:var(--rose);}
 .hero-prev{left:2rem;}
 .hero-next{right:2rem;}
 .hero-dots{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:3;}
 .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.35);border:none;cursor:pointer;transition:all 0.3s;padding:0;}
 .hero-dot.active{background:#fff;width:26px;border-radius:4px;}
+
+.scroll-hint{position:absolute;bottom:2.5rem;right:3rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
+.scroll-hint-line{width:1px;height:48px;background:rgba(255,255,255,0.25);position:relative;overflow:hidden;}
+.scroll-hint-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--gold2);animation:scrolldrop 1.8s ease-in-out infinite;}
+.scroll-hint-label{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;writing-mode:vertical-rl;}
+@keyframes scrolldrop{0%{top:-100%;}100%{top:200%;}}
+@media(max-width:768px){.scroll-hint{display:none;}}
 
 /* BUTTONS */
 .btn-gold{background:var(--gold);color:var(--dark);padding:0.95rem 2.25rem;font-size:0.875rem;font-weight:800;font-family:'Nunito',sans-serif;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:0.04em;}
@@ -411,8 +418,10 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
       </div>
     </div>
   </div>
-  <button class="hero-arrow hero-prev" id="h-prev">&#8249;</button>
-  <button class="hero-arrow hero-next" id="h-next">&#8250;</button>
+  <div class="scroll-hint">
+    <div class="scroll-hint-label">Scroll</div>
+    <div class="scroll-hint-line"></div>
+  </div>
   <div class="hero-dots" id="h-dots">
     <button class="hero-dot active"></button>
     <button class="hero-dot"></button>
