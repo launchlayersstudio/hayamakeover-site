@@ -308,7 +308,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   .nav-links,.nav-cta{display:none!important;}
   .nav-ham{display:flex;}
-  .hero{height:80vh;min-height:460px;}
+  .hero{height:100svh;min-height:460px;}
   .hero-content{padding:5rem 1.5rem 2rem;}
   .hero-arrow{display:none;}
   .offer-badge{display:none;}
@@ -778,20 +778,22 @@ dots.forEach(function(d,i){d.onclick=function(){clearInterval(timer);goTo(i);tim
 document.querySelector('.hero').addEventListener('mouseenter',function(){clearInterval(timer);});
 document.querySelector('.hero').addEventListener('mouseleave',function(){timer=setInterval(function(){goTo(cur+1);},5500);});
 
-/* PINNED HERO — overscroll style */
-var hero=document.querySelector('.hero');
-var heroTl=gsap.timeline({
-  scrollTrigger:{
-    trigger:hero,
-    start:'bottom bottom',
-    end:'bottom top',
-    pin:true,
-    pinSpacing:false,
-    scrub:true
-  }
-});
-heroTl.fromTo(hero,{scale:1,opacity:1},{scale:0.82,opacity:0.5,duration:0.9,ease:'none'})
-      .to(hero,{opacity:0,duration:0.1,ease:'none'});
+/* PINNED HERO — overscroll style (desktop only) */
+if(window.innerWidth>768){
+  var hero=document.querySelector('.hero');
+  var heroTl=gsap.timeline({
+    scrollTrigger:{
+      trigger:hero,
+      start:'bottom bottom',
+      end:'bottom top',
+      pin:true,
+      pinSpacing:false,
+      scrub:true
+    }
+  });
+  heroTl.fromTo(hero,{scale:1,opacity:1},{scale:0.82,opacity:0.5,duration:0.9,ease:'none'})
+        .to(hero,{opacity:0,duration:0.1,ease:'none'});
+}
 
 /* SCROLL REVEAL */
 document.querySelectorAll('.g0').forEach(function(el){
