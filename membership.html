@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership — Haya Makeover | Privilege Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+.nav-logo-img{height:36px;width:36px;object-fit:contain;display:block;flex-shrink:0;}
+.nav-brand{display:flex;flex-direction:row;align-items:center;gap:0.5rem;text-decoration:none;flex-wrap:nowrap;}
+.nav-brand-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.1rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark);line-height:1;display:block;white-space:nowrap;}
+.nav-brand-name em{font-style:italic;color:var(--rose);}
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ivory:#FDF9F5;--ivory2:#F7F1EA;--ivory3:#EFE6DA;
+  --rose:#A0304E;--rose2:#C04060;--rose-light:#F5D8E2;--rose-pale:#FDF0F4;
+  --gold:#B8956A;--gold2:#D4AF7A;
+  --dark:#1E0E14;--dark2:#2E1820;
+  --muted:rgba(30,14,20,0.48);--border:rgba(184,149,106,0.2);--border-rose:rgba(160,48,78,0.15);
+}
+body{background:var(--ivory);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* NAV */
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.5rem 0.75rem 1.25rem;background:#fff;border-radius:50px;box-shadow:0 4px 32px rgba(30,14,20,0.12);border:1px solid rgba(184,149,106,0.15);width:calc(100% - 3rem);max-width:1200px;transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
+nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24px rgba(30,14,20,0.1);border-left:none;border-right:none;border-top:none;border-bottom-color:rgba(184,149,106,0.25);padding:0.875rem 3.5rem;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.04em;font-weight:600;transition:color 0.2s;position:relative;white-space:nowrap;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--rose);transition:width 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--rose);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-cta{background:var(--rose);color:#fff;padding:0.625rem 1.375rem;font-size:0.78rem;font-weight:800;letter-spacing:0.04em;border:none;cursor:pointer;border-radius:50px;transition:all 0.22s;text-transform:uppercase;white-space:nowrap;text-decoration:none;}
+.nav-cta:hover{background:var(--dark);}
+.nav-ham{display:none;flex-direction:column;justify-content:center;gap:5.5px;background:none;border:none;cursor:pointer;padding:6px;z-index:102;width:36px;height:36px;}
+.nav-ham span{width:22px;height:1.75px;background:var(--dark);border-radius:2px;transition:all 0.35s;display:block;}
+.nav-ham.open span:nth-child(1){transform:translateY(7.25px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-ham.open span:nth-child(3){transform:translateY(-7.25px) rotate(-45deg);}
+
+/* SIDEBAR */
+.overlay{position:fixed;inset:0;background:rgba(30,14,20,0.48);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.38s ease;backdrop-filter:blur(4px);}
+.overlay.show{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:-100%;width:min(340px,88vw);height:100vh;background:var(--ivory);z-index:201;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:right 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(30,14,20,0.14);overflow-y:auto;}
+.sidebar.open{right:0;}
+.sidebar-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sb-tag{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:3px;}
+.sidebar-close{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.125rem;transition:all 0.2s;flex-shrink:0;}
+.sidebar-close:hover{background:var(--rose-pale);border-color:var(--rose);color:var(--rose);}
+.sidebar-body{padding:1.75rem 2rem;flex:1;display:flex;flex-direction:column;}
+.sb-links{display:flex;flex-direction:column;}
+.sb-links a{color:var(--dark);text-decoration:none;font-family:'Aboreto',serif;font-size:1.75rem;font-weight:600;letter-spacing:0.02em;padding:0.875rem 0;border-bottom:1px solid var(--border);transition:color 0.2s;display:flex;align-items:center;justify-content:space-between;}
+.sb-links a::after{content:'→';font-size:1rem;color:var(--rose);opacity:0;transform:translateX(-6px);transition:all 0.25s;}
+.sb-links a:hover{color:var(--rose);}
+.sb-links a:hover::after{opacity:1;transform:translateX(0);}
+.sb-book{margin-top:2rem;background:var(--rose);color:#fff;padding:1rem 1.75rem;font-size:0.875rem;font-weight:800;letter-spacing:0.04em;border:none;border-radius:50px;cursor:pointer;text-transform:uppercase;text-align:center;text-decoration:none;display:block;transition:background 0.22s;}
+.sb-book:hover{background:var(--dark);}
+.sb-foot{margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);}
+.sb-foot-info{font-size:0.8rem;color:var(--muted);line-height:2;font-weight:500;}
+.sb-foot-info strong{color:var(--dark);font-weight:700;}
+.sb-socials{display:flex;gap:1rem;margin-top:0.875rem;}
+.sb-socials a{font-size:0.78rem;color:var(--rose);text-decoration:none;font-weight:700;}
+
+/* PAGE HERO */
+.page-hero{position:relative;height:56vh;min-height:400px;overflow:hidden;display:flex;align-items:center;}
+.page-hero-img{position:absolute;inset:0;}
+.page-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 40%;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(108deg,rgba(30,14,20,0.88) 0%,rgba(30,14,20,0.6) 55%,rgba(30,14,20,0.3) 100%);}
+.page-hero-content{position:relative;z-index:2;padding:0 5rem;margin-top:4rem;}
+.page-hero-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.25rem;}
+.page-hero-badge::before{content:'';width:1.5rem;height:1px;background:var(--gold2);}
+.page-hero-badge::after{content:'✦';font-size:0.55rem;}
+.page-hero h1{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(2rem,4.5vw,3.75rem);line-height:1.08;color:#fff;letter-spacing:0.08em;}
+.page-hero h1 em{font-style:italic;color:var(--gold2);}
+.page-hero-sub{font-size:1rem;color:rgba(255,255,255,0.55);margin-top:1rem;max-width:500px;line-height:1.7;}
+
+/* SHARED */
+.sec-label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:0.875rem;display:flex;align-items:center;gap:0.625rem;}
+.sec-label::before{content:'';width:1.5rem;height:1px;background:var(--rose);}
+.section-head{text-align:center;margin-bottom:3.5rem;}
+.section-head .sec-label{justify-content:center;}
+.section-head .sec-label::after{content:'';width:1.5rem;height:1px;background:var(--rose);}
+.sec-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.14;color:var(--dark);letter-spacing:0.06em;}
+.sec-h em{font-style:italic;color:var(--rose);}
+.sec-sub{font-size:0.9375rem;color:var(--muted);max-width:540px;margin:1rem auto 0;line-height:1.8;}
+
+/* VALUE BAR */
+.value-bar{background:var(--dark);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.value-item{display:flex;align-items:center;gap:0.625rem;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:500;}
+.value-item strong{color:var(--gold2);}
+.value-dot{width:3px;height:3px;border-radius:50%;background:rgba(184,149,106,0.3);}
+
+/* PLANS INTRO */
+.plans-intro{padding:5rem 4rem 2rem;text-align:center;background:var(--ivory);}
+
+/* MEMBERSHIP CARDS */
+.plans-section{padding:2rem 4rem 6rem;background:var(--ivory);}
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem;align-items:start;}
+
+/* CARD BASE */
+.plan-card{border-radius:24px;overflow:hidden;display:flex;flex-direction:column;transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);position:relative;}
+.plan-card:hover{transform:translateY(-8px);}
+
+/* BRONZE */
+.plan-bronze{background:#fff;border:1px solid var(--border);}
+.plan-bronze:hover{box-shadow:0 24px 56px rgba(184,149,106,0.18);border-color:rgba(184,149,106,0.5);}
+
+/* GOLD — featured */
+.plan-gold{background:var(--dark);border:1px solid rgba(184,149,106,0.25);}
+.plan-gold:hover{box-shadow:0 28px 64px rgba(30,14,20,0.4);}
+.plan-popular{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--dark);font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:800;padding:0.3rem 1.25rem;border-radius:0 0 10px 10px;white-space:nowrap;}
+
+/* TITANIUM */
+.plan-titanium{background:var(--ivory2);border:1px solid var(--border);}
+.plan-titanium:hover{box-shadow:0 24px 56px rgba(160,48,78,0.12);border-color:var(--border-rose);}
+
+/* CARD HEADER */
+.plan-head{padding:2rem 2rem 1.5rem;}
+.plan-tier{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;font-weight:800;margin-bottom:0.625rem;}
+.plan-bronze .plan-tier{color:var(--gold);}
+.plan-gold .plan-tier{color:var(--gold2);}
+.plan-titanium .plan-tier{color:var(--rose);}
+.plan-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.625rem;letter-spacing:0.06em;margin-bottom:1.25rem;}
+.plan-bronze .plan-name,.plan-titanium .plan-name{color:var(--dark);}
+.plan-gold .plan-name{color:#fff;}
+.plan-price-row{display:flex;align-items:flex-end;gap:0.5rem;margin-bottom:0.375rem;}
+.plan-price{font-family:'Aboreto',serif;font-weight:400;font-size:2.5rem;line-height:1;letter-spacing:0.02em;}
+.plan-bronze .plan-price,.plan-titanium .plan-price{color:var(--dark);}
+.plan-gold .plan-price{color:var(--gold2);}
+.plan-value{font-size:0.78rem;font-weight:600;}
+.plan-bronze .plan-value,.plan-titanium .plan-value{color:var(--muted);}
+.plan-gold .plan-value{color:rgba(255,255,255,0.4);}
+.plan-value span{font-weight:800;}
+.plan-bronze .plan-value span{color:var(--rose);}
+.plan-gold .plan-value span{color:var(--gold2);}
+.plan-titanium .plan-value span{color:var(--rose);}
+.plan-validity{display:inline-block;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;padding:0.25rem 0.75rem;border-radius:20px;margin-top:0.5rem;}
+.plan-bronze .plan-validity{background:var(--ivory2);color:var(--muted);}
+.plan-gold .plan-validity{background:rgba(184,149,106,0.15);color:var(--gold2);}
+.plan-titanium .plan-validity{background:var(--rose-pale);color:var(--rose);}
+
+/* DIVIDER */
+.plan-divider{height:1px;margin:0 2rem;}
+.plan-bronze .plan-divider,.plan-titanium .plan-divider{background:var(--border);}
+.plan-gold .plan-divider{background:rgba(255,255,255,0.08);}
+
+/* BENEFITS */
+.plan-body{padding:1.75rem 2rem;flex:1;}
+.plan-body-label{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:800;margin-bottom:1rem;}
+.plan-bronze .plan-body-label,.plan-titanium .plan-body-label{color:var(--muted);}
+.plan-gold .plan-body-label{color:rgba(255,255,255,0.35);}
+.plan-benefits{list-style:none;display:flex;flex-direction:column;gap:0.75rem;}
+.plan-benefits li{font-size:0.84rem;display:flex;align-items:flex-start;gap:0.625rem;line-height:1.5;}
+.plan-bronze .plan-benefits li,.plan-titanium .plan-benefits li{color:var(--muted);}
+.plan-gold .plan-benefits li{color:rgba(255,255,255,0.55);}
+.plan-benefits li::before{content:'✦';font-size:0.55rem;margin-top:0.2rem;flex-shrink:0;}
+.plan-bronze .plan-benefits li::before{color:var(--gold);}
+.plan-gold .plan-benefits li::before{color:var(--gold2);}
+.plan-titanium .plan-benefits li::before{color:var(--rose);}
+.plan-highlight{font-weight:700;}
+.plan-bronze .plan-highlight{color:var(--dark);}
+.plan-gold .plan-highlight{color:#fff;}
+.plan-titanium .plan-highlight{color:var(--dark);}
+
+/* FOOTER */
+.plan-foot{padding:1.5rem 2rem 2rem;}
+.btn-rose{background:var(--rose);color:#fff;padding:1rem 1.5rem;font-size:0.78rem;font-weight:800;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:block;text-align:center;text-transform:uppercase;letter-spacing:0.04em;width:100%;}
+.btn-rose:hover{background:var(--dark2);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:1rem 1.5rem;font-size:0.78rem;font-weight:800;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:block;text-align:center;text-transform:uppercase;letter-spacing:0.04em;width:100%;}
+.btn-gold:hover{background:var(--gold2);}
+.btn-wire-rose{border:1.5px solid var(--border-rose);color:var(--rose);padding:1rem 1.5rem;font-size:0.78rem;font-family:'Inter',sans-serif;letter-spacing:0.04em;border-radius:50px;text-decoration:none;display:block;text-align:center;transition:all 0.22s;font-weight:700;text-transform:uppercase;width:100%;}
+.btn-wire-rose:hover{background:var(--rose-pale);}
+
+/* T&C */
+.tc-section{padding:4rem;background:var(--ivory2);}
+.tc-head{text-align:center;margin-bottom:2.5rem;}
+.tc-head h2{font-family:'Aboreto',serif;font-weight:400;font-size:1.5rem;color:var(--dark);letter-spacing:0.06em;}
+.tc-head h2 em{font-style:italic;color:var(--rose);}
+.tc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1000px;margin:0 auto;}
+.tc-item{display:flex;align-items:flex-start;gap:0.75rem;font-size:0.82rem;color:var(--muted);line-height:1.7;}
+.tc-item::before{content:'·';color:var(--rose);font-size:1.25rem;line-height:1;flex-shrink:0;margin-top:-0.1rem;}
+
+/* CTA STRIP */
+.cta-strip{background:var(--dark);padding:4.5rem 4rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;position:relative;overflow:hidden;}
+.cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(160,48,78,0.16),transparent 60%);}
+.cta-strip-text{position:relative;z-index:1;}
+.cta-label{font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:0.875rem;display:flex;align-items:center;gap:0.625rem;}
+.cta-label::before{content:'';width:1.5rem;height:1px;background:var(--gold);}
+.cta-strip h2{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.5rem,2.5vw,2.25rem);color:#fff;letter-spacing:0.06em;line-height:1.1;}
+.cta-strip h2 em{font-style:italic;color:var(--gold2);}
+.cta-strip p{font-size:0.9rem;color:rgba(255,255,255,0.38);margin-top:0.75rem;line-height:1.7;max-width:420px;}
+.cta-strip-action{position:relative;z-index:1;display:flex;flex-direction:column;gap:0.875rem;min-width:200px;}
+.btn-wire-light{border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:0.875rem 1.75rem;font-size:0.78rem;border-radius:50px;text-decoration:none;display:block;text-align:center;transition:all 0.22s;font-weight:700;}
+.btn-wire-light:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold-block{background:var(--gold);color:var(--dark);padding:0.875rem 1.75rem;font-size:0.78rem;font-weight:800;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:block;text-align:center;text-transform:uppercase;letter-spacing:0.04em;}
+.btn-gold-block:hover{background:var(--gold2);}
+
+/* FOOTER */
+footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(184,149,106,0.1);}
+.ft-copy{font-size:0.72rem;color:rgba(255,255,255,0.2);}
+.ft-links{display:flex;gap:1.25rem;}
+.ft-links a{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .page-hero-content,.value-bar,.plans-intro,.plans-section,.tc-section,.cta-strip{padding-left:2rem;padding-right:2rem;}
+  .plans-grid{grid-template-columns:1fr;}
+  .tc-grid{grid-template-columns:1fr 1fr;}
+  .cta-strip{grid-template-columns:1fr;gap:2rem;}
+  footer{padding-left:2rem;padding-right:2rem;}
+}
+@media(max-width:768px){
+  nav{top:0.75rem;padding:0.625rem 1rem 0.625rem 0.875rem;width:calc(100% - 1.5rem);}
+  nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
+  .nav-links,.nav-cta{display:none!important;}
+  .nav-ham{display:flex;}
+  .page-hero{height:46vh;}
+  .page-hero-content{padding:0 1.5rem;}
+  .tc-grid{grid-template-columns:1fr;}
+  .value-bar{gap:1.25rem;padding:1.25rem;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
+  .ft-links{justify-content:center;}
+}
+.reveal{opacity:0;transform:translateY(28px);}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div>
+      <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img" style="height:38px;">
+      <div class="sb-tag">Luxury Home Salon · Lucknow</div>
+    </div>
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <div class="sidebar-body">
+    <div class="sb-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/#services">Services</a>
+      <a href="/portfolio.html">Portfolio</a>
+      <a href="/packages.html">Packages</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/#contact">Contact Us</a>
+    </div>
+    <a href="tel:+916394584794" class="sb-book">Call to Book →</a>
+    <div class="sb-foot">
+      <div class="sb-foot-info">
+        <strong>+91 63945 84794</strong><br>
+        info@hayamakeover.com<br>
+        Mon–Fri 11AM–8PM · Sat 11AM–6PM
+      </div>
+      <div class="sb-socials">
+        <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img">
+    <span class="nav-brand-name">Haya <em>Makeover</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/#services">Services</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/packages.html">Packages</a>
+    <a href="/membership.html" class="active">Membership</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <a href="tel:+916394584794" class="nav-cta">Call to Book →</a>
+  <button class="nav-ham" id="ham" onclick="toggleSidebar()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1400&q=85" alt="Membership">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-badge">Privilege Cards · Exclusive Benefits</p>
+    <h1>Pay Less.<br><em>Get More.</em></h1>
+    <p class="page-hero-sub">Our membership plans are designed for women who love looking their best — every month. Buy once, save all year.</p>
+  </div>
+</section>
+
+<!-- VALUE BAR -->
+<div class="value-bar">
+  <div class="value-item"><strong>More Value</strong> — Pay ₹4K, get ₹5K+</div>
+  <div class="value-dot"></div>
+  <div class="value-item"><strong>Free Home Visits</strong> — No conveyance charges</div>
+  <div class="value-dot"></div>
+  <div class="value-item"><strong>Complimentary Extras</strong> — Massages, hair spa &amp; more</div>
+  <div class="value-dot"></div>
+  <div class="value-item"><strong>Bring a Guest</strong> — Share with family</div>
+</div>
+
+<!-- PLANS INTRO -->
+<div class="plans-intro">
+  <div class="section-head">
+    <p class="sec-label" style="justify-content:center;">Choose Your Plan</p>
+    <h2 class="sec-h">Privilege <em>Membership Cards.</em></h2>
+    <p class="sec-sub">All good things come in small packages — and so does a relaxing pamper session at Haya Makeover. Pick the plan that fits your lifestyle.</p>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section class="plans-section">
+  <div class="plans-grid">
+
+    <!-- BRONZE -->
+    <div class="plan-card plan-bronze reveal">
+      <div class="plan-head">
+        <div class="plan-tier">Bronze</div>
+        <div class="plan-name">Starter Privilege</div>
+        <div class="plan-price-row">
+          <div class="plan-price">₹4,000</div>
+        </div>
+        <div class="plan-value">Redeem up to <span>₹5,000</span> in skin services</div>
+        <div class="plan-validity">Valid for 3 Months</div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-body">
+        <div class="plan-body-label">What's included</div>
+        <ul class="plan-benefits">
+          <li><span class="plan-highlight">₹5,000 worth</span> of skin services redeemable</li>
+          <li>Complimentary <span class="plan-highlight">Head Massage</span> on first service</li>
+          <li>Book 2 HD Makeups → <span class="plan-highlight">₹1,000 flat discount</span> (one time)</li>
+          <li>No conveyance charges on skin services in Lucknow</li>
+          <li>1 guest can be added to share benefits</li>
+        </ul>
+      </div>
+      <div class="plan-foot">
+        <a href="tel:+916394584794" class="btn-wire-rose">Get Bronze Card →</a>
+      </div>
+    </div>
+
+    <!-- GOLD -->
+    <div class="plan-card plan-gold reveal">
+      <div class="plan-popular">Most Popular</div>
+      <div class="plan-head">
+        <div class="plan-tier">Gold</div>
+        <div class="plan-name">Premium Privilege</div>
+        <div class="plan-price-row">
+          <div class="plan-price">₹6,000</div>
+        </div>
+        <div class="plan-value">Redeem up to <span>₹8,000</span> in skin services</div>
+        <div class="plan-validity">Valid for 6 Months</div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-body">
+        <div class="plan-body-label">What's included</div>
+        <ul class="plan-benefits">
+          <li><span class="plan-highlight">₹8,000 worth</span> of skin services redeemable</li>
+          <li>2x Complimentary <span class="plan-highlight">Head Massages</span></li>
+          <li>Book 2 HD Makeups → <span class="plan-highlight">₹1,500 flat discount</span> (two times)</li>
+          <li>Keratin &amp; Smoothening → <span class="plan-highlight">₹599 flat discount</span></li>
+          <li>Book 2+ Party Mehendi → <span class="plan-highlight">10% flat discount</span></li>
+          <li>No conveyance charges on skin services in Lucknow</li>
+          <li>1 guest can be added to share benefits</li>
+        </ul>
+      </div>
+      <div class="plan-foot">
+        <a href="tel:+916394584794" class="btn-gold">Get Gold Card →</a>
+      </div>
+    </div>
+
+    <!-- TITANIUM -->
+    <div class="plan-card plan-titanium reveal">
+      <div class="plan-head">
+        <div class="plan-tier">Titanium</div>
+        <div class="plan-name">Elite Privilege</div>
+        <div class="plan-price-row">
+          <div class="plan-price">₹12,000</div>
+        </div>
+        <div class="plan-value">Redeem up to <span>₹15,000</span> in skin services</div>
+        <div class="plan-validity">Valid for 12 Months</div>
+      </div>
+      <div class="plan-divider"></div>
+      <div class="plan-body">
+        <div class="plan-body-label">What's included</div>
+        <ul class="plan-benefits">
+          <li><span class="plan-highlight">₹15,000 worth</span> of skin services redeemable</li>
+          <li>Complimentary <span class="plan-highlight">Hair Spa</span></li>
+          <li>Book 2 MAC Makeups → <span class="plan-highlight">₹2,000 flat discount</span> (one time)</li>
+          <li>Keratin &amp; Smoothening → <span class="plan-highlight">₹799 flat discount</span></li>
+          <li>Book 2+ Basic Party Hairstyles → <span class="plan-highlight">1 Complimentary</span></li>
+          <li><span class="plan-highlight">₹500 Gift Voucher</span> (virtual, extra)</li>
+          <li>Share with family &amp; friends — <span class="plan-highlight">up to 4 beneficiaries</span></li>
+          <li>No conveyance charges on skin services in Lucknow</li>
+        </ul>
+      </div>
+      <div class="plan-foot">
+        <a href="tel:+916394584794" class="btn-rose">Get Titanium Card →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="tc-section">
+  <div class="tc-head">
+    <h2>Terms &amp; <em>Conditions</em></h2>
+  </div>
+  <div class="tc-grid">
+    <div class="tc-item">Membership amount is valid for all skin services only.</div>
+    <div class="tc-item">Applicable on website rates only. Cannot be clubbed with other offers, packages or combos.</div>
+    <div class="tc-item">Each member may add 1 guest (Bronze &amp; Gold) or up to 4 beneficiaries (Titanium).</div>
+    <div class="tc-item">Minimum service value of ₹600 required per home visit booking.</div>
+    <div class="tc-item">Full membership amount must be paid in advance to activate the card.</div>
+    <div class="tc-item">No refund. Unused value cannot be exchanged for cash or carried forward.</div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-strip-text">
+    <p class="cta-label">Ready to Join?</p>
+    <h2>Get Your Privilege Card <em>Today.</em></h2>
+    <p>Call us to activate your membership. Confirm your plan, pay in advance, and start redeeming from your very next appointment.</p>
+  </div>
+  <div class="cta-strip-action">
+    <a href="tel:+916394584794" class="btn-gold-block">Call → +91 63945 84794</a>
+    <a href="https://wa.me/916394584794" class="btn-wire-light">WhatsApp Us</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="/logo.png" alt="Haya Makeover" style="height:48px;width:auto;filter:brightness(0) invert(1);">
+  <span class="ft-copy">© 2025 Haya Makeover · All rights reserved.</span>
+  <div class="ft-links">
+    <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+    <a href="tel:+916394584794">Call Now</a>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+document.querySelectorAll('.sec-h,.page-hero h1,.cta-strip h2,.tc-head h2').forEach(function(el){
+  gsap.set(el,{opacity:1,clipPath:'inset(0 0 100% 0)'});
+  gsap.to(el,{clipPath:'inset(0 0 0% 0)',duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}});
+});
+document.querySelectorAll('.reveal').forEach(function(el,i){
+  gsap.fromTo(el,{opacity:0,y:28},{opacity:1,y:0,duration:0.82,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'},delay:i*0.08});
+});
+function toggleSidebar(){
+  var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');
+  var open=s.classList.toggle('open');
+  o.classList.toggle('show',open);h.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('ham').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+</script>
+</body>
+</html>
