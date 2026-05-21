@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Appointment — Haya Makeover | Home Salon Lucknow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<style>
+.nav-logo-img{height:36px;width:36px;object-fit:contain;display:block;flex-shrink:0;}
+.nav-brand{display:flex;flex-direction:row;align-items:center;gap:0.5rem;text-decoration:none;flex-wrap:nowrap;}
+.nav-brand-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.1rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark);line-height:1;display:block;white-space:nowrap;}
+.nav-brand-name em{font-style:italic;color:var(--rose);}
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ivory:#FDF9F5;--ivory2:#F7F1EA;
+  --rose:#A0304E;--rose-light:#F5D8E2;--rose-pale:#FDF0F4;
+  --gold:#B8956A;--gold2:#D4AF7A;
+  --dark:#1E0E14;--dark2:#2E1820;
+  --muted:rgba(30,14,20,0.48);--border:rgba(184,149,106,0.2);--border-rose:rgba(160,48,78,0.15);
+}
+body{background:var(--ivory);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* NAV */
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.5rem 0.75rem 1.25rem;background:#fff;border-radius:50px;box-shadow:0 4px 32px rgba(30,14,20,0.12);border:1px solid rgba(184,149,106,0.15);width:calc(100% - 3rem);max-width:1200px;transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
+nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24px rgba(30,14,20,0.1);border-left:none;border-right:none;border-top:none;border-bottom-color:rgba(184,149,106,0.25);padding:0.875rem 3.5rem;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.04em;font-weight:600;transition:color 0.2s;position:relative;white-space:nowrap;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--rose);transition:width 0.3s;}
+.nav-links a:hover{color:var(--rose);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--dark);color:#fff;padding:0.625rem 1.375rem;font-size:0.78rem;font-weight:800;letter-spacing:0.04em;border:none;cursor:pointer;border-radius:50px;transition:all 0.22s;text-transform:uppercase;white-space:nowrap;text-decoration:none;}
+.nav-ham{display:none;flex-direction:column;justify-content:center;gap:5.5px;background:none;border:none;cursor:pointer;padding:6px;z-index:102;width:36px;height:36px;}
+.nav-ham span{width:22px;height:1.75px;background:var(--dark);border-radius:2px;transition:all 0.35s;display:block;}
+.nav-ham.open span:nth-child(1){transform:translateY(7.25px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-ham.open span:nth-child(3){transform:translateY(-7.25px) rotate(-45deg);}
+
+/* SIDEBAR */
+.overlay{position:fixed;inset:0;background:rgba(30,14,20,0.48);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.38s ease;backdrop-filter:blur(4px);}
+.overlay.show{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:-100%;width:min(340px,88vw);height:100vh;background:var(--ivory);z-index:201;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:right 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(30,14,20,0.14);overflow-y:auto;}
+.sidebar.open{right:0;}
+.sidebar-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sb-tag{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:3px;}
+.sidebar-close{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.125rem;transition:all 0.2s;flex-shrink:0;}
+.sidebar-close:hover{background:var(--rose-pale);border-color:var(--rose);color:var(--rose);}
+.sidebar-body{padding:1.75rem 2rem;flex:1;display:flex;flex-direction:column;}
+.sb-links{display:flex;flex-direction:column;}
+.sb-links a{color:var(--dark);text-decoration:none;font-family:'Aboreto',serif;font-size:1.75rem;font-weight:600;letter-spacing:0.02em;padding:0.875rem 0;border-bottom:1px solid var(--border);transition:color 0.2s;display:flex;align-items:center;justify-content:space-between;}
+.sb-links a::after{content:'→';font-size:1rem;color:var(--rose);opacity:0;transform:translateX(-6px);transition:all 0.25s;}
+.sb-links a:hover{color:var(--rose);}
+.sb-links a:hover::after{opacity:1;transform:translateX(0);}
+.sb-book{margin-top:2rem;background:var(--rose);color:#fff;padding:1rem 1.75rem;font-size:0.875rem;font-weight:800;letter-spacing:0.04em;border:none;border-radius:50px;cursor:pointer;text-transform:uppercase;text-align:center;text-decoration:none;display:block;transition:background 0.22s;}
+.sb-book:hover{background:var(--dark);}
+.sb-foot{margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);}
+.sb-foot-info{font-size:0.8rem;color:var(--muted);line-height:2;font-weight:500;}
+.sb-foot-info strong{color:var(--dark);font-weight:700;}
+.sb-socials{display:flex;gap:1rem;margin-top:0.875rem;}
+.sb-socials a{font-size:0.78rem;color:var(--rose);text-decoration:none;font-weight:700;}
+
+/* PAGE LAYOUT */
+.book-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+
+/* LEFT — decorative */
+.book-left{background:var(--dark);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:5rem 4rem;min-height:100vh;}
+.book-left-img{position:absolute;inset:0;}
+.book-left-img img{width:100%;height:100%;object-fit:cover;object-position:center 20%;opacity:0.22;}
+.book-left-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,14,20,0.98) 0%,rgba(30,14,20,0.6) 50%,rgba(30,14,20,0.3) 100%);}
+.book-left-content{position:relative;z-index:1;}
+.book-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.5rem;}
+.book-badge::before{content:'';width:1.5rem;height:1px;background:var(--gold2);}
+.book-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(2rem,3.5vw,3.25rem);line-height:1.1;color:#fff;letter-spacing:0.06em;margin-bottom:1rem;}
+.book-h em{font-style:italic;color:var(--gold2);}
+.book-sub{font-size:0.9375rem;color:rgba(255,255,255,0.45);line-height:1.8;margin-bottom:2.5rem;max-width:380px;}
+.book-trust{display:flex;flex-direction:column;gap:0.875rem;}
+.book-trust-item{display:flex;align-items:center;gap:0.875rem;font-size:0.82rem;color:rgba(255,255,255,0.45);}
+.book-trust-item strong{color:rgba(255,255,255,0.75);}
+.book-trust-dot{width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;}
+.book-contact-quick{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:1rem;flex-wrap:wrap;}
+.book-quick-btn{display:flex;align-items:center;gap:0.5rem;padding:0.625rem 1.125rem;border-radius:50px;font-size:0.78rem;font-weight:700;text-decoration:none;transition:all 0.22s;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);}
+.book-quick-btn:hover{border-color:var(--gold);color:var(--gold);}
+.book-quick-btn.primary{background:var(--rose);border-color:var(--rose);color:#fff;}
+.book-quick-btn.primary:hover{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+
+/* RIGHT — form */
+.book-right{background:#fff;display:flex;flex-direction:column;justify-content:center;padding:6rem 4rem;overflow-y:auto;}
+.form-top{margin-bottom:2.5rem;}
+.form-eyebrow{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.625rem;}
+.form-eyebrow::before{content:'';width:1.5rem;height:1px;background:var(--rose);}
+.form-title{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.625rem,2.5vw,2.25rem);color:var(--dark);letter-spacing:0.06em;line-height:1.12;margin-bottom:0.625rem;}
+.form-title em{font-style:italic;color:var(--rose);}
+.form-note{font-size:0.875rem;color:var(--muted);line-height:1.65;}
+
+/* STEP INDICATOR */
+.steps{display:flex;align-items:center;gap:0;margin-bottom:2.5rem;}
+.step{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.step.active{color:var(--rose);}
+.step.done{color:var(--gold);}
+.step-num{width:26px;height:26px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:0.68rem;font-weight:800;flex-shrink:0;}
+.step-done-icon{font-size:0.75rem;}
+.step-line{flex:1;height:1px;background:var(--border);margin:0 0.75rem;}
+
+/* FORM FIELDS */
+.form-step{display:none;}
+.form-step.active{display:block;}
+.field{margin-bottom:1.25rem;}
+.field label{display:block;font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--dark);margin-bottom:0.5rem;}
+.field input,.field select,.field textarea{width:100%;padding:0.9rem 1.125rem;border:1.5px solid var(--border);border-radius:12px;font-size:0.9rem;font-family:'Inter',sans-serif;color:var(--dark);background:var(--ivory);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(160,48,78,0.08);}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6;}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A0304E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;cursor:pointer;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+
+/* SERVICE PILLS */
+.service-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:0.5rem;}
+.service-pill{border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.125rem;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.75rem;}
+.service-pill:hover{border-color:var(--border-rose);background:var(--rose-pale);}
+.service-pill.selected{border-color:var(--rose);background:var(--rose-pale);}
+.service-pill input{display:none;}
+.svc-pill-icon{font-size:1.25rem;flex-shrink:0;}
+.svc-pill-name{font-size:0.82rem;font-weight:700;color:var(--dark);}
+.svc-pill-desc{font-size:0.7rem;color:var(--muted);margin-top:0.1rem;}
+
+/* NAV BUTTONS */
+.form-nav{display:flex;gap:1rem;margin-top:1.75rem;align-items:center;}
+.btn-next{flex:1;background:var(--rose);color:#fff;padding:1rem;font-size:0.875rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;}
+.btn-next:hover{background:var(--dark);}
+.btn-next:disabled{opacity:0.5;cursor:not-allowed;}
+.btn-back{background:none;border:1.5px solid var(--border);color:var(--muted);padding:1rem 1.5rem;font-size:0.82rem;font-weight:700;border-radius:50px;cursor:pointer;transition:all 0.22s;}
+.btn-back:hover{border-color:var(--dark);color:var(--dark);}
+
+/* SUCCESS */
+.form-success{display:none;text-align:center;padding:3rem 1rem;}
+.form-success.show{display:block;}
+.success-icon{font-size:3.5rem;margin-bottom:1.25rem;}
+.success-h{font-family:'Aboreto',serif;font-weight:400;font-size:1.75rem;color:var(--dark);letter-spacing:0.06em;margin-bottom:0.75rem;}
+.success-h em{font-style:italic;color:var(--rose);}
+.success-p{font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:2rem;}
+.success-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-rose{background:var(--rose);color:#fff;padding:0.875rem 2rem;font-size:0.82rem;font-weight:800;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:0.04em;}
+.btn-rose:hover{background:var(--dark);}
+.btn-soft{border:1.5px solid var(--border-rose);color:var(--rose);padding:0.875rem 2rem;font-size:0.82rem;border-radius:50px;text-decoration:none;display:inline-block;transition:all 0.22s;font-weight:700;}
+.btn-soft:hover{background:var(--rose-pale);}
+
+/* FOOTER */
+footer{background:var(--dark2);padding:2rem 4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(184,149,106,0.1);}
+.ft-copy{font-size:0.72rem;color:rgba(255,255,255,0.2);}
+.ft-links{display:flex;gap:1.25rem;}
+.ft-links a{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .book-wrap{grid-template-columns:1fr;}
+  .book-left{min-height:420px;padding:4rem 2.5rem;}
+  .book-right{padding:4rem 2.5rem;}
+}
+@media(max-width:768px){
+  nav{top:0.75rem;padding:0.625rem 1rem 0.625rem 0.875rem;width:calc(100% - 1.5rem);}
+  nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
+  .nav-links,.nav-cta{display:none!important;}
+  .nav-ham{display:flex;}
+  .book-left{min-height:320px;padding:3rem 1.5rem;}
+  .book-right{padding:3rem 1.5rem;}
+  .field-row{grid-template-columns:1fr;}
+  .service-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
+  .ft-links{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div>
+      <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img" style="height:38px;">
+      <div class="sb-tag">Luxury Home Salon · Lucknow</div>
+    </div>
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <div class="sidebar-body">
+    <div class="sb-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/#services">Services</a>
+      <a href="/portfolio.html">Portfolio</a>
+      <a href="/packages.html">Packages</a>
+      <a href="/membership.html">Membership</a>
+      <a href="/contact.html">Contact Us</a>
+    </div>
+    <a href="/book.html" class="sb-book">Book Appointment →</a>
+    <div class="sb-foot">
+      <div class="sb-foot-info">
+        <strong>+91 63945 84794</strong><br>
+        info@hayamakeover.com<br>
+        Mon–Fri 11AM–8PM · Sat 11AM–6PM
+      </div>
+      <div class="sb-socials">
+        <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img">
+    <span class="nav-brand-name">Haya <em>Makeover</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/#services">Services</a>
+    <a href="/portfolio.html">Portfolio</a>
+    <a href="/packages.html">Packages</a>
+    <a href="/membership.html">Membership</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <a href="/book.html" class="nav-cta">Book Appointment →</a>
+  <button class="nav-ham" id="ham" onclick="toggleSidebar()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MAIN BOOKING PAGE -->
+<div class="book-wrap">
+
+  <!-- LEFT — branding -->
+  <div class="book-left">
+    <div class="book-left-img">
+      <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1200&q=85" alt="Haya Makeover">
+    </div>
+    <div class="book-left-overlay"></div>
+    <div class="book-left-content">
+      <p class="book-badge">Haya Makeover · Lucknow</p>
+      <h1 class="book-h">Book Your<br><em>Appointment.</em></h1>
+      <p class="book-sub">Fill the form and we confirm within 30 minutes. We come to you — fully equipped, on time, anywhere in Lucknow.</p>
+      <div class="book-trust">
+        <div class="book-trust-item">
+          <div class="book-trust-dot"></div>
+          <span><strong>No travel charges</strong> — home visit included</span>
+        </div>
+        <div class="book-trust-item">
+          <div class="book-trust-dot"></div>
+          <span><strong>Certified artists</strong> — trained & verified professionals</span>
+        </div>
+        <div class="book-trust-item">
+          <div class="book-trust-dot"></div>
+          <span><strong>Premium products</strong> — MAC, Lakmé, O3+ & more</span>
+        </div>
+        <div class="book-trust-item">
+          <div class="book-trust-dot"></div>
+          <span><strong>500+ happy clients</strong> — 4.9★ Google rated</span>
+        </div>
+      </div>
+      <div class="book-contact-quick">
+        <a href="tel:+916394584794" class="book-quick-btn primary">📞 Call Now</a>
+        <a href="https://wa.me/916394584794" target="_blank" class="book-quick-btn">💬 WhatsApp</a>
+        <a href="/contact.html" class="book-quick-btn">✉ Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — form -->
+  <div class="book-right">
+
+    <!-- STEP INDICATOR -->
+    <div class="steps" id="stepIndicator">
+      <div class="step active" id="step-ind-1">
+        <div class="step-num">1</div>
+        <span>Service</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-2">
+        <div class="step-num">2</div>
+        <span>Details</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="step-ind-3">
+        <div class="step-num">3</div>
+        <span>Confirm</span>
+      </div>
+    </div>
+
+    <div class="form-top">
+      <p class="form-eyebrow" id="formEyebrow">Step 1 of 3</p>
+      <h2 class="form-title" id="formTitle">Choose Your <em>Service.</em></h2>
+      <p class="form-note" id="formNote">Select the service you'd like to book. You can add more details in the next step.</p>
+    </div>
+
+    <form id="bookForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+      <input type="hidden" name="subject" value="New Appointment Booking — Haya Makeover">
+      <input type="hidden" name="service" id="hiddenService" value="">
+
+      <!-- STEP 1 — Service -->
+      <div class="form-step active" id="step1">
+        <div class="service-grid">
+          <label class="service-pill" onclick="selectService(this,'Bridal Makeup')">
+            <input type="radio" name="_service" value="Bridal Makeup">
+            <div class="svc-pill-icon">👰</div>
+            <div><div class="svc-pill-name">Bridal Makeup</div><div class="svc-pill-desc">Wedding, engagement, reception</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Party Makeup')">
+            <input type="radio" name="_service" value="Party Makeup">
+            <div class="svc-pill-icon">✨</div>
+            <div><div class="svc-pill-name">Party Makeup</div><div class="svc-pill-desc">Events, functions & occasions</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Skin Care')">
+            <input type="radio" name="_service" value="Skin Care">
+            <div class="svc-pill-icon">🌸</div>
+            <div><div class="svc-pill-name">Skin Care</div><div class="svc-pill-desc">Facials, cleanup, bleach, D-tan</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Hair Styling')">
+            <input type="radio" name="_service" value="Hair Styling">
+            <div class="svc-pill-icon">💇</div>
+            <div><div class="svc-pill-name">Hair Styling</div><div class="svc-pill-desc">Styling, spa, smoothening</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Mehendi')">
+            <input type="radio" name="_service" value="Mehendi">
+            <div class="svc-pill-icon">🎨</div>
+            <div><div class="svc-pill-name">Mehendi</div><div class="svc-pill-desc">Bridal & occasion mehendi</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Package')">
+            <input type="radio" name="_service" value="Package">
+            <div class="svc-pill-icon">📦</div>
+            <div><div class="svc-pill-name">Package / Combo</div><div class="svc-pill-desc">Bundled service packages</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Pre-Bridal Package')">
+            <input type="radio" name="_service" value="Pre-Bridal Package">
+            <div class="svc-pill-icon">💍</div>
+            <div><div class="svc-pill-name">Pre-Bridal</div><div class="svc-pill-desc">Skincare & prep sessions</div></div>
+          </label>
+          <label class="service-pill" onclick="selectService(this,'Membership')">
+            <input type="radio" name="_service" value="Membership">
+            <div class="svc-pill-icon">⭐</div>
+            <div><div class="svc-pill-name">Membership</div><div class="svc-pill-desc">Bronze, Gold or Titanium card</div></div>
+          </label>
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-next" id="nextBtn1" onclick="goStep(2)" disabled>Next — Your Details →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 — Personal details -->
+      <div class="form-step" id="step2">
+        <div class="field-row">
+          <div class="field">
+            <label>Full Name *</label>
+            <input type="text" name="name" placeholder="Your full name" required>
+          </div>
+          <div class="field">
+            <label>Phone Number *</label>
+            <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="your@email.com">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Preferred Date</label>
+            <input type="date" name="date" min="">
+          </div>
+          <div class="field">
+            <label>Preferred Time</label>
+            <select name="time">
+              <option value="">Select time</option>
+              <option>11:00 AM</option>
+              <option>12:00 PM</option>
+              <option>1:00 PM</option>
+              <option>2:00 PM</option>
+              <option>3:00 PM</option>
+              <option>4:00 PM</option>
+              <option>5:00 PM</option>
+              <option>6:00 PM</option>
+              <option>7:00 PM</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Your Address in Lucknow</label>
+          <input type="text" name="address" placeholder="Area / Colony / Landmark">
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-back" onclick="goStep(1)">← Back</button>
+          <button type="button" class="btn-next" onclick="goStep(3)">Next — Review →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 — Confirm -->
+      <div class="form-step" id="step3">
+        <div style="background:var(--ivory2);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;">
+          <p style="font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:1rem;">Booking Summary</p>
+          <div id="summary" style="display:flex;flex-direction:column;gap:0.625rem;font-size:0.875rem;color:var(--dark);"></div>
+        </div>
+        <div class="field">
+          <label>Any Special Requests?</label>
+          <textarea name="message" placeholder="Product preferences, skin concerns, number of people, occasion details..."></textarea>
+        </div>
+        <div style="background:var(--rose-pale);border:1px solid var(--border-rose);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:0.82rem;color:var(--rose);line-height:1.6;">
+          ✓ We'll confirm your booking within <strong>30 minutes</strong> via call or WhatsApp.
+        </div>
+        <div class="form-nav">
+          <button type="button" class="btn-back" onclick="goStep(2)">← Back</button>
+          <button type="submit" class="btn-next" id="submitBtn">Confirm Booking →</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="form-success" id="formSuccess">
+      <div class="success-icon">🎉</div>
+      <h2 class="success-h">Booking <em>Confirmed!</em></h2>
+      <p class="success-p">We've received your appointment request. Our team will call or WhatsApp you within 30 minutes to confirm the details.</p>
+      <div class="success-actions">
+        <a href="/" class="btn-rose">Back to Home</a>
+        <a href="https://wa.me/916394584794" target="_blank" class="btn-soft">WhatsApp Us</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="/logo.png" alt="Haya Makeover" style="height:44px;width:auto;filter:brightness(0) invert(1);">
+  <span class="ft-copy">© 2025 Haya Makeover · All rights reserved.</span>
+  <div class="ft-links">
+    <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+    <a href="tel:+916394584794">Call Now</a>
+  </div>
+</footer>
+
+<script>
+/* NAV */
+gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* Set min date to today */
+var dateInput=document.querySelector('input[type="date"]');
+if(dateInput){var today=new Date();today.setDate(today.getDate()+1);dateInput.min=today.toISOString().split('T')[0];}
+
+/* SERVICE SELECTION */
+var selectedService='';
+function selectService(el,name){
+  document.querySelectorAll('.service-pill').forEach(function(p){p.classList.remove('selected');});
+  el.classList.add('selected');
+  selectedService=name;
+  document.getElementById('hiddenService').value=name;
+  document.getElementById('nextBtn1').disabled=false;
+}
+
+/* STEP NAVIGATION */
+var currentStep=1;
+var stepTitles=[
+  {eyebrow:'Step 1 of 3',title:'Choose Your <em>Service.</em>',note:'Select the service you\'d like to book. You can add more details in the next step.'},
+  {eyebrow:'Step 2 of 3',title:'Your <em>Details.</em>',note:'Tell us who you are and when works best for you.'},
+  {eyebrow:'Step 3 of 3',title:'Review &amp; <em>Confirm.</em>',note:'Everything look right? Hit confirm and we\'ll be in touch within 30 minutes.'}
+];
+
+function goStep(n){
+  if(n===2 && !selectedService){alert('Please select a service first.');return;}
+  if(n===3){buildSummary();}
+  document.getElementById('step'+currentStep).classList.remove('active');
+  currentStep=n;
+  document.getElementById('step'+currentStep).classList.add('active');
+  var t=stepTitles[n-1];
+  document.getElementById('formEyebrow').textContent=t.eyebrow;
+  document.getElementById('formTitle').innerHTML=t.title;
+  document.getElementById('formNote').textContent=t.note;
+  updateStepIndicator(n);
+}
+
+function updateStepIndicator(n){
+  for(var i=1;i<=3;i++){
+    var el=document.getElementById('step-ind-'+i);
+    el.classList.remove('active','done');
+    if(i<n)el.classList.add('done');
+    if(i===n)el.classList.add('active');
+    var numEl=el.querySelector('.step-num');
+    if(i<n){numEl.innerHTML='✓';}
+    else{numEl.textContent=i;}
+  }
+}
+
+function buildSummary(){
+  var name=document.querySelector('input[name="name"]').value;
+  var phone=document.querySelector('input[name="phone"]').value;
+  var date=document.querySelector('input[name="date"]').value;
+  var time=document.querySelector('select[name="time"]').value;
+  var address=document.querySelector('input[name="address"]').value;
+  var rows=[
+    {label:'Service',val:selectedService},
+    {label:'Name',val:name||'—'},
+    {label:'Phone',val:phone||'—'},
+    {label:'Date',val:date||'Flexible'},
+    {label:'Time',val:time||'Flexible'},
+    {label:'Location',val:address||'—'}
+  ];
+  var html=rows.map(function(r){
+    return '<div style="display:flex;justify-content:space-between;padding:0.375rem 0;border-bottom:1px solid var(--border);">'+
+      '<span style="color:var(--muted);font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;">'+r.label+'</span>'+
+      '<span style="font-weight:700;color:var(--dark);">'+r.val+'</span></div>';
+  }).join('');
+  document.getElementById('summary').innerHTML=html;
+}
+
+/* FORM SUBMIT */
+var form=document.getElementById('bookForm');
+var submitBtn=document.getElementById('submitBtn');
+var successEl=document.getElementById('formSuccess');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  submitBtn.disabled=true;
+  submitBtn.textContent='Confirming...';
+  var data=new FormData(form);
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
+    .then(function(r){return r.json();})
+    .then(function(r){
+      if(r.success){
+        document.getElementById('step3').style.display='none';
+        document.getElementById('stepIndicator').style.display='none';
+        document.querySelector('.form-top').style.display='none';
+        successEl.classList.add('show');
+      } else {
+        submitBtn.disabled=false;
+        submitBtn.textContent='Confirm Booking →';
+        alert('Something went wrong. Please call us directly on +91 63945 84794.');
+      }
+    })
+    .catch(function(){
+      submitBtn.disabled=false;
+      submitBtn.textContent='Confirm Booking →';
+      alert('Something went wrong. Please call us directly on +91 63945 84794.');
+    });
+});
+
+/* SIDEBAR */
+function toggleSidebar(){
+  var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');
+  var open=s.classList.toggle('open');
+  o.classList.toggle('show',open);h.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('ham').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+</script>
+</body>
+</html>
