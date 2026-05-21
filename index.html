@@ -254,10 +254,10 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 /* BRANDS */
 .brands{background:var(--ivory);padding:3rem 4rem;border-top:1px solid var(--border);}
 .brands-label{text-align:center;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2.5rem;}
-.brands-row{display:flex;justify-content:center;align-items:center;gap:2rem;flex-wrap:wrap;}
-.brand-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1rem 1.75rem;display:flex;align-items:center;justify-content:center;width:160px;height:80px;transition:all 0.2s;filter:grayscale(1);opacity:0.6;}
-.brand-card:hover{filter:grayscale(0);opacity:1;box-shadow:0 8px 24px rgba(160,48,78,0.1);transform:translateY(-2px);border-color:var(--border-rose);}
-.brand-card img{max-width:100%;max-height:100%;object-fit:contain;}
+.brands-row{display:grid;grid-template-columns:repeat(7,1fr);gap:1.5rem;align-items:center;}
+.brand-card{background:transparent;border:none;border-radius:0;padding:0.5rem 1rem;display:flex;align-items:center;justify-content:center;height:56px;transition:all 0.2s;filter:grayscale(1);opacity:0.45;}
+.brand-card:hover{filter:grayscale(0);opacity:1;transform:translateY(-2px);}
+.brand-card img{max-width:100%;max-height:44px;object-fit:contain;}
 .brand-card.txt{font-family:'Aboreto',serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;color:var(--dark);}
 
 /* CTA CONTACT */
