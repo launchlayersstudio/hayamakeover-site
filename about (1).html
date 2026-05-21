@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Haya Makeover | Home Salon in Lucknow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Aboreto&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+.nav-logo-img{height:36px;width:36px;object-fit:contain;display:block;flex-shrink:0;}
+.nav-brand{display:flex;flex-direction:row;align-items:center;gap:0.5rem;text-decoration:none;flex-wrap:nowrap;}
+.nav-brand-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.1rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark);line-height:1;display:block;white-space:nowrap;}
+.nav-brand-name em{font-style:italic;color:var(--rose);}
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ivory:#FDF9F5;--ivory2:#F7F1EA;--ivory3:#EFE6DA;
+  --rose:#A0304E;--rose2:#C04060;--rose-light:#F5D8E2;--rose-pale:#FDF0F4;
+  --gold:#B8956A;--gold2:#D4AF7A;
+  --dark:#1E0E14;--dark2:#2E1820;
+  --muted:rgba(30,14,20,0.48);--border:rgba(184,149,106,0.2);--border-rose:rgba(160,48,78,0.15);
+}
+html{}
+body{background:var(--ivory);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden;}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9998;opacity:0.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* NAV */
+nav{position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.5rem 0.75rem 1.25rem;background:#fff;border-radius:50px;box-shadow:0 4px 32px rgba(30,14,20,0.12);border:1px solid rgba(184,149,106,0.15);width:calc(100% - 3rem);max-width:1200px;transition:all 0.5s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;}
+nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24px rgba(30,14,20,0.1);border-left:none;border-right:none;border-top:none;border-bottom-color:rgba(184,149,106,0.25);padding:0.875rem 3.5rem;}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;letter-spacing:0.04em;font-weight:600;transition:color 0.2s;position:relative;white-space:nowrap;}
+.nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--rose);transition:width 0.3s;}
+.nav-links a:hover{color:var(--rose);}
+.nav-links a:hover::after{width:100%;}
+.nav-links a.active{color:var(--rose);}
+.nav-cta{background:var(--rose);color:#fff;padding:0.625rem 1.375rem;font-size:0.78rem;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:0.04em;border:none;cursor:pointer;border-radius:50px;transition:all 0.22s;text-transform:uppercase;white-space:nowrap;text-decoration:none;}
+.nav-cta:hover{background:var(--dark);}
+.nav-ham{display:none;flex-direction:column;justify-content:center;gap:5.5px;background:none;border:none;cursor:pointer;padding:6px;z-index:102;width:36px;height:36px;}
+.nav-ham span{width:22px;height:1.75px;background:var(--dark);border-radius:2px;transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);display:block;}
+.nav-ham.open span:nth-child(1){transform:translateY(7.25px) rotate(45deg);}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-ham.open span:nth-child(3){transform:translateY(-7.25px) rotate(-45deg);}
+
+/* OVERLAY + SIDEBAR */
+.overlay{position:fixed;inset:0;background:rgba(30,14,20,0.48);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.38s ease;backdrop-filter:blur(4px);}
+.overlay.show{opacity:1;pointer-events:all;}
+.sidebar{position:fixed;top:0;right:-100%;width:min(340px,88vw);height:100vh;background:var(--ivory);z-index:201;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:right 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(30,14,20,0.14);overflow-y:auto;}
+.sidebar.open{right:0;}
+.sidebar-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sb-tag{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:3px;}
+.sidebar-close{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.125rem;transition:all 0.2s;flex-shrink:0;}
+.sidebar-close:hover{background:var(--rose-pale);border-color:var(--rose);color:var(--rose);}
+.sidebar-body{padding:1.75rem 2rem;flex:1;display:flex;flex-direction:column;}
+.sb-links{display:flex;flex-direction:column;}
+.sb-links a{color:var(--dark);text-decoration:none;font-family:'Aboreto',serif;font-size:1.75rem;font-weight:600;letter-spacing:0.02em;padding:0.875rem 0;border-bottom:1px solid var(--border);transition:color 0.2s;display:flex;align-items:center;justify-content:space-between;}
+.sb-links a::after{content:'→';font-size:1rem;color:var(--rose);opacity:0;transform:translateX(-6px);transition:all 0.25s;}
+.sb-links a:hover{color:var(--rose);}
+.sb-links a:hover::after{opacity:1;transform:translateX(0);}
+.sb-book{margin-top:2rem;background:var(--rose);color:#fff;padding:1rem 1.75rem;font-size:0.875rem;font-weight:800;font-family:'Inter',sans-serif;letter-spacing:0.04em;border:none;border-radius:50px;cursor:pointer;text-transform:uppercase;text-align:center;text-decoration:none;display:block;transition:background 0.22s;}
+.sb-book:hover{background:var(--dark);}
+.sb-foot{margin-top:auto;padding-top:2rem;border-top:1px solid var(--border);}
+.sb-foot-info{font-size:0.8rem;color:var(--muted);line-height:2;font-weight:500;}
+.sb-foot-info strong{color:var(--dark);font-weight:700;}
+.sb-socials{display:flex;gap:1rem;margin-top:0.875rem;}
+.sb-socials a{font-size:0.78rem;color:var(--rose);text-decoration:none;font-weight:700;letter-spacing:0.04em;}
+
+/* PAGE HERO */
+.page-hero{position:relative;height:60vh;min-height:420px;overflow:hidden;display:flex;align-items:center;}
+.page-hero-img{position:absolute;inset:0;}
+.page-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(108deg,rgba(30,14,20,0.82) 0%,rgba(30,14,20,0.5) 55%,rgba(30,14,20,0.2) 100%);}
+.page-hero-content{position:relative;z-index:2;padding:0 5rem;margin-top:4rem;}
+.page-hero-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.25rem;}
+.page-hero-badge::before{content:'';width:1.5rem;height:1px;background:var(--gold2);}
+.page-hero-badge::after{content:'✦';font-size:0.55rem;}
+.page-hero h1{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(2rem,4.5vw,4rem);line-height:1.08;color:#fff;letter-spacing:0.08em;}
+.page-hero h1 em{font-style:italic;color:var(--gold2);}
+.page-hero-sub{font-size:1rem;color:rgba(255,255,255,0.6);margin-top:1rem;font-weight:400;max-width:480px;line-height:1.7;}
+
+/* SHARED */
+.sec-label{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--rose);font-weight:600;margin-bottom:0.875rem;display:flex;align-items:center;gap:0.625rem;}
+.sec-label::before{content:'';width:1.5rem;height:1px;background:var(--rose);}
+.sec-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.14;color:var(--dark);letter-spacing:0.06em;}
+.sec-h em{font-style:italic;color:var(--rose);}
+.btn-rose{background:var(--rose);color:#fff;padding:0.95rem 2.25rem;font-size:0.875rem;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:0.04em;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block;text-transform:uppercase;}
+.btn-rose:hover{background:var(--dark);transform:translateY(-2px);box-shadow:0 14px 36px rgba(160,48,78,0.28);}
+.btn-gold{background:var(--gold);color:var(--dark);padding:0.95rem 2.25rem;font-size:0.875rem;font-weight:700;font-family:'Inter',sans-serif;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;display:inline-block;text-transform:uppercase;letter-spacing:0.04em;}
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);}
+.btn-wire{border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.6);padding:1rem 2.25rem;font-size:0.875rem;font-family:'Inter',sans-serif;border-radius:50px;text-decoration:none;display:inline-block;transition:all 0.22s;font-weight:700;}
+.btn-wire:hover{border-color:var(--gold);color:var(--gold);}
+
+/* STORY */
+.story{padding:6rem 4rem;display:grid;grid-template-columns:1fr 1.1fr;gap:6rem;align-items:center;background:#fff;}
+.story-img{position:relative;}
+.story-img-inner{border-radius:24px;overflow:hidden;aspect-ratio:3/4;}
+.story-img-inner img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.story-float{position:absolute;bottom:-1.5rem;left:-1.5rem;background:var(--dark);border-radius:16px;padding:1.5rem 2rem;}
+.story-float-year{font-family:'Aboreto',serif;font-weight:400;font-size:2.5rem;color:var(--gold2);line-height:1;letter-spacing:0.04em;}
+.story-float-label{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:4px;font-weight:600;}
+.story-body{font-size:0.9375rem;color:var(--muted);line-height:1.9;margin-bottom:1.125rem;font-weight:400;}
+.story-body strong{color:var(--dark);font-weight:600;}
+
+/* STATS BAR */
+.stats-bar{background:var(--dark);padding:3.5rem 4rem;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;}
+.stat-item{text-align:center;padding:1.5rem;border-right:1px solid rgba(255,255,255,0.08);}
+.stat-item:last-child{border-right:none;}
+.stat-n{font-family:'Aboreto',serif;font-weight:400;font-size:2.5rem;color:var(--gold2);line-height:1;letter-spacing:0.04em;}
+.stat-l{font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-top:0.5rem;font-weight:600;}
+
+/* MISSION */
+.mission{padding:6rem 4rem;background:var(--ivory2);display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+.mission-visual{position:relative;}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
+.mission-img{border-radius:14px;overflow:hidden;}
+.mission-img img{width:100%;height:200px;object-fit:cover;display:block;transition:transform 0.5s ease;}
+.mission-img:hover img{transform:scale(1.05);}
+.mission-img.tall{grid-row:1/3;}
+.mission-img.tall img{height:100%;}
+.mission-quote{background:var(--rose);border-radius:16px;padding:2rem;grid-column:2;display:flex;align-items:center;justify-content:center;}
+.mission-quote p{font-family:'Aboreto',serif;font-style:italic;font-size:1rem;color:#fff;line-height:1.6;text-align:center;letter-spacing:0.02em;}
+
+/* VALUES */
+.values{padding:6rem 4rem;background:#fff;}
+.values-head{text-align:center;margin-bottom:4rem;}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.value-card{padding:2.5rem 2rem;border:1px solid var(--border);border-radius:20px;transition:all 0.3s;background:var(--ivory);}
+.value-card:hover{border-color:var(--border-rose);transform:translateY(-6px);box-shadow:0 20px 48px rgba(160,48,78,0.1);}
+.value-icon{width:52px;height:52px;background:var(--rose-pale);border:1px solid var(--border-rose);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:1.25rem;}
+.value-icon svg{width:24px;height:24px;stroke:var(--rose);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.value-title{font-family:'Aboreto',serif;font-weight:400;font-size:1.25rem;color:var(--dark);margin-bottom:0.75rem;letter-spacing:0.04em;}
+.value-desc{font-size:0.875rem;color:var(--muted);line-height:1.75;font-weight:400;}
+
+/* TEAM */
+.team{padding:6rem 4rem;background:var(--ivory2);}
+.team-head{text-align:center;margin-bottom:4rem;}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.team-card{text-align:center;}
+.team-photo{border-radius:20px;overflow:hidden;aspect-ratio:3/4;margin-bottom:1.25rem;background:var(--ivory3);}
+.team-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform 0.5s ease;}
+.team-card:hover .team-photo img{transform:scale(1.04);}
+.team-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.125rem;color:var(--dark);letter-spacing:0.06em;}
+.team-role{font-size:0.78rem;color:var(--rose);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-top:0.25rem;}
+.team-desc{font-size:0.82rem;color:var(--muted);line-height:1.7;margin-top:0.75rem;}
+
+/* BRANDS */
+.brands{background:var(--ivory);padding:4rem;border-top:1px solid var(--border);}
+.brands-label{text-align:center;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2.5rem;}
+.brands-row{display:grid;grid-template-columns:repeat(7,1fr);gap:1.5rem;align-items:center;}
+.brand-card{background:transparent;border:none;padding:0.5rem 1rem;display:flex;align-items:center;justify-content:center;height:56px;transition:all 0.2s;filter:grayscale(1);opacity:0.45;}
+.brand-card:hover{filter:grayscale(0);opacity:1;transform:translateY(-2px);}
+.brand-card img{max-width:100%;max-height:44px;object-fit:contain;}
+.brand-card.txt{font-family:'Aboreto',serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;color:var(--dark);}
+
+/* INFO + CTA */
+.info-cta{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
+.info-block{background:var(--ivory2);padding:5rem 4rem;}
+.info-block-head{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.5rem,2.5vw,2.25rem);color:var(--dark);letter-spacing:0.06em;margin-bottom:2.5rem;}
+.info-block-head em{font-style:italic;color:var(--rose);}
+.hours-list{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;}
+.hour-row{display:flex;justify-content:space-between;align-items:center;padding:0.875rem 1.25rem;background:#fff;border-radius:10px;border:1px solid var(--border);}
+.hour-day{font-size:0.82rem;font-weight:600;color:var(--dark);}
+.hour-time{font-size:0.82rem;color:var(--muted);font-weight:500;}
+.hour-closed{color:var(--rose);font-weight:700;}
+.address-block{padding:1.25rem;background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:1.5rem;}
+.address-line{font-size:0.875rem;color:var(--muted);line-height:1.8;}
+.address-line strong{color:var(--dark);font-weight:600;}
+.cta-block{background:var(--dark);padding:5rem 4rem;position:relative;overflow:hidden;}
+.cta-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(160,48,78,0.14),transparent 60%);}
+.cta-label{font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);font-weight:800;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.625rem;position:relative;}
+.cta-label::before{content:'';width:1.5rem;height:1px;background:var(--gold);}
+.cta-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(2rem,3.5vw,3rem);line-height:1.1;color:#fff;margin-bottom:1rem;position:relative;letter-spacing:0.06em;}
+.cta-h em{font-style:italic;color:var(--gold2);}
+.cta-sub{font-size:0.9375rem;color:rgba(255,255,255,0.42);line-height:1.85;margin-bottom:2.5rem;font-weight:400;position:relative;max-width:380px;}
+.cta-btns{display:flex;gap:1rem;flex-wrap:wrap;position:relative;}
+.cta-trust{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.07);position:relative;}
+.cta-trust p{font-size:0.78rem;color:rgba(255,255,255,0.3);line-height:1.9;}
+.cta-trust strong{color:rgba(255,255,255,0.55);}
+
+/* FOOTER */
+footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(184,149,106,0.1);}
+.ft-copy{font-size:0.72rem;color:rgba(255,255,255,0.2);}
+.ft-links{display:flex;gap:1.25rem;}
+.ft-links a{font-size:0.78rem;color:var(--gold);text-decoration:none;font-weight:600;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .page-hero-content{padding:0 2.5rem;}
+  .story,.mission,.values,.team,.brands,.info-block,.cta-block{padding-left:2rem;padding-right:2rem;}
+  .story{grid-template-columns:1fr;gap:3rem;padding-top:4rem;padding-bottom:4rem;}
+  .story-float{left:0.5rem;}
+  .mission{grid-template-columns:1fr;gap:3rem;padding-top:4rem;padding-bottom:4rem;}
+  .values-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+  .stats-bar{grid-template-columns:1fr 1fr;gap:1rem;padding:2.5rem 2rem;}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);padding:1rem;}
+  .stat-item:nth-child(even){border-bottom:1px solid rgba(255,255,255,0.08);}
+  .info-cta{grid-template-columns:1fr;}
+  .brands-row{grid-template-columns:repeat(4,1fr);}
+  footer{padding-left:2rem;padding-right:2rem;}
+}
+@media(max-width:768px){
+  nav{top:0.75rem;padding:0.625rem 1rem 0.625rem 0.875rem;width:calc(100% - 1.5rem);}
+  nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
+  .nav-links,.nav-cta{display:none!important;}
+  .nav-ham{display:flex;}
+  .page-hero{height:50vh;}
+  .page-hero-content{padding:0 1.5rem;}
+  .values-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .mission-grid{grid-template-columns:1fr;}
+  .mission-img.tall{grid-row:auto;}
+  .mission-img.tall img{height:200px;}
+  .mission-quote{grid-column:1;}
+  .brands-row{grid-template-columns:repeat(3,1fr);}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
+  .ft-links{justify-content:center;}
+}
+@media(max-width:480px){
+  .stats-bar{grid-template-columns:1fr 1fr;}
+  .brands-row{grid-template-columns:repeat(2,1fr);}
+}
+.reveal{opacity:0;transform:translateY(32px);}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-head">
+    <div>
+      <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img" style="height:38px;">
+      <div class="sb-tag">Luxury Home Salon · Lucknow</div>
+    </div>
+    <button class="sidebar-close" onclick="closeSidebar()">✕</button>
+  </div>
+  <div class="sidebar-body">
+    <div class="sb-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/#services">Services</a>
+      <a href="/#portfolio">Portfolio</a>
+      <a href="/#packages">Packages</a>
+      <a href="/#contact">Contact Us</a>
+    </div>
+    <a href="/#contact" class="sb-book">Book Appointment →</a>
+    <div class="sb-foot">
+      <div class="sb-foot-info">
+        <strong>+91 63945 84794</strong><br>
+        info@hayamakeover.com<br>
+        Mon–Fri 11AM–8PM · Sat 11AM–6PM
+      </div>
+      <div class="sb-socials">
+        <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+        <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/logo.png" alt="Haya Makeover" class="nav-logo-img">
+    <span class="nav-brand-name">Haya <em>Makeover</em></span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/about.html" class="active">About</a>
+    <a href="/#services">Services</a>
+    <a href="/#portfolio">Portfolio</a>
+    <a href="/#packages">Packages</a>
+    <a href="/#testimonials">Reviews</a>
+    <a href="/#contact">Contact</a>
+  </div>
+  <a href="/#contact" class="nav-cta">Book Appointment →</a>
+  <button class="nav-ham" id="ham" onclick="toggleSidebar()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-img">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1400&q=85" alt="Haya Makeover">
+  </div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-badge">Est. 2017 · Lucknow</p>
+    <h1>Lucknow's Most Trusted<br><em>Home Salon</em></h1>
+    <p class="page-hero-sub">500+ happy clients. 8 years of flawless results. We come to you — fully equipped, on time, every time.</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-n">500+</div>
+    <div class="stat-l">Happy Clients</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-n">4.9★</div>
+    <div class="stat-l">Google Rating</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-n">8 Yrs</div>
+    <div class="stat-l">Experience</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-n">100%</div>
+    <div class="stat-l">Satisfaction Guaranteed</div>
+  </div>
+</div>
+
+<!-- OUR STORY -->
+<section class="story" id="story">
+  <div class="story-img reveal">
+    <div class="story-img-inner">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=85" alt="Haya Makeover Story">
+    </div>
+    <div class="story-float">
+      <div class="story-float-year">2017</div>
+      <div class="story-float-label">Founded in Lucknow</div>
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="sec-label">Our Story</p>
+    <h2 class="sec-h" style="margin-bottom:1.5rem;">Beauty That Comes<br><em>To Your Door.</em></h2>
+    <p class="story-body">Haya Makeover was born from a simple belief — <strong>every woman deserves a luxury salon experience without the hassle of leaving her home.</strong> Founded in 2017 in Lucknow, we set out to redefine what home beauty services could look like.</p>
+    <p class="story-body">What started as a small team of passionate artists has grown into Lucknow's highest-rated home salon service — trusted by brides, professionals, and busy mothers across the city. We've been there for engagements, weddings, baby showers, and quiet self-care Sundays alike.</p>
+    <p class="story-body">Today, our certified professionals arrive at your doorstep with everything they need — top-grade products, sanitised tools, and the expertise to make you look and feel extraordinary. <strong>No waiting. No travel. Just results.</strong></p>
+    <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="/#contact" class="btn-rose">Book an Appointment →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION + IMAGES -->
+<section class="mission">
+  <div class="reveal">
+    <p class="sec-label">Our Mission</p>
+    <h2 class="sec-h" style="margin-bottom:1.5rem;">Luxury, Hygiene &amp;<br><em>Flawless Results.</em></h2>
+    <p class="story-body">We believe beauty is not just about looking good — it's about <strong>feeling cared for, confident, and stress-free.</strong> Every appointment is designed to be a moment of luxury, not a chore.</p>
+    <p class="story-body">We use only branded, top-grade products. Our tools are sanitised before every session. And our artists are trained not just in technique, but in making you feel completely comfortable in your own home.</p>
+    <p class="story-body">Whether it's your wedding day or a regular Tuesday, you deserve the best. That's the Haya Makeover promise.</p>
+  </div>
+  <div class="mission-visual reveal">
+    <div class="mission-grid">
+      <div class="mission-img tall">
+        <img src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=500&q=80" alt="Bridal Makeup">
+      </div>
+      <div class="mission-img">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80" alt="Skin Care">
+      </div>
+      <div class="mission-quote">
+        <p>"Beauty meets convenience — at your doorstep."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="values-head">
+    <p class="sec-label" style="justify-content:center;">What We Stand For</p>
+    <h2 class="sec-h">The Haya <em>Difference.</em></h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="value-title">We Come to You</div>
+      <p class="value-desc">No traffic, no waiting rooms, no parking stress. Our team arrives at your home fully equipped and on time — every single visit.</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="value-title">Hygiene First</div>
+      <p class="value-desc">Sanitised tools, single-use materials, and strict hygiene protocols on every visit. Your safety is never an afterthought — it's our starting point.</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div class="value-title">Premium Products Only</div>
+      <p class="value-desc">MAC, Lakmé, O3+, Schwarzkopf, L'Oréal — we never compromise on what touches your skin. Only top-grade, trusted brands make the cut.</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div class="value-title">Certified Professionals</div>
+      <p class="value-desc">Every artist on our team is trained, certified, and experienced. From bridal makeup to hair spas, you're always in expert hands.</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="value-title">Personalised Service</div>
+      <p class="value-desc">We listen before we begin. Every look is tailored to your features, skin tone, occasion, and personal style. No cookie-cutter results.</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="value-title">100% Satisfaction</div>
+      <p class="value-desc">We're not done until you're delighted. Client satisfaction isn't a target — it's the only outcome we accept. Trusted by 500+ happy clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands">
+  <p class="brands-label">Products We Use</p>
+  <div class="brands-row">
+    <div class="brand-card"><img src="/mac.png" alt="MAC"></div>
+    <div class="brand-card"><img src="/loreal.png" alt="L'Oréal"></div>
+    <div class="brand-card"><img src="/Schwarzkopf.png" alt="Schwarzkopf"></div>
+    <div class="brand-card"><img src="/lakme.png" alt="Lakmé"></div>
+    <div class="brand-card"><img src="/vlcc.png" alt="VLCC"></div>
+    <div class="brand-card"><img src="/lotus.png" alt="Lotus"></div>
+    <div class="brand-card txt">O3+</div>
+  </div>
+</div>
+
+<!-- INFO + CTA -->
+<div class="info-cta">
+  <div class="info-block">
+    <h2 class="info-block-head">Find Us &<br><em>Working Hours</em></h2>
+    <div class="hours-list">
+      <div class="hour-row">
+        <span class="hour-day">Monday – Friday</span>
+        <span class="hour-time">11:00 AM – 8:00 PM</span>
+      </div>
+      <div class="hour-row">
+        <span class="hour-day">Saturday</span>
+        <span class="hour-time">11:00 AM – 6:00 PM</span>
+      </div>
+      <div class="hour-row">
+        <span class="hour-day">Sunday</span>
+        <span class="hour-time hour-closed">Closed</span>
+      </div>
+    </div>
+    <div class="address-block">
+      <p class="address-line">📍 <strong>68, Lalkuan, Lucknow, UP 226001</strong></p>
+      <p class="address-line">📞 <strong>+91 63945 84794</strong></p>
+      <p class="address-line">📞 <strong>+91 82992 23169</strong></p>
+      <p class="address-line">✉ <strong>info@hayamakeover.com</strong></p>
+    </div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a href="https://www.instagram.com/haya.makeover23/" target="_blank" class="btn-rose" style="font-size:0.78rem;padding:0.75rem 1.5rem;">Instagram →</a>
+      <a href="https://www.facebook.com/haya.makeover23/" target="_blank" class="btn-gold" style="font-size:0.78rem;padding:0.75rem 1.5rem;">Facebook →</a>
+    </div>
+  </div>
+  <div class="cta-block">
+    <p class="cta-label">Ready to Book?</p>
+    <h2 class="cta-h">Your Beauty Day<br><em>Starts Here.</em></h2>
+    <p class="cta-sub">Most bookings confirmed within 30 minutes. We arrive anywhere in Lucknow — on time, every time.</p>
+    <div class="cta-btns">
+      <a href="tel:+916394584794" class="btn-gold">Call → +91 63945 84794</a>
+      <a href="https://wa.me/916394584794" class="btn-wire">WhatsApp Us</a>
+    </div>
+    <div class="cta-trust">
+      <p><strong>Serving Lucknow since 2017</strong> · 500+ Happy Clients<br>
+      Certified Artists · Sanitised Tools · Premium Products</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="/logo.png" alt="Haya Makeover" style="height:48px;width:auto;filter:brightness(0) invert(1);">
+  <span class="ft-copy">© 2025 Haya Makeover · All rights reserved.</span>
+  <div class="ft-links">
+    <a href="https://www.instagram.com/haya.makeover23/" target="_blank">Instagram</a>
+    <a href="https://www.facebook.com/haya.makeover23/" target="_blank">Facebook</a>
+    <a href="tel:+916394584794">Call Now</a>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* NAV */
+gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* HEADING REVEAL */
+document.querySelectorAll('.sec-h,.cta-h,.info-block-head,.page-hero h1').forEach(function(el){
+  gsap.set(el,{opacity:1,clipPath:'inset(0 0 100% 0)'});
+  gsap.to(el,{
+    clipPath:'inset(0 0 0% 0)',
+    duration:1,
+    ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}
+  });
+});
+
+/* SCROLL REVEAL */
+document.querySelectorAll('.reveal').forEach(function(el){
+  gsap.fromTo(el,{opacity:0,y:32},{opacity:1,y:0,duration:0.88,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
+});
+
+/* SIDEBAR */
+function toggleSidebar(){
+  var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');
+  var open=s.classList.toggle('open');
+  o.classList.toggle('show',open);h.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('ham').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+</script>
+</body>
+</html>
