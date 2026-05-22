@@ -352,6 +352,21 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   #hbtns{flex-direction:column!important;width:100%!important;}
   #hbtns a{width:100%!important;text-align:center!important;display:block!important;box-sizing:border-box!important;padding:0.875rem 1rem!important;}
 }
+  /* ENHANCED BUTTONS */
+.btn-gold{position:relative;overflow:hidden;}
+.btn-gold::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transition:left 0.5s ease;}
+.btn-gold:hover::before{left:100%;}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(184,149,106,0.4);}
+
+.btn-wire-light{position:relative;overflow:hidden;z-index:1;}
+.btn-wire-light::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,0.08);transform:translateX(-101%);transition:transform 0.35s ease;z-index:-1;}
+.btn-wire-light:hover::before{transform:translateX(0);}
+.btn-wire-light:hover{border-color:rgba(255,255,255,0.6);transform:translateY(-3px);}
+
+.btn-rose{position:relative;overflow:hidden;}
+.btn-rose::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s ease;}
+.btn-rose:hover::before{left:100%;}
+.btn-rose:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(160,48,78,0.35);}
 </style>
 </head>
 <body>
