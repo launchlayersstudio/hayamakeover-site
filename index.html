@@ -139,10 +139,13 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .sec-h{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3vw,2.75rem);line-height:1.14;color:var(--dark);letter-spacing:0.06em;}
 .sec-h em{font-style:italic;color:var(--rose);}
 .about-body{font-size:0.9375rem;color:var(--muted);line-height:1.85;margin-bottom:1.125rem;font-weight:500;}
-.about-stats{display:flex;gap:2.5rem;margin-top:2.25rem;padding-top:2rem;border-top:1px solid var(--border);}
-.astat-n{font-family:'Aboreto',serif;font-weight:700;font-size:2rem;color:var(--dark);line-height:1;}
-.astat-l{font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:700;}
-
+.about-stats{display:flex;align-items:center;gap:0;margin-top:2.25rem;padding-top:2rem;border-top:1px solid var(--border);}
+.astat{flex:1;text-align:center;}
+.astat-n{font-family:'Aboreto',serif;font-weight:400;font-size:2.25rem;color:var(--dark);line-height:1;letter-spacing:0.04em;}
+.astat-plus{color:var(--rose);font-size:1.5rem;vertical-align:super;font-style:italic;}
+.astat-l{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:700;}
+.astat-div{width:1px;height:40px;background:var(--border);flex-shrink:0;}
+  
 /* SERVICES */
 .services{padding:5rem 4rem;background:var(--ivory2);}
 .section-head{text-align:center;margin-bottom:3.5rem;}
@@ -488,9 +491,20 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
     <p class="about-body">Our certified professionals use only top-grade products and techniques to deliver high-quality, personalised results. Known for excellence and stunning transformations — we're Lucknow's most trusted home salon.</p>
     <div style="margin-top:2rem;"><a href="#contact" class="btn-rose">Book an Appointment →</a></div>
     <div class="about-stats">
-      <div><div class="astat-n">500+</div><div class="astat-l">Happy Clients</div></div>
-      <div><div class="astat-n">4.9★</div><div class="astat-l">Google Rating</div></div>
-      <div><div class="astat-n">8 Yrs</div><div class="astat-l">Experience</div></div>
+      <div class="astat">
+        <div class="astat-n">500<span class="astat-plus">+</span></div>
+        <div class="astat-l">Happy Clients</div>
+      </div>
+      <div class="astat-div"></div>
+      <div class="astat">
+        <div class="astat-n">4.9<span class="astat-plus">★</span></div>
+        <div class="astat-l">Google Rating</div>
+      </div>
+      <div class="astat-div"></div>
+      <div class="astat">
+        <div class="astat-n">8<span class="astat-plus">+</span></div>
+        <div class="astat-l">Years Experience</div>
+      </div>
     </div>
   </div>
 </section>
