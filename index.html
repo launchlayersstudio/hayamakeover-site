@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
+html,body{max-width:100%;overflow-x:hidden;}
 .nav-logo-img{height:36px;width:36px;object-fit:contain;display:block;flex-shrink:0;}
 .nav-brand{display:flex;flex-direction:row;align-items:center;gap:0.5rem;text-decoration:none;flex-wrap:nowrap;}
 .nav-brand-name{font-family:'Aboreto',serif;font-weight:400;font-size:1.1rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dark);line-height:1;display:block;white-space:nowrap;}
@@ -312,7 +313,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 @media(max-width:768px){
   .topbar{padding:0.4rem 1.25rem;}
   .topbar-right{display:none;}
-  nav{top:0.75rem;padding:0.625rem 1rem 0.625rem 0.875rem;width:calc(100% - 1.5rem);}
+  nav{top:0.75rem;padding:0.625rem 1rem 0.625rem 0.875rem;width:calc(100vw - 1.5rem);max-width:calc(100vw - 1.5rem);}
 nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   .nav-links,.nav-cta{display:none!important;}
   .nav-ham{display:flex;}
@@ -345,6 +346,12 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   .port-grid2{grid-template-columns:1fr 1fr;}
 }
 .g0{opacity:0;}
+@media(max-width:768px){
+  #hhead{font-size:1.5rem!important;letter-spacing:0.04em!important;}
+  #hsub{font-size:0.85rem!important;margin-bottom:1.25rem!important;}
+  #hbtns{flex-direction:column!important;width:100%!important;}
+  #hbtns a{width:100%!important;text-align:center!important;display:block!important;box-sizing:border-box!important;padding:0.875rem 1rem!important;}
+}
 </style>
 </head>
 <body>
