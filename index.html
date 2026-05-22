@@ -910,6 +910,77 @@ function closeSidebar(){
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+  /* ---- SECTION ANIMATIONS ---- */
+
+/* About image — slide in from left */
+gsap.fromTo('.about-img-wrap',
+  {opacity:0,x:-60},
+  {opacity:1,x:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:'.about',start:'top 75%'}});
+
+/* About text — slide in from right */
+gsap.fromTo('.about > div:last-child',
+  {opacity:0,x:60},
+  {opacity:1,x:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:'.about',start:'top 75%'}});
+
+/* Stats — count up feel: stagger in */
+gsap.fromTo('.astat',
+  {opacity:0,y:20},
+  {opacity:1,y:0,duration:0.6,stagger:0.15,ease:'power3.out',
+    scrollTrigger:{trigger:'.about-stats',start:'top 88%'}});
+
+/* Service cards — stagger up */
+gsap.fromTo('.svc-card',
+  {opacity:0,y:50,scale:0.95},
+  {opacity:1,y:0,scale:1,duration:0.7,stagger:0.12,ease:'power3.out',
+    scrollTrigger:{trigger:'.svc-grid',start:'top 80%'}});
+
+/* Promo — left slides in, right slides in */
+gsap.fromTo('.promo-left',
+  {opacity:0,x:-50},
+  {opacity:1,x:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:'.promo',start:'top 75%'}});
+gsap.fromTo('.promo-right',
+  {opacity:0,x:50},
+  {opacity:1,x:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:'.promo',start:'top 75%'}});
+
+/* Testimonial cards — stagger up */
+gsap.fromTo('.testi-card',
+  {opacity:0,y:40},
+  {opacity:1,y:0,duration:0.7,stagger:0.15,ease:'power3.out',
+    scrollTrigger:{trigger:'.testi-grid',start:'top 82%'}});
+
+/* Offer cards — stagger up */
+gsap.fromTo('.offer-card',
+  {opacity:0,y:40,scale:0.97},
+  {opacity:1,y:0,scale:1,duration:0.65,stagger:0.1,ease:'power3.out',
+    scrollTrigger:{trigger:'.offers-grid',start:'top 82%'}});
+
+/* Why Us items — slide in from right */
+gsap.fromTo('.why-item',
+  {opacity:0,x:40},
+  {opacity:1,x:0,duration:0.65,stagger:0.12,ease:'power3.out',
+    scrollTrigger:{trigger:'.why-items',start:'top 80%'}});
+
+/* Why Us left — fade up */
+gsap.fromTo('.whyus > div:first-child',
+  {opacity:0,y:40},
+  {opacity:1,y:0,duration:1,ease:'power3.out',
+    scrollTrigger:{trigger:'.whyus',start:'top 75%'}});
+
+/* Brands — stagger fade in */
+gsap.fromTo('.brand-card',
+  {opacity:0,y:20},
+  {opacity:0.45,y:0,duration:0.5,stagger:0.08,ease:'power2.out',
+    scrollTrigger:{trigger:'.brands-row',start:'top 88%'}});
+
+/* Svc strip — already animating, add a fade in */
+gsap.fromTo('.svc-strip',
+  {opacity:0},
+  {opacity:1,duration:0.8,ease:'power2.out',
+    scrollTrigger:{trigger:'.svc-strip',start:'top 95%'}});
 </script>
   <!-- WHATSAPP FLOAT -->
 <a href="https://wa.me/916394584794" target="_blank" class="wa-float" aria-label="WhatsApp">
