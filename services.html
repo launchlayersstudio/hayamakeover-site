@@ -127,40 +127,52 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .svc-add-btn:hover{background:var(--dark);}
 .svc-card.in-cart .svc-add-btn:hover{background:var(--rose);cursor:pointer;}
 
-/* CART BAR */
-.cart-bar{position:fixed;bottom:0;left:0;right:0;z-index:500;transform:translateY(100%);transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94);}
-.cart-bar.visible{transform:translateY(0);}
-.cart-bar-inner{background:var(--dark);border-top:1px solid rgba(201,24,112,0.25);padding:1.125rem 4rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
-.cart-info{display:flex;align-items:center;gap:1.25rem;}
-.cart-badge{width:38px;height:38px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-family:'Aboreto',serif;font-size:1rem;color:#fff;font-weight:400;flex-shrink:0;transition:transform 0.3s;}
-.cart-badge.bump{animation:bump 0.3s ease;}
-@keyframes bump{0%{transform:scale(1);}50%{transform:scale(1.3);}100%{transform:scale(1);}}
-.cart-text{}
-.cart-title{font-size:0.78rem;color:rgba(255,255,255,0.45);font-weight:500;letter-spacing:0.04em;}
-.cart-services-list{font-size:0.875rem;color:#fff;font-weight:600;margin-top:0.1rem;max-width:560px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.cart-actions{display:flex;align-items:center;gap:0.875rem;flex-shrink:0;}
-.cart-clear{background:none;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.45);padding:0.625rem 1.25rem;border-radius:50px;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.22s;letter-spacing:0.04em;text-transform:uppercase;}
-.cart-clear:hover{border-color:rgba(255,255,255,0.35);color:rgba(255,255,255,0.7);}
-.cart-book-btn{background:var(--gold);color:var(--dark);padding:0.875rem 2rem;border:none;border-radius:50px;font-size:0.875rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:0.625rem;white-space:nowrap;}
-.cart-book-btn:hover{background:var(--gold2);transform:translateY(-2px);}
-.cart-book-btn svg{width:18px;height:18px;fill:var(--dark);}
-@media(max-width:768px){
-  .cart-bar-inner{padding:1rem 1.25rem;gap:1rem;}
-  .cart-services-list{max-width:200px;}
-  .cart-book-btn{padding:0.75rem 1.375rem;font-size:0.78rem;}
-}
+/* CART FAB */
+@keyframes bump{0%{transform:scale(1);}50%{transform:scale(1.25);}100%{transform:scale(1);}}
+.cart-fab{position:fixed;bottom:1.75rem;left:1.75rem;z-index:9999;width:58px;height:58px;background:var(--rose);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(201,24,112,0.45);cursor:pointer;border:none;transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);opacity:0;transform:scale(0);pointer-events:none;}
+.cart-fab.visible{opacity:1;transform:scale(1);pointer-events:all;}
+.cart-fab:hover{transform:scale(1.1);box-shadow:0 12px 40px rgba(201,24,112,0.55);}
+.cart-fab svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round;}
+.cart-fab-badge{position:absolute;top:-4px;right:-4px;width:22px;height:22px;background:var(--gold);border-radius:50%;font-size:0.72rem;font-weight:800;color:var(--dark);display:flex;align-items:center;justify-content:center;font-family:'Aboreto',serif;border:2px solid var(--ivory);}
+.cart-fab-badge.bump{animation:bump 0.3s ease;}
+@media(max-width:768px){.cart-fab{bottom:1.25rem;left:1.25rem;width:52px;height:52px;}}
 
-/* CART DRAWER (mobile overlay) */
-.cart-drawer{position:fixed;bottom:0;left:0;right:0;z-index:502;background:var(--ivory);border-radius:24px 24px 0 0;border-top:1px solid var(--border);padding:1.75rem 1.5rem 2.5rem;transform:translateY(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);max-height:75vh;overflow-y:auto;}
-.cart-drawer.open{transform:translateY(0);}
-.cart-drawer-handle{width:40px;height:4px;background:var(--border-rose);border-radius:2px;margin:0 auto 1.5rem;}
-.cart-drawer-title{font-family:'Aboreto',serif;font-weight:400;font-size:1.375rem;color:var(--dark);letter-spacing:0.06em;margin-bottom:1.25rem;}
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(45,10,30,0.52);z-index:600;opacity:0;pointer-events:none;transition:opacity 0.35s ease;backdrop-filter:blur(4px);}
+.cart-overlay.show{opacity:1;pointer-events:all;}
+.cart-drawer{position:fixed;top:0;right:-100%;width:min(420px,100vw);height:100vh;background:var(--ivory);z-index:601;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:right 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(45,10,30,0.18);overflow:hidden;}
+.cart-drawer.open{right:0;}
+.cart-drawer-head{padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#fff;flex-shrink:0;}
+.cart-drawer-title{font-family:'Aboreto',serif;font-weight:400;font-size:1.375rem;color:var(--dark);letter-spacing:0.06em;}
 .cart-drawer-title em{font-style:italic;color:var(--rose);}
-.cart-drawer-items{display:flex;flex-direction:column;gap:0.625rem;margin-bottom:1.5rem;}
-.cart-drawer-item{display:flex;align-items:center;justify-content:space-between;padding:0.875rem 1rem;background:#fff;border:1px solid var(--border);border-radius:12px;}
-.cart-drawer-item-name{font-size:0.875rem;font-weight:600;color:var(--dark);}
-.cart-drawer-item-remove{background:none;border:none;color:var(--rose);font-size:1rem;cursor:pointer;padding:0.25rem;line-height:1;}
-.cart-drawer-empty{text-align:center;padding:2rem 0;color:var(--muted);font-size:0.875rem;}
+.cart-drawer-close{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1rem;transition:all 0.2s;flex-shrink:0;}
+.cart-drawer-close:hover{background:var(--rose-pale);border-color:var(--rose);color:var(--rose);}
+.cart-drawer-body{flex:1;overflow-y:auto;padding:1.5rem 1.75rem;}
+.cart-drawer-count{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:1rem;}
+.cart-drawer-count span{color:var(--rose);font-weight:800;}
+.cart-drawer-items{display:flex;flex-direction:column;gap:0.75rem;}
+.cart-drawer-item{display:flex;align-items:center;justify-content:space-between;gap:0.75rem;padding:1rem 1.125rem;background:#fff;border:1px solid var(--border);border-radius:14px;transition:border-color 0.2s;}
+.cart-drawer-item:hover{border-color:var(--border-rose);}
+.cart-item-left{display:flex;align-items:center;gap:0.875rem;flex:1;min-width:0;}
+.cart-item-icon{width:36px;height:36px;border-radius:10px;background:var(--rose-pale);border:1px solid var(--border-rose);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.cart-item-info{min-width:0;}
+.cart-item-name{font-size:0.875rem;font-weight:600;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cart-item-price{font-family:'Aboreto',serif;font-size:0.875rem;color:var(--rose);margin-top:0.1rem;}
+.cart-item-remove{background:none;border:1px solid var(--border);border-radius:50%;width:28px;height:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.875rem;transition:all 0.2s;flex-shrink:0;}
+.cart-item-remove:hover{background:var(--rose-pale);border-color:var(--rose);color:var(--rose);}
+.cart-drawer-empty{text-align:center;padding:3rem 1rem;}
+.cart-drawer-empty-icon{font-size:2.5rem;margin-bottom:1rem;}
+.cart-drawer-empty p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+.cart-drawer-foot{padding:1.5rem 1.75rem;border-top:1px solid var(--border);background:#fff;flex-shrink:0;}
+.cart-drawer-summary{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border);}
+.cart-summary-label{font-size:0.78rem;color:var(--muted);font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+.cart-summary-val{font-family:'Aboreto',serif;font-size:1rem;color:var(--dark);}
+.cart-summary-val span{color:var(--rose);}
+.cart-book-btn{width:100%;background:var(--rose);color:#fff;padding:1.125rem;border:none;border-radius:50px;font-size:0.9rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;justify-content:center;gap:0.625rem;margin-bottom:0.75rem;}
+.cart-book-btn:hover{background:var(--dark);}
+.cart-book-btn svg{width:20px;height:20px;fill:#fff;}
+.cart-clear-all{width:100%;background:none;border:1.5px solid var(--border);color:var(--muted);padding:0.875rem;border-radius:50px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.22s;letter-spacing:0.04em;text-transform:uppercase;}
+.cart-clear-all:hover{border-color:var(--rose);color:var(--rose);}
 
 /* EMPTY STATE */
 .cat-empty{display:none;text-align:center;padding:3rem;color:var(--muted);font-size:0.875rem;}
@@ -681,23 +693,38 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 
 </div>
 
-<!-- CART BAR -->
-<div class="cart-bar" id="cartBar">
-  <div class="cart-bar-inner">
-    <div class="cart-info">
-      <div class="cart-badge" id="cartBadge">0</div>
-      <div class="cart-text">
-        <div class="cart-title">Your Wishlist</div>
-        <div class="cart-services-list" id="cartServicesList">No services selected yet</div>
+<!-- CART FAB -->
+<button class="cart-fab" id="cartFab" onclick="openCart()" aria-label="View Cart">
+  <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+  <div class="cart-fab-badge" id="cartBadge">0</div>
+</button>
+
+<!-- CART OVERLAY + DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <div class="cart-drawer-title">Your <em>Wishlist</em></div>
+    <button class="cart-drawer-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-drawer-body">
+    <div class="cart-drawer-count">Selected: <span id="cartCount">0</span> services</div>
+    <div class="cart-drawer-items" id="cartItems">
+      <div class="cart-drawer-empty" id="cartEmpty">
+        <div class="cart-drawer-empty-icon">🛍️</div>
+        <p>No services added yet.<br>Browse and tap <strong>+ Add</strong> on any service.</p>
       </div>
     </div>
-    <div class="cart-actions">
-      <button class="cart-clear" onclick="clearCart()">Clear All</button>
-      <button class="cart-book-btn" onclick="bookViaWhatsApp()">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Book via WhatsApp
-      </button>
+  </div>
+  <div class="cart-drawer-foot">
+    <div class="cart-drawer-summary">
+      <span class="cart-summary-label">Services Selected</span>
+      <span class="cart-summary-val"><span id="cartCountFoot">0</span> items</span>
     </div>
+    <button class="cart-book-btn" onclick="bookViaWhatsApp()">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Book via WhatsApp
+    </button>
+    <button class="cart-clear-all" onclick="clearCart()">Remove All</button>
   </div>
 </div>
 
@@ -750,6 +777,7 @@ document.querySelectorAll('.reveal').forEach(function(el,i){
 
 /* ── CART STATE ── */
 var cart=[];
+var cartIcons={'HD Bridal Makeup':'👰','Airbrush Bridal Makeup':'✨','Party Makeup (HD)':'🎉','Engagement Makeup':'💍','Reception Makeup':'👑','Everyday Glam Makeup':'💄','O3+ Facial':'🌸','Lotus Whiteglow Facial':'🪷','Sara Gold Facial':'✨','Brightening Cleanup':'🧖','Bleach / D-Tan (Face & Neck)':'🌟','Manicure':'💅','Pedicure':'🦶','Kerastase Hair Spa':'💆','Hair Styling (Blow Dry / Set)':'💇','Bridal Hair Styling':'👸','Keratin Treatment':'✨','Hair Colouring':'🎨','Head Massage':'🙆','Full Bridal Package':'👰','Pre-Bridal Skincare Package':'💍','Bridal Trial Session':'🪞','Saree / Lehenga Draping':'🥻','Bridal Mehendi (Full)':'🎨','Party Mehendi':'🌿','Nail Art':'💅','Threading (Full Face)':'✂️','Full Arms Waxing (Honey)':'🌟','Full Arms Waxing (RICA)':'✨','Half Legs Waxing (Honey)':'🌿','Full Legs Waxing (RICA)':'✨','White Chocolate Waxing (Full Body)':'🍫'};
 
 function getCardData(btn){
   var card=btn.closest('.svc-card');
@@ -767,43 +795,80 @@ function toggleCart(btn){
     cart.splice(idx,1);
     card.classList.remove('in-cart');
   }
-  updateCartBar();
+  updateCartUI();
 }
 
-function updateCartBar(){
-  var bar=document.getElementById('cartBar');
+function removeFromCart(name){
+  cart=cart.filter(function(s){return s.name!==name;});
+  document.querySelectorAll('.svc-card').forEach(function(c){
+    if(c.dataset.name===name) c.classList.remove('in-cart');
+  });
+  updateCartUI();
+}
+
+function updateCartUI(){
+  var fab=document.getElementById('cartFab');
   var badge=document.getElementById('cartBadge');
-  var list=document.getElementById('cartServicesList');
+  var countEl=document.getElementById('cartCount');
+  var countFoot=document.getElementById('cartCountFoot');
+  var itemsEl=document.getElementById('cartItems');
+  var emptyEl=document.getElementById('cartEmpty');
+
   badge.textContent=cart.length;
+  if(countEl) countEl.textContent=cart.length;
+  if(countFoot) countFoot.textContent=cart.length;
+
   if(cart.length>0){
-    bar.classList.add('visible');
-    list.textContent=cart.map(function(s){return s.name;}).join(' · ');
-    /* bump animation */
+    fab.classList.add('visible');
     badge.classList.remove('bump');
     void badge.offsetWidth;
     badge.classList.add('bump');
-    /* shift WA float up */
-    document.getElementById('waFloat').style.bottom='5.5rem';
+    /* render items */
+    var html=cart.map(function(s){
+      var icon=cartIcons[s.name]||'✦';
+      return '<div class="cart-drawer-item">'+
+        '<div class="cart-item-left">'+
+          '<div class="cart-item-icon">'+icon+'</div>'+
+          '<div class="cart-item-info">'+
+            '<div class="cart-item-name">'+s.name+'</div>'+
+            '<div class="cart-item-price">'+s.price+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<button class="cart-item-remove" onclick="removeFromCart(\''+s.name.replace(/'/g,"\\'")+'\')" title="Remove">✕</button>'+
+      '</div>';
+    }).join('');
+    itemsEl.innerHTML=html;
   } else {
-    bar.classList.remove('visible');
-    document.getElementById('waFloat').style.bottom='1.75rem';
+    fab.classList.remove('visible');
+    itemsEl.innerHTML='<div class="cart-drawer-empty" id="cartEmpty"><div class="cart-drawer-empty-icon">🛍️</div><p>No services added yet.<br>Browse and tap <strong>+ Add</strong> on any service.</p></div>';
+    closeCart();
   }
+}
+
+function openCart(){
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeCart(){
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('show');
+  document.body.style.overflow='';
 }
 
 function clearCart(){
   cart=[];
   document.querySelectorAll('.svc-card.in-cart').forEach(function(c){c.classList.remove('in-cart');});
-  updateCartBar();
+  updateCartUI();
 }
 
 function bookViaWhatsApp(){
   if(cart.length===0){return;}
   var lines=cart.map(function(s){return '• '+s.name+' ('+s.price+')';}).join('\n');
   var msg='Hi Haya Makeover! 🌸\n\nI am interested in booking the following services:\n\n'+lines+'\n\nPlease confirm availability, pricing and preferred date/time.\n\nThank you! 🙏';
-  var url='https://wa.me/916394584794?text='+encodeURIComponent(msg);
-  window.open(url,'_blank');
+  window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
 }
-
 /* ── FILTER ── */
 var tabs=document.querySelectorAll('.filter-tab');
 var countEl=document.getElementById('visibleCount');
