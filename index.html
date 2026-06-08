@@ -880,23 +880,31 @@ document.querySelector('.hero').addEventListener('touchend',function(e){
   }
 },{passive:true});
 
-/* PINNED HERO — scale on desktop, fade-only on mobile */
+/* PINNED HERO */
 var hero=document.querySelector('.hero');
-var heroTl=gsap.timeline({
-  scrollTrigger:{
-    trigger:hero,
-    start:'bottom bottom',
-    end:'bottom top',
-    pin:true,
-    pinSpacing:false,
-    scrub:true
-  }
-});
-if(window.innerWidth<=768){
-  heroTl.fromTo(hero,{opacity:1},{opacity:0,duration:1,ease:'none'});
-} else {
+if(window.innerWidth>768){
+  var heroTl=gsap.timeline({
+    scrollTrigger:{
+      trigger:hero,
+      start:'bottom bottom',
+      end:'bottom top',
+      pin:true,
+      pinSpacing:false,
+      scrub:true
+    }
+  });
   heroTl.fromTo(hero,{scale:1,opacity:1},{scale:0.82,opacity:0.5,duration:0.9,ease:'none'})
         .to(hero,{opacity:0,duration:0.1,ease:'none'});
+} else {
+  gsap.to(hero,{
+    opacity:0,
+    scrollTrigger:{
+      trigger:hero,
+      start:'bottom 60%',
+      end:'bottom top',
+      scrub:true
+    }
+  });
 }
   
 /* SCROLL REVEAL */
