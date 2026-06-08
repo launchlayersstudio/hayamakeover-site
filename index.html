@@ -76,6 +76,7 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .hero{position:relative;z-index:1;height:100vh;min-height:560px;overflow:hidden;transform-origin:top center;will-change:transform;}
 .hero-slides{position:absolute;inset:0;}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.3s cubic-bezier(0.4,0,0.2,1);}
+@media(max-width:768px){.hero-slide{cursor:pointer;}}
 .hero-slide.active{opacity:1;}
 .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center 20%;}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(108deg,rgba(30,14,20,0.76) 0%,rgba(30,14,20,0.42) 55%,rgba(30,14,20,0.15) 100%),linear-gradient(to top,rgba(30,14,20,0.45) 0%,transparent 48%);pointer-events:none;}
@@ -322,8 +323,9 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   .nav-links,.nav-cta{display:none!important;}
   .nav-ham{display:flex;}
   .hero{height:100svh;min-height:460px;}
-  .hero-content{padding:5rem 1.25rem 2rem;}
+  .hero-content{display:none;}
   .hero-arrow{display:none;}
+  .hero-overlay{background:linear-gradient(to top,rgba(30,14,20,0.2) 0%,transparent 40%)!important;}
   .offer-badge{display:none;}
   .ob-main{font-size:1.875rem;}
   .slide-h{font-size:1.5rem!important;letter-spacing:0.04em;}
@@ -442,9 +444,9 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
 <!-- HERO CAROUSEL -->
 <section class="hero" id="home">
   <div class="hero-slides">
-    <div class="hero-slide active"><img src="/images/b1.jpg" alt="Bridal Makeup"></div>
-    <div class="hero-slide"><img src="/images/b3.png" alt="Bridal Look"></div>
-    <div class="hero-slide"><img src="/images/b7.png" alt="Bridal Lehenga"></div>
+    <div class="hero-slide active" data-wa="Hi Haya Makeover! 🌸 I saw your Bridal Makeup offer — Book &amp; Get Mom's Makeup FREE. I'm interested, please share details!"><img src="/images/b1.jpg" alt="Bridal Makeup"></div>
+    <div class="hero-slide" data-wa="Hi Haya Makeover! 🌸 I saw your Flat 15% Off offer on all home salon services. I'd like to book, please share details!"><img src="/images/b3.png" alt="Bridal Look"></div>
+    <div class="hero-slide" data-wa="Hi Haya Makeover! 🌸 I saw your Pre-Bridal Package starting ₹2,499. I'm interested, please share details!"><img src="/images/b7.png" alt="Bridal Lehenga"></div>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -899,6 +901,16 @@ gsap.utils.toArray('.port-item').forEach(function(el,i){
   gsap.fromTo(el,{opacity:0,scale:0.96},{opacity:1,scale:1,duration:0.75,ease:'power3.out',
     scrollTrigger:{trigger:el,start:'top 90%'},delay:i*0.07});
 });
+
+/* MOBILE SLIDE TAP → WHATSAPP */
+if(window.innerWidth<=768){
+  document.querySelectorAll('.hero-slide').forEach(function(slide){
+    slide.addEventListener('click',function(){
+      var msg=slide.dataset.wa;
+      if(msg) window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
+    });
+  });
+}
 
 /* SIDEBAR */
 function toggleSidebar(){
