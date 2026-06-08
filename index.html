@@ -96,8 +96,6 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .ob-main{font-family:'Aboreto',serif;font-weight:700;font-size:2.25rem;line-height:1;color:#fff;}
 .ob-label{font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.82);font-weight:800;margin-top:2px;}
 .hero-arrow{display:none;}
-  .hero-scroll-hint{position:absolute;bottom:1.25rem;left:50%;transform:translateX(-50%);z-index:4;animation:bounceDown 1.8s ease-in-out infinite;display:flex;}
-  @keyframes bounceDown{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
 .hero-arrow:hover{background:var(--rose);border-color:var(--rose);}
 .hero-prev{left:2rem;}
 .hero-next{right:2rem;}
@@ -106,7 +104,6 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .hero-dot.active{background:#fff;width:26px;border-radius:4px;}
 
 .scroll-hint{position:absolute;bottom:2.5rem;right:3rem;z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.5rem;}
-.hero-scroll-hint{display:none;}
 .scroll-hint-line{width:1px;height:48px;background:rgba(255,255,255,0.25);position:relative;overflow:hidden;}
 .scroll-hint-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--gold2);animation:scrolldrop 1.8s ease-in-out infinite;}
 .scroll-hint-label{font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.45);font-weight:600;writing-mode:vertical-rl;}
@@ -325,7 +322,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   .nav-links,.nav-cta{display:none!important;}
   .nav-ham{display:flex;}
-  .hero{height:75svh;min-height:380px;}
+  .hero{height:100svh;min-height:460px;}
   .hero-content{display:none;}
   .hero-arrow{display:none;}
   .hero-overlay{background:linear-gradient(to top,rgba(30,14,20,0.2) 0%,transparent 40%)!important;}
@@ -466,9 +463,6 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
   <div class="scroll-hint">
     <div class="scroll-hint-label">Scroll</div>
     <div class="scroll-hint-line"></div>
-  </div>
-  <div class="hero-scroll-hint" id="mobileScrollHint">
-    <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
   <div class="hero-dots" id="h-dots">
     <button class="hero-dot active"></button>
