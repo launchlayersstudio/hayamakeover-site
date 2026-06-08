@@ -864,6 +864,22 @@ dots.forEach(function(d,i){d.onclick=function(){clearInterval(timer);goTo(i);tim
 document.querySelector('.hero').addEventListener('mouseenter',function(){clearInterval(timer);});
 document.querySelector('.hero').addEventListener('mouseleave',function(){timer=setInterval(function(){goTo(cur+1);},5500);});
 
+/* TOUCH SWIPE */
+var touchStartX=0;
+var touchEndX=0;
+document.querySelector('.hero').addEventListener('touchstart',function(e){
+  touchStartX=e.changedTouches[0].screenX;
+},{passive:true});
+document.querySelector('.hero').addEventListener('touchend',function(e){
+  touchEndX=e.changedTouches[0].screenX;
+  var diff=touchStartX-touchEndX;
+  if(Math.abs(diff)>40){
+    clearInterval(timer);
+    if(diff>0){goTo(cur+1);}else{goTo(cur-1);}
+    timer=setInterval(function(){goTo(cur+1);},5500);
+  }
+},{passive:true});
+
 /* PINNED HERO — overscroll style (desktop only) */
 if(window.innerWidth>768){
   var hero=document.querySelector('.hero');
