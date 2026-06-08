@@ -880,7 +880,7 @@ document.querySelector('.hero').addEventListener('touchend',function(e){
   }
 },{passive:true});
 
-/* PINNED HERO — all devices */
+/* PINNED HERO — scale on desktop, fade-only on mobile */
 var hero=document.querySelector('.hero');
 var heroTl=gsap.timeline({
   scrollTrigger:{
@@ -892,8 +892,13 @@ var heroTl=gsap.timeline({
     scrub:true
   }
 });
-heroTl.fromTo(hero,{scale:1,opacity:1},{scale:0.82,opacity:0.5,duration:0.9,ease:'none'})
-      .to(hero,{opacity:0,duration:0.1,ease:'none'});
+if(window.innerWidth<=768){
+  heroTl.fromTo(hero,{opacity:1},{opacity:0,duration:1,ease:'none'});
+} else {
+  heroTl.fromTo(hero,{scale:1,opacity:1},{scale:0.82,opacity:0.5,duration:0.9,ease:'none'})
+        .to(hero,{opacity:0,duration:0.1,ease:'none'});
+}
+  
 /* SCROLL REVEAL */
 document.querySelectorAll('.about-img-wrap,.promo-left,.promo-right,.cta-h,.cta-sub,.cta-btns,.cta-details').forEach(function(el){
   gsap.fromTo(el,{opacity:0,y:24},{opacity:1,y:0,duration:0.88,ease:'power3.out',
