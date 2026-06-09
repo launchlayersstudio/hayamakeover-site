@@ -488,10 +488,6 @@ nav.scrolled{top:0;border-radius:0;width:100%;padding:0.75rem 1.25rem;}
     <button class="hero-dot"></button>
     <button class="hero-dot"></button>
   </div>
-  <button class="hero-enquire-btn" id="heroEnquireBtn" onclick="enquireCurrentSlide()">
-    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    Enquire About This Offer
-  </button>
 </section>
 
 <!-- STRIP -->
@@ -851,10 +847,6 @@ function goTo(n){
   dots[cur].classList.add('active');
 }
 
-function enquireCurrentSlide(){
-  var msg=slides[cur].dataset.wa;
-  if(msg) window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
-}
 timer=setInterval(function(){goTo(cur+1);},5500);
 var hprev=document.getElementById('h-prev');
 var hnext=document.getElementById('h-next');
@@ -931,16 +923,6 @@ gsap.utils.toArray('.port-item').forEach(function(el,i){
   gsap.fromTo(el,{opacity:0,scale:0.96},{opacity:1,scale:1,duration:0.75,ease:'power3.out',
     scrollTrigger:{trigger:el,start:'top 90%'},delay:i*0.07});
 });
-
-/* MOBILE SLIDE TAP → WHATSAPP */
-if(window.innerWidth<=768){
-  document.querySelectorAll('.hero-slide').forEach(function(slide){
-    slide.addEventListener('click',function(){
-      var msg=slide.dataset.wa;
-      if(msg) window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
-    });
-  });
-}
 
 /* SIDEBAR */
 function toggleSidebar(){
