@@ -68,8 +68,8 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 /* PAGE HERO */
 .page-hero{position:relative;height:58vh;min-height:420px;overflow:hidden;display:flex;align-items:center;}
 .page-hero-img{position:absolute;inset:0;}
-.page-hero-img img{width:100%;height:100%;object-fit:cover;object-position:center 30%;}
-.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(108deg,rgba(30,14,20,0.88) 0%,rgba(30,14,20,0.58) 55%,rgba(30,14,20,0.25) 100%);}
+.page-hero-img img{width:100%;height:100%;object-fit:contain;background:var(--dark);object-position:center center;}
+.page-hero-overlay{position:absolute;inset:0;background:linear-gradient(108deg,rgba(30,14,20,0.92) 0%,rgba(30,14,20,0.75) 50%,rgba(30,14,20,0.55) 100%);}
 .page-hero-content{position:relative;z-index:2;padding:0 5rem;margin-top:4rem;}
 .page-hero-badge{display:inline-flex;align-items:center;gap:0.625rem;font-size:0.68rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold2);font-weight:800;margin-bottom:1.25rem;}
 .page-hero-badge::before{content:'';width:1.5rem;height:1px;background:var(--gold2);}
@@ -246,7 +246,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <!-- PAGE HERO -->
 <section class="page-hero">
   <div class="page-hero-img">
-    <img src="/images/contact-hero.jpg" alt="Contact Haya Makeover" style="object-position:center center;">
+    <img src="/images/contact-hero.jpg" alt="Contact Haya Makeover">
   </div>
   <div class="page-hero-overlay"></div>
   <div class="page-hero-content">
