@@ -47,8 +47,8 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 /* OVERLAY + SIDEBAR */
 .overlay{position:fixed;inset:0;background:rgba(30,14,20,0.48);z-index:200;opacity:0;pointer-events:none;transition:opacity 0.38s ease;backdrop-filter:blur(4px);}
 .overlay.show{opacity:1;pointer-events:all;}
-.sidebar{position:fixed;top:0;right:-100%;width:min(340px,88vw);height:100vh;background:var(--ivory);z-index:201;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:right 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(30,14,20,0.14);overflow-y:auto;}
-.sidebar.open{right:0;}
+.sidebar{position:fixed;top:0;right:0;transform:translateX(100%);width:min(340px,88vw);height:100vh;background:var(--ivory);z-index:201;display:flex;flex-direction:column;border-left:1px solid var(--border);transition:transform 0.42s cubic-bezier(0.25,0.46,0.45,0.94);box-shadow:-24px 0 72px rgba(30,14,20,0.14);overflow-y:auto;will-change:transform;}
+.sidebar.open{transform:translateX(0);}
 .sidebar-head{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
 .sb-tag{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-top:3px;}
 .sidebar-close{background:none;border:1px solid var(--border);border-radius:50%;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.125rem;transition:all 0.2s;flex-shrink:0;}
