@@ -532,6 +532,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 </footer>
 <script>
 gsap.registerPlugin(ScrollTrigger);
+window.addEventListener('load',function(){ScrollTrigger.refresh();});
 if(window.innerWidth>768){var lenis=new Lenis({duration:1.2,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));},smooth:true});function raf(time){lenis.raf(time);requestAnimationFrame(raf);}requestAnimationFrame(raf);lenis.on('scroll',ScrollTrigger.update);gsap.ticker.add(function(time){lenis.raf(time*1000);});gsap.ticker.lagSmoothing(0);}
 document.querySelectorAll('.sec-h,.why-h,.cta-h,.promo-h').forEach(function(el){el.classList.remove('g0');gsap.set(el,{opacity:1,clipPath:'inset(0 0 100% 0)'});gsap.to(el,{clipPath:'inset(0 0 0% 0)',duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 85%',toggleActions:'play none none none'}});});
 gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
@@ -553,8 +554,8 @@ gsap.utils.toArray('.port-item').forEach(function(el,i){gsap.fromTo(el,{opacity:
 function toggleSidebar(){var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');var open=s.classList.toggle('open');o.classList.toggle('show',open);h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');document.getElementById('ham').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
-gsap.fromTo('.about-img-wrap',{opacity:0,x:-60},{opacity:1,x:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
-gsap.fromTo('.about > div:last-child',{opacity:0,x:60},{opacity:1,x:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
+gsap.fromTo('.about-img-wrap',{opacity:0,y:40},{opacity:1,y:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
+gsap.fromTo('.about > div:last-child',{opacity:0,y:40},{opacity:1,y:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
 gsap.fromTo('.astat',{opacity:0,y:20},{opacity:1,y:0,duration:0.9,stagger:0.22,ease:'power3.out',scrollTrigger:{trigger:'.about-stats',start:'top 88%'}});
 gsap.fromTo('.svc-card',{opacity:0,y:50,scale:0.95},{opacity:1,y:0,scale:1,duration:1,stagger:0.18,ease:'power3.out',scrollTrigger:{trigger:'.svc-grid',start:'top 80%'}});
 gsap.fromTo('.promo-left',{opacity:0,x:-50},{opacity:1,x:0,duration:1.5,ease:'power3.out',scrollTrigger:{trigger:'.promo',start:'top 75%'}});
