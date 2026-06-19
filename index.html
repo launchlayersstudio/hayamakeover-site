@@ -36,7 +36,16 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--rose);transition:width 0.3s;}
 .nav-links a:hover{color:var(--rose);}
 .nav-links a:hover::after{width:100%;}
-.nav-cta{background:var(--rose);color:#fff;padding:0.625rem 1.375rem;font-size:0.78rem;font-weight:800;letter-spacing:0.04em;border:none;cursor:pointer;border-radius:50px;transition:all 0.22s;text-transform:uppercase;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-dropdown{position:relative;display:flex;align-items:center;}
+.nav-dropdown-trigger{display:flex;align-items:center;}
+.nav-chevron{display:inline-block;width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-left:0.4rem;margin-top:-2px;transition:transform 0.25s ease;}
+.nav-dropdown:hover .nav-chevron{transform:rotate(225deg);margin-top:2px;}
+.nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:0.65rem;opacity:0;pointer-events:none;transition:opacity 0.2s ease;z-index:150;}
+.nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;}
+.nav-dropdown-menu-inner{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 16px 48px rgba(30,14,20,0.16);padding:0.5rem;min-width:170px;}
+.nav-dropdown-menu a{display:block;padding:0.625rem 1rem;font-size:0.8rem;color:var(--muted);text-decoration:none;border-radius:10px;font-weight:600;white-space:nowrap;}
+.nav-dropdown-menu a::after{display:none;}
+.nav-dropdown-menu a:hover{background:var(--rose-pale);color:var(--rose);}.nav-cta{background:var(--rose);color:#fff;padding:0.625rem 1.375rem;font-size:0.78rem;font-weight:800;letter-spacing:0.04em;border:none;cursor:pointer;border-radius:50px;transition:all 0.22s;text-transform:uppercase;white-space:nowrap;text-decoration:none;display:inline-block;}
 .nav-cta:hover{background:var(--dark);}
 .nav-cta::after{display:none!important;}
 .nav-ham{display:none;flex-direction:column;justify-content:center;gap:5.5px;background:none;border:none;cursor:pointer;padding:6px;z-index:102;width:36px;height:36px;}
@@ -306,7 +315,18 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   <div class="nav-links">
     <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a>
     <a href="/about.html">About</a>
-    <a href="/services.html">Services</a>
+    <div class="nav-dropdown">
+      <a href="/services.html" class="nav-dropdown-trigger">Services<span class="nav-chevron"></span></a>
+      <div class="nav-dropdown-menu">
+        <div class="nav-dropdown-menu-inner">
+          <a href="/services.html?cat=makeup">Makeup</a>
+          <a href="/services.html?cat=hair">Hair</a>
+          <a href="/services.html?cat=skin">Skin</a>
+          <a href="/services.html?cat=mehndi">Mehndi</a>
+          <a href="/services.html?cat=nail">Nail</a>
+        </div>
+      </div>
+    </div>
     <a href="/portfolio.html">Portfolio</a>
     <a href="/membership.html">Membership</a>
     <a href="/contact.html">Contact</a>
