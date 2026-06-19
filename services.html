@@ -109,7 +109,7 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .subcat-panel-block{display:none;}
 .subcat-panel-block.active{display:block;}
 .subcat-panel-title{font-family:'Aboreto',serif;font-weight:400;font-size:1.375rem;color:var(--dark);letter-spacing:0.04em;margin-bottom:1.25rem;}
-.price-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;margin-bottom:1.5rem;}
+.subgroup-title{font-family:'Aboreto',serif;font-weight:400;font-size:1rem;color:var(--rose);letter-spacing:0.04em;margin:0 0 0.75rem;}.price-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;margin-bottom:1.5rem;}
 .price-table{width:100%;border-collapse:collapse;min-width:480px;}
 .price-table thead th{background:var(--ivory2);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:left;padding:0.875rem 1.25rem;}
 .price-table tbody tr{border-top:1px solid var(--border);transition:background 0.2s;}
@@ -439,194 +439,271 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   </div>
 </div>
 
-  <!-- SKIN CARE -->
-  <div class="category-block" data-cat="skin">
-    <div class="cat-label">
-      <span class="cat-label-text">Skin Care</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">7 services</span>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card reveal" data-name="O3+ Facial" data-price="1499" data-display="₹1,499" data-emoji="🌸">
-        <div class="svc-card-top"><div class="svc-icon">🌸</div><span class="svc-popular">Best Seller</span></div>
-        <div class="svc-name">O3+ Facial</div>
-        <div class="svc-desc">Deep cleansing O3+ facial for radiant, even-toned skin. Reduces pigmentation and brightens complexion.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹1,499</span><span class="svc-price-old">₹2,200</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+  <!-- SKIN -->
+  <div class="main-cat-block" data-cat="skin">
+    <h2 class="cat-page-heading">Skin <em>Services</em></h2>
+    <div class="cat-layout">
+      <div class="subcat-sidebar">
+        <button class="subcat-pill active" data-subcat="prebridal">Pre Bridal Services</button>
+        <button class="subcat-pill" data-subcat="hairremoval">Hair Removal & Wax</button>
+        <button class="subcat-pill" data-subcat="bleach">Bleach/D-Tan</button>
+        <button class="subcat-pill" data-subcat="cleanup">Cleanup / Facial / Massage</button>
+        <button class="subcat-pill" data-subcat="manipedi">Manicure/Pedicure</button>
       </div>
-      <div class="svc-card reveal" data-name="Lotus Whiteglow Facial" data-price="888" data-display="₹888" data-emoji="🪷">
-        <div class="svc-card-top"><div class="svc-icon">🪷</div></div>
-        <div class="svc-name">Lotus Whiteglow Facial</div>
-        <div class="svc-desc">Brightening Lotus Herbals facial for glowing, hydrated skin. Suitable for all skin types.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹888</span><span class="svc-price-old">₹1,400</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+      <div class="subcat-panels">
+
+        <div class="subcat-panel-block active" data-subcat="prebridal">
+          <h3 class="subcat-panel-title">Pre Bridal – Services</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offer Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Pre Bridal Facial" data-price="0" data-display="₹500 – ₹3,500" data-emoji="👰"><td>Facial</td><td class="price-offer">₹500 – ₹3,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Bleach/D-tan" data-price="150" data-display="₹150" data-emoji="👰"><td>Bleach/D-tan</td><td class="price-offer">₹150</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Full Arms+UA Waxing (RICA)" data-price="500" data-display="₹500" data-emoji="👰"><td>Full Arms+UA Waxing (RICA)</td><td class="price-offer">₹500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Full Leg Wax (RICA)" data-price="700" data-display="₹700" data-emoji="👰"><td>Full Leg Wax (RICA)</td><td class="price-offer">₹700</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Hair Cut" data-price="400" data-display="₹400" data-emoji="👰"><td>Hair Cut</td><td class="price-offer">₹400</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Threading & Upperlip" data-price="60" data-display="₹60" data-emoji="👰"><td>Threading & Upperlip</td><td class="price-offer">₹60</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Mani/Pedi" data-price="1000" data-display="₹1,000" data-emoji="👰"><td>Mani/Pedi</td><td class="price-offer">₹1,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Pre Bridal Hair Spa" data-price="600" data-display="₹600" data-emoji="👰"><td>Hair Spa</td><td class="price-offer">₹600</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Sara Gold Facial" data-price="699" data-display="₹699" data-emoji="✨">
-        <div class="svc-card-top"><div class="svc-icon">✨</div></div>
-        <div class="svc-name">Sara Gold Facial</div>
-        <div class="svc-desc">Gold-infused facial for luminous, anti-ageing results. Ideal before events for instant glow.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹699</span><span class="svc-price-old">₹1,100</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="hairremoval">
+          <h3 class="subcat-panel-title">Facial Hair Removal & Wax</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Amount</th><th>Method</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Upper Lip (Thread)" data-price="15" data-display="₹15" data-emoji="🪒"><td>Upper Lip</td><td class="price-offer">₹15</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Upper Lip (Wax)" data-price="50" data-display="₹50" data-emoji="🪒"><td>Upper Lip</td><td class="price-offer">₹50</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Chin (Thread)" data-price="15" data-display="₹15" data-emoji="🪒"><td>Chin</td><td class="price-offer">₹15</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Chin (Wax)" data-price="40" data-display="₹40" data-emoji="🪒"><td>Chin</td><td class="price-offer">₹40</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Forehead (Thread)" data-price="20" data-display="₹20" data-emoji="🪒"><td>Forehead</td><td class="price-offer">₹20</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Forehead (Wax)" data-price="60" data-display="₹60" data-emoji="🪒"><td>Forehead</td><td class="price-offer">₹60</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Side Lock (Thread)" data-price="40" data-display="₹40" data-emoji="🪒"><td>Side Lock</td><td class="price-offer">₹40</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Side Lock (Wax)" data-price="60" data-display="₹60" data-emoji="🪒"><td>Side Lock</td><td class="price-offer">₹60</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Eye Brows (Thread)" data-price="40" data-display="₹40" data-emoji="🪒"><td>Eye Brows</td><td class="price-offer">₹40</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Eye Brows (Wax)" data-price="80" data-display="₹80" data-emoji="🪒"><td>Eye Brows</td><td class="price-offer">₹80</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Face (Thread)" data-price="120" data-display="₹120" data-emoji="🪒"><td>Full Face</td><td class="price-offer">₹120</td><td>Thread</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Face (Wax)" data-price="250" data-display="₹250" data-emoji="🪒"><td>Full Face</td><td class="price-offer">₹250</td><td>Wax</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Underarms Wax (Honey)" data-price="60" data-display="₹60" data-emoji="🪒"><td>Underarms Wax</td><td class="price-offer">₹60</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Underarms Wax (RICA)" data-price="80" data-display="₹80" data-emoji="🪒"><td>Underarms Wax</td><td class="price-offer">₹80</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Neckline Wax (Honey)" data-price="100" data-display="₹100" data-emoji="🪒"><td>Neckline Wax</td><td class="price-offer">₹100</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Neckline Wax (RICA)" data-price="120" data-display="₹120" data-emoji="🪒"><td>Neckline Wax</td><td class="price-offer">₹120</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Hand Wax (Honey)" data-price="239" data-display="₹239" data-emoji="🪒"><td>Half Hand Wax</td><td class="price-offer">₹239</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Hand Wax (RICA)" data-price="319" data-display="₹319" data-emoji="🪒"><td>Half Hand Wax</td><td class="price-offer">₹319</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Legs Wax (Honey)" data-price="319" data-display="₹319" data-emoji="🪒"><td>Half Legs Wax</td><td class="price-offer">₹319</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Legs Wax (RICA)" data-price="399" data-display="₹399" data-emoji="🪒"><td>Half Legs Wax</td><td class="price-offer">₹399</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Hand Wax (Honey)" data-price="279" data-display="₹279" data-emoji="🪒"><td>Full Hand Wax</td><td class="price-offer">₹279</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Hand Wax (RICA)" data-price="599" data-display="₹599" data-emoji="🪒"><td>Full Hand Wax</td><td class="price-offer">₹599</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Back Wax (Honey)" data-price="319" data-display="₹319" data-emoji="🪒"><td>Back Wax</td><td class="price-offer">₹319</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Back Wax (RICA)" data-price="479" data-display="₹479" data-emoji="🪒"><td>Back Wax</td><td class="price-offer">₹479</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Legs Wax (Honey)" data-price="399" data-display="₹399" data-emoji="🪒"><td>Full Legs Wax</td><td class="price-offer">₹399</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Legs Wax (RICA)" data-price="559" data-display="₹559" data-emoji="🪒"><td>Full Legs Wax</td><td class="price-offer">₹559</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Brazilian Wax (Honey)" data-price="1200" data-display="₹1,200" data-emoji="🪒"><td>Brazilian Wax</td><td class="price-offer">₹1,200</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Brazilian Wax (RICA)" data-price="1600" data-display="₹1,600" data-emoji="🪒"><td>Brazilian Wax</td><td class="price-offer">₹1,600</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Body Wax (Honey)" data-price="1500" data-display="₹1,500" data-emoji="🪒"><td>Full Body Wax</td><td class="price-offer">₹1,500</td><td>Honey</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Body Wax (RICA)" data-price="2000" data-display="₹2,000" data-emoji="🪒"><td>Full Body Wax</td><td class="price-offer">₹2,000</td><td>RICA</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Brightening Cleanup" data-price="349" data-display="₹349" data-emoji="🧖">
-        <div class="svc-card-top"><div class="svc-icon">🧖</div></div>
-        <div class="svc-name">Brightening Cleanup</div>
-        <div class="svc-desc">Quick deep-cleanse and brightening treatment. Removes dead skin, unclogs pores.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹349</span><span class="svc-price-old">₹550</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="bleach">
+          <h3 class="subcat-panel-title">Bleach & D-tan</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Amount</th><th>Method</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Underarms (Bleach)" data-price="100" data-display="₹100" data-emoji="🌟"><td>Underarms</td><td class="price-offer">₹100</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Underarms (D-Tan)" data-price="150" data-display="₹150" data-emoji="🌟"><td>Underarms</td><td class="price-offer">₹150</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Face, Neck, Back (Bleach)" data-price="300" data-display="₹300" data-emoji="🌟"><td>Face, Neck, Back(Blouse Line)</td><td class="price-offer">₹300</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Face, Neck, Back (D-Tan)" data-price="400" data-display="₹400" data-emoji="🌟"><td>Face, Neck, Back(Blouse Line)</td><td class="price-offer">₹400</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Hands (Bleach)" data-price="200" data-display="₹200" data-emoji="🌟"><td>Hands</td><td class="price-offer">₹200</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Hands (D-Tan)" data-price="300" data-display="₹300" data-emoji="🌟"><td>Hands</td><td class="price-offer">₹300</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Legs (Bleach)" data-price="300" data-display="₹300" data-emoji="🌟"><td>Half Legs</td><td class="price-offer">₹300</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Legs (D-Tan)" data-price="400" data-display="₹400" data-emoji="🌟"><td>Half Legs</td><td class="price-offer">₹400</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Body (Bleach)" data-price="1500" data-display="₹1,500" data-emoji="🌟"><td>Full Body</td><td class="price-offer">₹1,500</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Full Body (D-Tan)" data-price="2000" data-display="₹2,000" data-emoji="🌟"><td>Full Body</td><td class="price-offer">₹2,000</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Back (Bleach)" data-price="300" data-display="₹300" data-emoji="🌟"><td>Half Back</td><td class="price-offer">₹300</td><td>Bleach</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Half Back (D-Tan)" data-price="400" data-display="₹400" data-emoji="🌟"><td>Half Back</td><td class="price-offer">₹400</td><td>D-Tan</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Bleach / D-Tan (Face & Neck)" data-price="249" data-display="₹249" data-emoji="🌟">
-        <div class="svc-card-top"><div class="svc-icon">🌟</div></div>
-        <div class="svc-name">Bleach / D-Tan (Face & Neck)</div>
-        <div class="svc-desc">Removes tan and brightens skin tone on face and neck. O3+ & Lotus products used.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹249</span><span class="svc-price-old">₹400</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="cleanup">
+          <h3 class="subcat-panel-title">Cleanup / Facial / Massage</h3>
+
+          <h4 class="subgroup-title">Cleanup</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offered Price</th><th>Actual Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Cleanup Aroma" data-price="399" data-display="₹399" data-emoji="🧖"><td>Aroma</td><td class="price-offer">₹399</td><td class="price-actual">₹499</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Cleanup VLCC" data-price="499" data-display="₹499" data-emoji="🧖"><td>VLCC</td><td class="price-offer">₹499</td><td class="price-actual">₹599</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Cleanup SARA" data-price="699" data-display="₹699" data-emoji="🧖"><td>SARA</td><td class="price-offer">₹699</td><td class="price-actual">₹999</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Cleanup O3+" data-price="849" data-display="₹849" data-emoji="🧖"><td>O3+</td><td class="price-offer">₹849</td><td class="price-actual">₹1,299</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="subgroup-title">Facial</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offered Price</th><th>Actual Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Facial Aroma/Whitening" data-price="499" data-display="₹499" data-emoji="🧖"><td>Aroma/Whitening</td><td class="price-offer">₹499</td><td class="price-actual">₹599</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial VLCC" data-price="599" data-display="₹599" data-emoji="🧖"><td>VLCC</td><td class="price-offer">₹599</td><td class="price-actual">₹699</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial Lotus" data-price="699" data-display="₹699" data-emoji="🧖"><td>Lotus</td><td class="price-offer">₹699</td><td class="price-actual">₹799</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial SARA" data-price="849" data-display="₹849" data-emoji="🧖"><td>SARA</td><td class="price-offer">₹849</td><td class="price-actual">₹1,099</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial O3+ (4 Step)" data-price="1099" data-display="₹1,099" data-emoji="🧖"><td>O3+ (4 Step)</td><td class="price-offer">₹1,099</td><td class="price-actual">₹1,699</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial O3+ (6 Step)" data-price="1299" data-display="₹1,299" data-emoji="🧖"><td>O3+ (6 Step)</td><td class="price-offer">₹1,299</td><td class="price-actual">₹2,299</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial O3+ (10 Step)" data-price="1599" data-display="₹1,599" data-emoji="🧖"><td>O3+ (10 Step)</td><td class="price-offer">₹1,599</td><td class="price-actual">₹2,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Facial Casmara" data-price="3799" data-display="₹3,799" data-emoji="🧖"><td>Casmara</td><td class="price-offer">₹3,799</td><td class="price-actual">₹6,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4 class="subgroup-title">Body Massage/Polishing</h4>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offered Price</th><th>Actual Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Body Massage" data-price="1600" data-display="₹1,600" data-emoji="🧖"><td>Body Massage</td><td class="price-offer">₹1,600</td><td class="price-actual">₹2,200</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Body Polishing" data-price="2200" data-display="₹2,200" data-emoji="🧖"><td>Body Polishing</td><td class="price-offer">₹2,200</td><td class="price-actual">₹2,400</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Manicure" data-price="299" data-display="₹299" data-emoji="💅">
-        <div class="svc-card-top"><div class="svc-icon">💅</div></div>
-        <div class="svc-name">Manicure</div>
-        <div class="svc-desc">Professional manicure with soaking, scrubbing, massage and nail shaping.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹299</span><span class="svc-price-old">₹450</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="manipedi">
+          <h3 class="subcat-panel-title">Manicure/Pedicure</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offered Price</th><th>Actual Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="ManiPedi Aroma" data-price="849" data-display="₹849" data-emoji="💅"><td>Aroma</td><td class="price-offer">₹849</td><td class="price-actual">₹1,200</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="ManiPedi VLCC" data-price="999" data-display="₹999" data-emoji="💅"><td>VLCC</td><td class="price-offer">₹999</td><td class="price-actual">₹1,300</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="ManiPedi SARA" data-price="1199" data-display="₹1,199" data-emoji="💅"><td>SARA</td><td class="price-offer">₹1,199</td><td class="price-actual">₹1,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="ManiPedi O3+ Bubble" data-price="1599" data-display="₹1,599" data-emoji="💅"><td>O3+ Bubble</td><td class="price-offer">₹1,599</td><td class="price-actual">₹1,800</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="ManiPedi O3+ Bridal" data-price="1699" data-display="₹1,699" data-emoji="💅"><td>O3+ Bridal</td><td class="price-offer">₹1,699</td><td class="price-actual">₹2,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Pedicure" data-price="349" data-display="₹349" data-emoji="🦶">
-        <div class="svc-card-top"><div class="svc-icon">🦶</div></div>
-        <div class="svc-name">Pedicure</div>
-        <div class="svc-desc">Relaxing pedicure with foot soak, scrub, massage and nail care. Softens cracked heels.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹349</span><span class="svc-price-old">₹550</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+
       </div>
     </div>
   </div>
 
   <!-- HAIR -->
-  <div class="category-block" data-cat="hair">
-    <div class="cat-label">
-      <span class="cat-label-text">Hair</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">6 services</span>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card reveal" data-name="Kerastase Hair Spa" data-price="999" data-display="₹999" data-emoji="💆">
-        <div class="svc-card-top"><div class="svc-icon">💆</div><span class="svc-popular">Popular</span></div>
-        <div class="svc-name">Kerastase Hair Spa</div>
-        <div class="svc-desc">Deeply nourishing Kerastase / Schwarzkopf hair spa with head massage and blow-dry finish.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹999</span><span class="svc-price-old">₹1,800</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+  <div class="main-cat-block" data-cat="hair">
+    <h2 class="cat-page-heading">Hair <em>Services</em></h2>
+    <div class="cat-layout">
+      <div class="subcat-sidebar">
+        <button class="subcat-pill active" data-subcat="styling">Dressing/Cutting & Styling</button>
+        <button class="subcat-pill" data-subcat="treatment">Treatment</button>
       </div>
-      <div class="svc-card reveal" data-name="Hair Styling (Blow Dry)" data-price="499" data-display="₹499" data-emoji="💇">
-        <div class="svc-card-top"><div class="svc-icon">💇</div></div>
-        <div class="svc-name">Hair Styling (Blow Dry)</div>
-        <div class="svc-desc">Professional blow-dry and setting. Perfect for parties, events, or any occasion.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹499</span><span class="svc-price-old">₹800</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+      <div class="subcat-panels">
+
+        <div class="subcat-panel-block active" data-subcat="styling">
+          <h3 class="subcat-panel-title">Hair Services</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Offer Price</th><th>Actual Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Trim" data-price="349" data-display="₹349" data-emoji="💇"><td>Trim</td><td class="price-offer">₹349</td><td class="price-actual">₹449</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Split End Removal" data-price="449" data-display="₹449" data-emoji="💇"><td>Split End Removal</td><td class="price-offer">₹449</td><td class="price-actual">₹559</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Change Of Style" data-price="449" data-display="₹449" data-emoji="💇"><td>Change Of Style</td><td class="price-offer">₹449</td><td class="price-actual">₹599</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Hair Wash" data-price="150" data-display="₹150" data-emoji="💇"><td>Hair Wash</td><td class="price-offer">₹150</td><td class="price-actual">₹200</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Hair Head Massage" data-price="249" data-display="₹249" data-emoji="💇"><td>Head Massage</td><td class="price-offer">₹249</td><td class="price-actual">₹500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Deep Conditioning" data-price="600" data-display="₹600" data-emoji="💇"><td>Deep Conditioning</td><td class="price-offer">₹600</td><td class="price-actual">₹650</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Bridal Hair Styling" data-price="1499" data-display="₹1,499" data-emoji="👸">
-        <div class="svc-card-top"><div class="svc-icon">👸</div></div>
-        <div class="svc-name">Bridal Hair Styling</div>
-        <div class="svc-desc">Elaborate bridal hairstyling — updos, braids, curls. Coordinated with your lehenga and look.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹1,499</span><span class="svc-price-old">₹2,500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="treatment">
+          <h3 class="subcat-panel-title">Hair Treatment</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Amount</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Anti-Dandruff Treatment" data-price="0" data-display="₹800 – ₹1,600" data-emoji="🌿"><td>Anti-Dandruff</td><td class="price-offer">₹800 – ₹1,600</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Anti-Hair Fall Treatment" data-price="0" data-display="₹800 – ₹1,600" data-emoji="🌿"><td>Anti-Hair Fall</td><td class="price-offer">₹800 – ₹1,600</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Absolute Repair Treatment" data-price="0" data-display="₹1,000 – ₹2,200" data-emoji="🌿"><td>Absolute Repair</td><td class="price-offer">₹1,000 – ₹2,200</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Cysteine Treatment" data-price="0" data-display="₹4,000 – ₹7,999" data-emoji="🌿"><td>Cysteine</td><td class="price-offer">₹4,000 – ₹7,999</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Keratine Treatment" data-price="0" data-display="₹4,000 – ₹8,000" data-emoji="🌿"><td>Keratine</td><td class="price-offer">₹4,000 – ₹8,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Kera Smooth Treatment" data-price="0" data-display="₹6,000 – ₹9,999" data-emoji="🌿"><td>Kera Smooth</td><td class="price-offer">₹6,000 – ₹9,999</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Smoothening Treatment" data-price="0" data-display="₹4,000 – ₹9,999" data-emoji="🌿"><td>Smoothening</td><td class="price-offer">₹4,000 – ₹9,999</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Schwarzkopf Smoothening Treatment" data-price="0" data-display="₹5,000 – ₹12,000" data-emoji="🌿"><td>Schwarzkopf Smoothning</td><td class="price-offer">₹5,000 – ₹12,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Rebonding Treatment" data-price="0" data-display="₹4,000 – ₹9,999" data-emoji="🌿"><td>Rebonding</td><td class="price-offer">₹4,000 – ₹9,999</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Schwarzkopf Rebonding Treatment" data-price="0" data-display="₹5,000 – ₹12,000" data-emoji="🌿"><td>Schwarzkopf Rebonding</td><td class="price-offer">₹5,000 – ₹12,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Keratin Treatment" data-price="3500" data-display="₹3,500" data-emoji="🌿">
-        <div class="svc-card-top"><div class="svc-icon">🌿</div></div>
-        <div class="svc-name">Keratin Treatment</div>
-        <div class="svc-desc">Professional keratin smoothening using Schwarzkopf / L'Oréal. Frizz-free, glossy hair for months.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹3,500</span><span class="svc-price-old">₹5,000</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Hair Colouring" data-price="1299" data-display="₹1,299+" data-emoji="🎨">
-        <div class="svc-card-top"><div class="svc-icon">🎨</div></div>
-        <div class="svc-name">Hair Colouring</div>
-        <div class="svc-desc">Global colour, highlights or balayage using L'Oréal / Schwarzkopf. Vibrant, lasting results.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹1,299+</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Head Massage" data-price="299" data-display="₹299" data-emoji="🙆">
-        <div class="svc-card-top"><div class="svc-icon">🙆</div></div>
-        <div class="svc-name">Head Massage</div>
-        <div class="svc-desc">Relaxing scalp massage with warm oil. Reduces stress, stimulates growth, improves circulation.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹299</span><span class="svc-price-old">₹500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- BRIDAL PACKAGES -->
-  <div class="category-block" data-cat="bridal">
-    <div class="cat-label">
-      <span class="cat-label-text">Bridal Packages</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">4 services</span>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card reveal" data-name="Full Bridal Package" data-price="5000" data-display="₹5,000" data-emoji="👰">
-        <div class="svc-card-top"><div class="svc-icon">👰</div><span class="svc-popular">Most Booked</span></div>
-        <div class="svc-name">Full Bridal Package</div>
-        <div class="svc-desc">HD/Airbrush bridal makeup + bridal hair + draping + Mom's complimentary makeup. Senior artist.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹5,000</span><span class="svc-price-old">₹8,000</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+  <!-- MEHNDI -->
+  <div class="main-cat-block" data-cat="mehndi">
+    <h2 class="cat-page-heading">Mehendi <em>Service</em></h2>
+    <div class="cat-layout">
+      <div class="subcat-sidebar">
+        <button class="subcat-pill active" data-subcat="bridalmehendi">Bridal Mehendi</button>
+        <button class="subcat-pill" data-subcat="partymehendi">Party Mehendi</button>
       </div>
-      <div class="svc-card reveal" data-name="Pre-Bridal Skincare Package" data-price="2499" data-display="₹2,499" data-emoji="💍">
-        <div class="svc-card-top"><div class="svc-icon">💍</div></div>
-        <div class="svc-name">Pre-Bridal Skincare Package</div>
-        <div class="svc-desc">4-session O3+ skin prep programme. Facials, bleach, threading, waxing, manicure & pedicure.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹2,499</span><span class="svc-price-old">₹4,000</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+      <div class="subcat-panels">
+
+        <div class="subcat-panel-block active" data-subcat="bridalmehendi">
+          <h3 class="subcat-panel-title">Bridal Mehendi</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Particular</th><th>Amount</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Basic Bridal Mehendi" data-price="3500" data-display="₹3,500" data-emoji="🌸"><td>Basic Bridal Mehendi</td><td class="price-offer">₹3,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Advance Bridal Mehendi" data-price="4000" data-display="₹4,000" data-emoji="🌸"><td>Advance Bridal Mehendi</td><td class="price-offer">₹4,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Professional Bridal Mehendi" data-price="4500" data-display="₹4,500" data-emoji="🌸"><td>Professional Bridal Mehendi</td><td class="price-offer">₹4,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Special Bridal Mehendi" data-price="5500" data-display="₹5,500" data-emoji="🌸"><td>Special Bridal Mehendi</td><td class="price-offer">₹5,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Bridal Trial Session" data-price="1500" data-display="₹1,500" data-emoji="🪞">
-        <div class="svc-card-top"><div class="svc-icon">🪞</div></div>
-        <div class="svc-name">Bridal Trial Session</div>
-        <div class="svc-desc">Full trial makeup and hair session before the wedding day. Finalise your look in advance.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹1,500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+        <div class="subcat-panel-block" data-subcat="partymehendi">
+          <h3 class="subcat-panel-title">Party Mehendi</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Particular</th><th>Unit</th><th>Amount</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Party Mehendi" data-price="250" data-display="₹250 / hand" data-emoji="🎉"><td>Party Mehendi</td><td>Per Hand</td><td class="price-offer">₹250</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
-      </div>
-      <div class="svc-card reveal" data-name="Saree / Lehenga Draping" data-price="499" data-display="₹499" data-emoji="🥻">
-        <div class="svc-card-top"><div class="svc-icon">🥻</div></div>
-        <div class="svc-name">Saree / Lehenga Draping</div>
-        <div class="svc-desc">Expert draping in multiple styles — Bengali, Gujarati, Maharashtrian, Nivi and more.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹499</span><span class="svc-price-old">₹800</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- NAILS & THREADING -->
-  <div class="category-block" data-cat="mehendi">
+  <!-- NAIL ART -->
+  <div class="category-block" data-cat="nail">
     <div class="cat-label">
       <span class="cat-label-text">Nail Art</span>
       <div class="cat-label-line"></div>
@@ -639,62 +716,6 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
         <div class="svc-desc">Custom nail art — French, floral, geometric, glitter and more. Gel or regular polish.</div>
         <div class="svc-footer">
           <div><span class="svc-price">₹349+</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WAXING -->
-  <div class="category-block" data-cat="waxing">
-    <div class="cat-label">
-      <span class="cat-label-text">Waxing</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">5 services</span>
-    </div>
-    <div class="svc-grid">
-      <div class="svc-card reveal" data-name="Full Arms Waxing (Honey)" data-price="199" data-display="₹199" data-emoji="🍯">
-        <div class="svc-card-top"><div class="svc-icon">🍯</div></div>
-        <div class="svc-name">Full Arms Waxing (Honey)</div>
-        <div class="svc-desc">Smooth, gentle honey wax for full arms including underarms. Long-lasting results.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹199</span><span class="svc-price-old">₹320</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Full Arms Waxing (RICA)" data-price="349" data-display="₹349" data-emoji="✨">
-        <div class="svc-card-top"><div class="svc-icon">✨</div><span class="svc-popular">Premium</span></div>
-        <div class="svc-name">Full Arms Waxing (RICA)</div>
-        <div class="svc-desc">Premium RICA cold wax for sensitive skin. Painless, residue-free.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹349</span><span class="svc-price-old">₹550</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Half Legs Waxing (Honey)" data-price="199" data-display="₹199" data-emoji="🌿">
-        <div class="svc-card-top"><div class="svc-icon">🌿</div></div>
-        <div class="svc-name">Half Legs Waxing (Honey)</div>
-        <div class="svc-desc">Smooth honey wax for lower legs. Quick, efficient and long-lasting.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹199</span><span class="svc-price-old">₹320</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Full Legs Waxing (RICA)" data-price="649" data-display="₹649" data-emoji="🌟">
-        <div class="svc-card-top"><div class="svc-icon">🌟</div></div>
-        <div class="svc-name">Full Legs Waxing (RICA)</div>
-        <div class="svc-desc">Full leg RICA premium wax. Smooth, long-lasting, suitable for sensitive skin.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹649</span><span class="svc-price-old">₹950</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="White Chocolate Waxing" data-price="899" data-display="₹899+" data-emoji="🍫">
-        <div class="svc-card-top"><div class="svc-icon">🍫</div><span class="svc-popular">Luxury</span></div>
-        <div class="svc-name">White Chocolate Waxing</div>
-        <div class="svc-desc">Ultra-gentle white chocolate wax — moisturising, ideal for sensitive skin.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹899+</span></div>
           <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
         </div>
       </div>
