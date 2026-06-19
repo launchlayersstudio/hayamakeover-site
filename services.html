@@ -729,22 +729,64 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
     </div>
   </div>
 
-  <!-- NAIL ART -->
+  <!-- NAIL SERVICES -->
   <div class="main-cat-block" data-cat="nail">
-    <h2 class="cat-page-heading">Nail <em>Art</em></h2>
-    <div class="svc-grid" style="max-width:300px;margin:0 auto;">
-      <div class="svc-card reveal" data-name="Nail Art" data-price="349" data-display="₹349+" data-emoji="💅">
-        <div class="svc-card-top"><div class="svc-icon">💅</div></div>
-        <div class="svc-name">Nail Art</div>
-        <div class="svc-desc">Custom nail art — French, floral, geometric, glitter and more. Gel or regular polish.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹349+</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+    <h2 class="cat-page-heading">Nails <em>Services</em></h2>
+    <div class="cat-layout">
+      <div class="subcat-sidebar">
+        <button class="subcat-pill active" data-subcat="enhancement">Nails Enhancement</button>
+        <button class="subcat-pill" data-subcat="nailart">Nail Art & Add-Ons</button>
+        <button class="subcat-pill" data-subcat="removal">Removal Services</button>
+      </div>
+      <div class="subcat-panels">
+
+        <div class="subcat-panel-block active" data-subcat="enhancement">
+          <h3 class="subcat-panel-title">Nails Enhancement</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Acrylic Fill" data-price="1500" data-display="₹1,500" data-emoji="💅"><td>Acrylic Fill</td><td class="price-offer">₹1,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Acrylic Full Set" data-price="2000" data-display="₹2,000" data-emoji="💅"><td>Acrylic Full Set</td><td class="price-offer">₹2,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Gel Extensions" data-price="2500" data-display="₹2,500" data-emoji="💅"><td>Gel Extensions</td><td class="price-offer">₹2,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
         </div>
+
+        <div class="subcat-panel-block" data-subcat="nailart">
+          <h3 class="subcat-panel-title">Nail Art & Add-Ons</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Simple Nail Art" data-price="1500" data-display="₹1,500" data-emoji="💅"><td>Simple Nail Art</td><td class="price-offer">₹1,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="French Tips" data-price="2000" data-display="₹2,000" data-emoji="💅"><td>French Tips</td><td class="price-offer">₹2,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Chrome/Cat Eye" data-price="2500" data-display="₹2,500" data-emoji="💅"><td>Chrome/ Cat Eye</td><td class="price-offer">₹2,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
+        </div>
+
+        <div class="subcat-panel-block" data-subcat="removal">
+          <h3 class="subcat-panel-title">Removal Services</h3>
+          <div class="price-table-wrap">
+            <table class="price-table">
+              <thead><tr><th>Service Name</th><th>Price</th><th></th></tr></thead>
+              <tbody>
+                <tr data-name="Gel Removal" data-price="1500" data-display="₹1,500" data-emoji="💅"><td>Gel Removal</td><td class="price-offer">₹1,500</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+                <tr data-name="Acrylic Removal" data-price="2000" data-display="₹2,000" data-emoji="💅"><td>Acrylic Removal</td><td class="price-offer">₹2,000</td><td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
+        </div>
+
       </div>
     </div>
   </div>
-</div>
 
 <!-- CART FAB (bottom-right, appears when items added) -->
 <button class="cart-fab" id="cartFab" onclick="openCart()" aria-label="View Cart">
