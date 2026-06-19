@@ -97,7 +97,42 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .filter-tab.active{background:var(--rose);color:#fff;border-color:var(--rose);}
 .service-count{font-size:0.75rem;color:var(--muted);white-space:nowrap;flex-shrink:0;}
 .service-count span{color:var(--dark);font-weight:700;}
-
+.main-cat-block{display:none;}
+.main-cat-block.active{display:block;}
+.cat-page-heading{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3vw,2.5rem);color:var(--dark);letter-spacing:0.06em;margin-bottom:2rem;text-align:center;}
+.cat-page-heading em{font-style:italic;color:var(--rose);}
+.cat-layout{display:grid;grid-template-columns:240px 1fr;gap:2rem;align-items:start;}
+.subcat-sidebar{display:flex;flex-direction:column;gap:0.625rem;background:var(--ivory2);border-radius:16px;padding:1rem;position:sticky;top:90px;}
+.subcat-pill{background:#fff;border:1.5px solid var(--border);color:var(--muted);padding:0.875rem 1.25rem;border-radius:12px;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;cursor:pointer;transition:all 0.22s;text-align:left;}
+.subcat-pill:hover{border-color:var(--border-rose);color:var(--rose);}
+.subcat-pill.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+.subcat-panel-block{display:none;}
+.subcat-panel-block.active{display:block;}
+.subcat-panel-title{font-family:'Aboreto',serif;font-weight:400;font-size:1.375rem;color:var(--dark);letter-spacing:0.04em;margin-bottom:1.25rem;}
+.price-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:16px;margin-bottom:1.5rem;}
+.price-table{width:100%;border-collapse:collapse;min-width:480px;}
+.price-table thead th{background:var(--ivory2);font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:left;padding:0.875rem 1.25rem;}
+.price-table tbody tr{border-top:1px solid var(--border);transition:background 0.2s;}
+.price-table tbody tr.in-cart{background:var(--rose-pale);}
+.price-table tbody tr.in-cart .svc-add-btn{background:var(--dark);color:#fff;}
+.price-table tbody tr.in-cart .svc-add-btn::after{content:'✓ Added';}
+.price-table tbody tr.in-cart .svc-add-btn span{display:none;}
+.price-table tbody td{padding:0.875rem 1.25rem;font-size:0.85rem;color:var(--dark);font-weight:500;vertical-align:middle;}
+.price-offer{font-family:'Aboreto',serif;color:var(--rose);font-weight:700;font-size:0.95rem;}
+.price-actual{color:var(--muted);text-decoration:line-through;font-size:0.8rem;}
+.price-table .svc-add-btn{padding:0.4rem 0.875rem;font-size:0.65rem;}
+.cat-call-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--rose);color:#fff;padding:0.875rem 1.75rem;font-size:0.82rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;transition:all 0.25s;text-decoration:none;margin-bottom:1.5rem;}
+.cat-call-btn:hover{background:var(--dark);}
+.subcat-body-copy{display:flex;flex-direction:column;gap:1rem;max-width:680px;}
+.subcat-body-copy p{font-size:0.9rem;color:var(--muted);line-height:1.8;}
+.subcat-coming-soon{background:var(--ivory2);border:1px solid var(--border);border-radius:16px;padding:3rem 2rem;text-align:center;}
+.subcat-coming-soon p{color:var(--muted);font-size:0.95rem;margin-bottom:1.5rem;}
+@media(max-width:900px){
+  .cat-layout{grid-template-columns:1fr;}
+  .subcat-sidebar{flex-direction:row;overflow-x:auto;position:static;-webkit-overflow-scrolling:touch;}
+  .subcat-pill{white-space:nowrap;flex-shrink:0;}
+}
+  
 /* ── SERVICES WRAP ── */
 .services-wrap{padding:2.5rem 4rem 8rem;}
 .category-block{margin-bottom:3.5rem;}
@@ -211,6 +246,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .svc-grid{grid-template-columns:1fr;}
 }
 .reveal{opacity:0;transform:translateY(24px);}
+.offer-badge{display:inline-flex;align-items:center;justify-content:center;background:#1f9d55;color:#fff;font-size:0.65rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:20px;}
 </style>
 </head>
 <body>
@@ -296,84 +332,112 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <!-- FILTER BAR -->
 <div class="filter-bar" id="filterBar">
   <div class="filter-tabs">
-    <button class="filter-tab active" data-filter="all">All</button>
-    <button class="filter-tab" data-filter="makeup">Makeup</button>
-    <button class="filter-tab" data-filter="skin">Skin Care</button>
-    <button class="filter-tab" data-filter="hair">Hair</button>
-    <button class="filter-tab" data-filter="bridal">Bridal</button>
-    <button class="filter-tab" data-filter="mehendi">Nail Art</button>
-    <button class="filter-tab" data-filter="waxing">Waxing</button>
+    <button class="filter-tab" data-cat="makeup">Makeup</button>
+    <button class="filter-tab" data-cat="hair">Hair</button>
+    <button class="filter-tab" data-cat="skin">Skin</button>
+    <button class="filter-tab" data-cat="mehndi">Mehndi</button>
+    <button class="filter-tab" data-cat="nail">Nail</button>
   </div>
-  <p class="service-count"><span id="visibleCount">29</span> services</p>
+  <p class="service-count"><span id="visibleCount">0</span> services in this category</p>
 </div>
 
 <!-- SERVICES -->
 <div class="services-wrap">
 
   <!-- MAKEUP -->
-  <div class="category-block" data-cat="makeup">
-    <div class="cat-label">
-      <span class="cat-label-text">Makeup</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">6 services</span>
+<div class="main-cat-block active" data-cat="makeup">
+  <h2 class="cat-page-heading">Makeup <em>Services</em></h2>
+  <div class="cat-layout">
+    <div class="subcat-sidebar">
+      <button class="subcat-pill active" data-subcat="party">Party Makeup</button>
+      <button class="subcat-pill" data-subcat="engagement">Engagement Makeup</button>
+      <button class="subcat-pill" data-subcat="bridal">Bridal Makeup</button>
     </div>
-    <div class="svc-grid">
-      <div class="svc-card reveal" data-name="HD Bridal Makeup" data-price="5000" data-display="₹5,000" data-emoji="👰">
-        <div class="svc-card-top"><div class="svc-icon">👰</div><span class="svc-popular">Top Booked</span></div>
-        <div class="svc-name">HD Bridal Makeup</div>
-        <div class="svc-desc">Full HD bridal look with draping assistance. MAC & Lakmé products. Includes complimentary Mom's makeup.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹5,000</span><span class="svc-price-old">₹8,000</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+    <div class="subcat-panels">
+
+      <div class="subcat-panel-block active" data-subcat="party">
+        <h3 class="subcat-panel-title">Party Makeup Charges</h3>
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Service Name</th><th>Offer Price</th><th>Actual Price</th><th></th></tr></thead>
+            <tbody>
+              <tr data-name="Basic Party Makeup" data-price="2499" data-display="₹2,499" data-emoji="🎉">
+                <td>Basic Party Makeup</td><td class="price-offer">₹2,499</td><td class="price-actual">₹2,999</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="HD Party Makeup" data-price="2999" data-display="₹2,999" data-emoji="🎉">
+                <td>HD Party Makeup</td><td class="price-offer">₹2,999</td><td class="price-actual">₹3,499</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="MAC Party Makeup" data-price="3999" data-display="₹3,999" data-emoji="🎉">
+                <td>MAC Party Makeup</td><td class="price-offer">₹3,999</td><td class="price-actual">₹4,499</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
       </div>
-      <div class="svc-card reveal" data-name="Airbrush Bridal Makeup" data-price="6500" data-display="₹6,500" data-emoji="✨">
-        <div class="svc-card-top"><div class="svc-icon">✨</div></div>
-        <div class="svc-name">Airbrush Bridal Makeup</div>
-        <div class="svc-desc">Flawless, long-lasting airbrush finish. Perfect for outdoor and destination weddings.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹6,500</span><span class="svc-price-old">₹9,500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+      <div class="subcat-panel-block" data-subcat="engagement">
+        <h3 class="subcat-panel-title">Engagement Makeup Charges</h3>
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Service Name</th><th>Offer Price</th><th>Actual Price</th><th></th></tr></thead>
+            <tbody>
+              <tr data-name="Basic Engagement Makeup" data-price="0" data-display="Price on Request" data-emoji="💍">
+                <td>Basic Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹8,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="Pro HD Engagement Makeup" data-price="0" data-display="Price on Request" data-emoji="💍">
+                <td>Pro HD Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹10,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="Pro MAC Engagement Makeup" data-price="0" data-display="Price on Request" data-emoji="💍">
+                <td>Pro MAC Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹12,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="MAC Airbrush Engagement Makeup" data-price="0" data-display="Price on Request" data-emoji="💍">
+                <td>MAC Airbrush Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹12,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
       </div>
-      <div class="svc-card reveal" data-name="Party Makeup (HD)" data-price="1999" data-display="₹1,999" data-emoji="🎉">
-        <div class="svc-card-top"><div class="svc-icon">🎉</div><span class="svc-popular">Popular</span></div>
-        <div class="svc-name">Party Makeup (HD)</div>
-        <div class="svc-desc">Professional HD makeup for parties & events. Lakmé & MAC range. Includes hair blow-dry.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹1,999</span><span class="svc-price-old">₹3,000</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
+
+      <div class="subcat-panel-block" data-subcat="bridal">
+        <h3 class="subcat-panel-title">Bridal Makeup Charges</h3>
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead><tr><th>Service Name</th><th>Offer Price</th><th>Actual Price</th><th></th></tr></thead>
+            <tbody>
+              <tr data-name="Basic Bridal Makeup" data-price="0" data-display="Price on Request" data-emoji="👰">
+                <td>Basic Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹18,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="Pro HD Bridal Makeup" data-price="0" data-display="Price on Request" data-emoji="👰">
+                <td>Pro HD Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹22,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="Pro MAC Bridal Makeup" data-price="0" data-display="Price on Request" data-emoji="👰">
+                <td>Pro MAC Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹25,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+              <tr data-name="MAC Airbrush Bridal Makeup" data-price="0" data-display="Price on Request" data-emoji="👰">
+                <td>MAC Airbrush Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹30,000</td>
+                <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        <a href="tel:+916394584794" class="cat-call-btn">📞 Call Now</a>
       </div>
-      <div class="svc-card reveal" data-name="Engagement Makeup" data-price="2499" data-display="₹2,499" data-emoji="💍">
-        <div class="svc-card-top"><div class="svc-icon">💍</div></div>
-        <div class="svc-name">Engagement Makeup</div>
-        <div class="svc-desc">Glam engagement look designed to photograph beautifully. Tailored to your outfit and skin tone.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹2,499</span><span class="svc-price-old">₹3,800</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Reception Makeup" data-price="2999" data-display="₹2,999" data-emoji="👑">
-        <div class="svc-card-top"><div class="svc-icon">👑</div></div>
-        <div class="svc-name">Reception Makeup</div>
-        <div class="svc-desc">Bold, evening-ready reception glam. Long-lasting formula for all-night events.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹2,999</span><span class="svc-price-old">₹4,500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
-      <div class="svc-card reveal" data-name="Everyday Glam Makeup" data-price="999" data-display="₹999" data-emoji="💄">
-        <div class="svc-card-top"><div class="svc-icon">💄</div></div>
-        <div class="svc-name">Everyday Glam Makeup</div>
-        <div class="svc-desc">Natural, polished everyday look. Lightweight formula for meetings, lunches & casual outings.</div>
-        <div class="svc-footer">
-          <div><span class="svc-price">₹999</span><span class="svc-price-old">₹1,500</span></div>
-          <button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button>
-        </div>
-      </div>
+
     </div>
   </div>
+</div>
 
   <!-- SKIN CARE -->
   <div class="category-block" data-cat="skin">
@@ -666,7 +730,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
       <span class="cart-total-label">Estimated Total</span>
       <span class="cart-total-val" id="cartTotal">₹0</span>
     </div>
-    <p class="cart-total-note">Final price confirmed by Haya Makeover. <span>Prices may vary for combos.</span></p>
+    <p class="cart-total-note" id="cartNote">Final price confirmed by Haya Makeover.</p>
     <button class="cart-book-wa" onclick="bookOnWhatsApp()">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Book via WhatsApp
@@ -689,6 +753,19 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <script>
 gsap.registerPlugin(ScrollTrigger);
 
+/* SUBCATEGORY PILLS */
+document.querySelectorAll('.subcat-pill').forEach(function(pill){
+  pill.addEventListener('click',function(){
+    var wrap=pill.closest('.cat-layout');
+    wrap.querySelectorAll('.subcat-pill').forEach(function(p){p.classList.remove('active');});
+    pill.classList.add('active');
+    var sub=pill.dataset.subcat;
+    wrap.querySelectorAll('.subcat-panel-block').forEach(function(panel){
+      panel.classList.toggle('active',panel.dataset.subcat===sub);
+    });
+  });
+});
+  
 /* LENIS */
 if(window.innerWidth>768){
   var lenis=new Lenis({duration:1.2,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));},smooth:true});
@@ -736,7 +813,7 @@ document.querySelectorAll('.reveal').forEach(function(el,i){
 var cart=[];
 
 function toggleItem(btn){
-  var card=btn.closest('.svc-card');
+  var card=btn.closest('[data-name]');
   var name=card.dataset.name;
   var price=parseInt(card.dataset.price)||0;
   var display=card.dataset.display;
@@ -754,7 +831,7 @@ function toggleItem(btn){
 
 function removeItem(name){
   cart=cart.filter(function(s){return s.name!==name;});
-  document.querySelectorAll('.svc-card').forEach(function(c){
+  document.querySelectorAll('[data-name]').forEach(function(c){
     if(c.dataset.name===name) c.classList.remove('in-cart');
   });
   renderCart();
@@ -767,6 +844,7 @@ function renderCart(){
   var emptyState=document.getElementById('cartEmptyState');
   var itemsList=document.getElementById('cartItemsList');
   var totalEl=document.getElementById('cartTotal');
+  var noteEl=document.getElementById('cartNote');
 
   fabCount.textContent=cart.length;
   fabCount.classList.remove('bump');
@@ -777,8 +855,13 @@ function renderCart(){
     fab.classList.add('show');
     emptyState.style.display='none';
     itemsList.style.display='flex';
-    var total=cart.reduce(function(sum,s){return sum+s.price;},0);
-    totalEl.textContent='₹'+total.toLocaleString('en-IN');
+    var priced=cart.filter(function(s){return s.price>0;});
+    var onRequest=cart.filter(function(s){return s.price===0;});
+    var total=priced.reduce(function(sum,s){return sum+s.price;},0);
+    totalEl.textContent=(total>0)?('₹'+total.toLocaleString('en-IN')):'Price on Request';
+    var noteText='Final price confirmed by Haya Makeover.';
+    if(onRequest.length>0){noteText+=' '+onRequest.length+' service(s) need a call/WhatsApp for exact pricing.';}
+    if(noteEl) noteEl.textContent=noteText;
     itemsList.innerHTML=cart.map(function(s){
       var safeName=s.name.replace(/'/g,"\\'");
       return '<div class="cart-item">'+
@@ -812,19 +895,20 @@ function closeCart(){
 
 function clearCart(){
   cart=[];
-  document.querySelectorAll('.svc-card.in-cart').forEach(function(c){c.classList.remove('in-cart');});
+  document.querySelectorAll('.in-cart').forEach(function(c){c.classList.remove('in-cart');});
   renderCart();
   closeCart();
 }
 
 function bookOnWhatsApp(){
   if(!cart.length) return;
-  var total=cart.reduce(function(s,i){return s+i.price;},0);
+  var priced=cart.filter(function(i){return i.price>0;});
+  var total=priced.reduce(function(s,i){return s+i.price;},0);
   var lines=cart.map(function(s){return '• '+s.name+' ('+s.display+')';}).join('\n');
-  var msg='Hi Haya Makeover! 🌸\n\nI would like to book the following services:\n\n'+lines+'\n\nEstimated Total: ₹'+total.toLocaleString('en-IN')+'\n\nPlease confirm availability and preferred date/time.\n\nThank you! 🙏';
+  var totalLine=(total>0)?('Estimated Total: ₹'+total.toLocaleString('en-IN')+(cart.length>priced.length?' + items priced on request':'')):'All selected items are priced on request';
+  var msg='Hi Haya Makeover! 🌸\n\nI would like to book the following services:\n\n'+lines+'\n\n'+totalLine+'\n\nPlease confirm availability and preferred date/time.\n\nThank you! 🙏';
   window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
 }
-
 /* FILTER */
 document.querySelectorAll('.filter-tab').forEach(function(tab){
   tab.addEventListener('click',function(){
