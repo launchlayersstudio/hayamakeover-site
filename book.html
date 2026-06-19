@@ -37,6 +37,8 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .nav-dropdown:hover .nav-chevron{transform:rotate(225deg);margin-top:2px;}
 .nav-dropdown-menu{position:absolute;top:100%;left:50%;transform:translateX(-50%);padding-top:0.65rem;opacity:0;pointer-events:none;transition:opacity 0.2s ease;z-index:150;}
 .nav-dropdown:hover .nav-dropdown-menu{opacity:1;pointer-events:all;}
+.nav-dropdown.pinned .nav-chevron{transform:rotate(225deg);margin-top:2px;}
+.nav-dropdown.pinned .nav-dropdown-menu{opacity:1;pointer-events:all;}
 .nav-dropdown-menu-inner{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 16px 48px rgba(30,14,20,0.16);padding:0.5rem;min-width:170px;}
 .nav-dropdown-menu a{display:block;padding:0.625rem 1rem;font-size:0.8rem;color:var(--muted);text-decoration:none;border-radius:10px;font-weight:600;white-space:nowrap;}
 .nav-dropdown-menu a::after{display:none;}
@@ -465,6 +467,23 @@ footer{background:var(--dark2);padding:2rem 4rem;display:flex;align-items:center
 gsap.to('#nav',{opacity:1,duration:0.7,delay:0.2,ease:'power2.out'});
 window.addEventListener('scroll',function(){
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+document.querySelectorAll('.nav-dropdown').forEach(function(dd){
+  var trig=dd.querySelector('.nav-dropdown-trigger');
+  trig.addEventListener('click',function(e){
+    e.preventDefault();
+    var wasPinned=dd.classList.contains('pinned');
+    document.querySelectorAll('.nav-dropdown.pinned').forEach(function(o){o.classList.remove('pinned');});
+    if(!wasPinned)dd.classList.add('pinned');
+  });
+});
+document.addEventListener('click',function(e){
+  document.querySelectorAll('.nav-dropdown.pinned').forEach(function(dd){
+    if(!dd.contains(e.target))dd.classList.remove('pinned');
+  });
+});
+window.addEventListener('scroll',function(){
+  document.querySelectorAll('.nav-dropdown.pinned').forEach(function(dd){dd.classList.remove('pinned');});
 },{passive:true});
 
 /* Set min date to today */
