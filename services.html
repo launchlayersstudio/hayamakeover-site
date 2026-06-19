@@ -703,13 +703,9 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   </div>
 
   <!-- NAIL ART -->
-  <div class="category-block" data-cat="nail">
-    <div class="cat-label">
-      <span class="cat-label-text">Nail Art</span>
-      <div class="cat-label-line"></div>
-      <span class="cat-label-count">1 service</span>
-    </div>
-    <div class="svc-grid">
+  <div class="main-cat-block" data-cat="nail">
+    <h2 class="cat-page-heading">Nail <em>Art</em></h2>
+    <div class="svc-grid" style="max-width:300px;margin:0 auto;">
       <div class="svc-card reveal" data-name="Nail Art" data-price="349" data-display="₹349+" data-emoji="💅">
         <div class="svc-card-top"><div class="svc-icon">💅</div></div>
         <div class="svc-name">Nail Art</div>
@@ -721,7 +717,6 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- CART FAB (bottom-right, appears when items added) -->
@@ -931,21 +926,32 @@ function bookOnWhatsApp(){
   var msg='Hi Haya Makeover! 🌸\n\nI would like to book the following services:\n\n'+lines+'\n\n'+totalLine+'\n\nPlease confirm availability and preferred date/time.\n\nThank you! 🙏';
   window.open('https://wa.me/916394584794?text='+encodeURIComponent(msg),'_blank');
 }
-/* FILTER */
+/* CATEGORY SWITCHER */
+function showCategory(cat, scroll){
+  document.querySelectorAll('.main-cat-block').forEach(function(block){
+    block.classList.toggle('active',block.dataset.cat===cat);
+  });
+  document.querySelectorAll('.filter-tab').forEach(function(t){
+    t.classList.toggle('active',t.dataset.cat===cat);
+  });
+  var activeBlock=document.querySelector('.main-cat-block[data-cat="'+cat+'"]');
+  var total=activeBlock?activeBlock.querySelectorAll('.svc-card,.price-table tbody tr').length:0;
+  document.getElementById('visibleCount').textContent=total;
+  if(scroll){
+    var bar=document.getElementById('filterBar');
+    window.scrollTo({top:bar.offsetTop-10,behavior:'smooth'});
+  }
+}
+
 document.querySelectorAll('.filter-tab').forEach(function(tab){
   tab.addEventListener('click',function(){
-    document.querySelectorAll('.filter-tab').forEach(function(t){t.classList.remove('active');});
-    tab.classList.add('active');
-    var cat=tab.dataset.filter;
-    var total=0;
-    document.querySelectorAll('.category-block').forEach(function(block){
-      var show=(cat==='all'||block.dataset.cat===cat);
-      block.style.display=show?'':'none';
-      if(show) total+=block.querySelectorAll('.svc-card').length;
-    });
-    document.getElementById('visibleCount').textContent=total;
+    showCategory(tab.dataset.cat,true);
   });
 });
+
+var urlCat=new URLSearchParams(window.location.search).get('cat');
+var validCats=['makeup','hair','skin','mehndi','nail'];
+showCategory(validCats.includes(urlCat)?urlCat:'makeup',false);
 
 /* SIDEBAR */
 function toggleSidebar(){
