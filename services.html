@@ -101,6 +101,7 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .main-cat-block.active{display:block;}
 .cat-page-heading{font-family:'Aboreto',serif;font-weight:400;font-size:clamp(1.75rem,3vw,2.5rem);color:var(--dark);letter-spacing:0.06em;margin-bottom:2rem;text-align:center;}
 .cat-page-heading em{font-style:italic;color:var(--rose);}
+.cat-note{text-align:center;font-size:0.8rem;color:var(--rose);font-weight:600;margin:-1rem 0 1.75rem;letter-spacing:0.02em;}
 .cat-layout{display:grid;grid-template-columns:240px 1fr;gap:2rem;align-items:start;}
 .subcat-sidebar{display:flex;flex-direction:column;gap:0.625rem;background:var(--ivory2);border-radius:16px;padding:1rem;position:sticky;top:90px;}
 .subcat-pill{background:#fff;border:1.5px solid var(--border);color:var(--muted);padding:0.875rem 1.25rem;border-radius:12px;font-size:0.85rem;font-weight:700;letter-spacing:0.02em;cursor:pointer;transition:all 0.22s;text-align:left;}
@@ -244,6 +245,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
   .ft-links{justify-content:center;}
   .cat-page-heading{font-size:clamp(1.4rem,6vw,1.9rem);margin-bottom:1.25rem;}
+  .cat-note{font-size:0.72rem;margin:-0.5rem 0 1.25rem;}
   .subcat-sidebar{padding:0.75rem;gap:0.5rem;-webkit-mask-image:linear-gradient(to right,#000 94%,transparent 100%);mask-image:linear-gradient(to right,#000 94%,transparent 100%);}
   .subcat-pill{padding:0.7rem 0.9rem;font-size:0.74rem;}
   .subcat-panel-title{font-size:1.05rem;margin-bottom:0.875rem;}
@@ -371,6 +373,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   <!-- MAKEUP -->
 <div class="main-cat-block active" data-cat="makeup">
   <h2 class="cat-page-heading">Makeup <em>Services</em></h2>
+  <p class="cat-note">✦ Offer prices can be checked with a quick call or WhatsApp enquiry.</p>
   <div class="cat-layout">
     <div class="subcat-sidebar">
       <button class="subcat-pill active" data-subcat="party">Party Makeup</button>
@@ -385,16 +388,16 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
           <table class="price-table">
             <thead><tr><th>Service Name</th><th>Offer Price</th><th>Actual Price</th><th></th></tr></thead>
             <tbody>
-              <tr data-name="Basic Party Makeup" data-price="2499" data-display="₹2,499" data-emoji="🎉">
-                <td>Basic Party Makeup</td><td class="price-offer">₹2,499</td><td class="price-actual">₹2,999</td>
+              <tr data-name="Basic Party Makeup" data-price="0" data-display="Price on Request" data-emoji="🎉">
+                <td>Basic Party Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹2,999</td>
                 <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
               </tr>
-              <tr data-name="HD Party Makeup" data-price="2999" data-display="₹2,999" data-emoji="🎉">
-                <td>HD Party Makeup</td><td class="price-offer">₹2,999</td><td class="price-actual">₹3,499</td>
+              <tr data-name="HD Party Makeup" data-price="0" data-display="Price on Request" data-emoji="🎉">
+                <td>HD Party Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹3,499</td>
                 <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
               </tr>
-              <tr data-name="MAC Party Makeup" data-price="3999" data-display="₹3,999" data-emoji="🎉">
-                <td>MAC Party Makeup</td><td class="price-offer">₹3,999</td><td class="price-actual">₹4,499</td>
+              <tr data-name="MAC Party Makeup" data-price="0" data-display="Price on Request" data-emoji="🎉">
+                <td>MAC Party Makeup</td><td><span class="offer-badge">Offer</span></td><td class="price-actual">₹4,499</td>
                 <td><button class="svc-add-btn" onclick="toggleItem(this)"><span>+ Add</span></button></td>
               </tr>
             </tbody>
