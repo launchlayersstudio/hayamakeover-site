@@ -128,8 +128,8 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .subcat-coming-soon{background:var(--ivory2);border:1px solid var(--border);border-radius:16px;padding:3rem 2rem;text-align:center;}
 .subcat-coming-soon p{color:var(--muted);font-size:0.95rem;margin-bottom:1.5rem;}
 @media(max-width:900px){
-  .cat-layout{grid-template-columns:1fr;}
-  .subcat-sidebar{flex-direction:row;overflow-x:auto;position:static;-webkit-overflow-scrolling:touch;}
+  .cat-layout{grid-template-columns:1fr;gap:1.25rem;}
+  .subcat-sidebar{flex-direction:row;overflow-x:auto;position:static;-webkit-overflow-scrolling:touch;gap:0.5rem;}
   .subcat-pill{white-space:nowrap;flex-shrink:0;}
 }
   
@@ -241,6 +241,22 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .cart-panel{width:100vw;}
   footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
   .ft-links{justify-content:center;}
+  .cat-page-heading{font-size:clamp(1.4rem,6vw,1.9rem);margin-bottom:1.25rem;}
+  .subcat-sidebar{padding:0.75rem;gap:0.5rem;}
+  .subcat-pill{padding:0.7rem 1rem;font-size:0.78rem;}
+  .subcat-panel-title{font-size:1.1rem;margin-bottom:1rem;}
+  .subgroup-title{font-size:0.9rem;}
+  .price-table-wrap{margin-bottom:1.1rem;}
+  .price-table thead th{padding:0.6rem 0.75rem;font-size:0.6rem;}
+  .price-table tbody td{padding:0.6rem 0.75rem;font-size:0.78rem;}
+  .price-offer{font-size:0.85rem;}
+  .price-actual{font-size:0.72rem;}
+  .price-table .svc-add-btn{padding:0.35rem 0.7rem;font-size:0.6rem;}
+  .offer-badge{font-size:0.6rem;padding:0.2rem 0.6rem;}
+  .cat-call-btn{width:100%;justify-content:center;padding:0.8rem 1.5rem;font-size:0.78rem;}
+}
+@media(max-width:480px){
+  .price-table{min-width:400px;}
 }
 @media(max-width:400px){
   .svc-grid{grid-template-columns:1fr;}
