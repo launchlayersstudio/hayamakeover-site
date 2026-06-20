@@ -320,9 +320,7 @@ footer{background:var(--dark2);padding:2rem 4rem;display:flex;align-items:center
       <p class="form-note" id="formNote">Select the service you'd like to book. You can add more details in the next step.</p>
     </div>
 
-    <form id="bookForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
-      <input type="hidden" name="subject" value="New Appointment Booking — Haya Makeover">
+    <form id="bookForm">
       <input type="hidden" name="service" id="hiddenService" value="">
 
       <!-- STEP 1 — Service -->
@@ -441,7 +439,7 @@ footer{background:var(--dark2);padding:2rem 4rem;display:flex;align-items:center
     <div class="form-success" id="formSuccess">
       <div class="success-icon">🎉</div>
       <h2 class="success-h">Booking <em>Confirmed!</em></h2>
-      <p class="success-p">We've received your appointment request. Our team will call or WhatsApp you within 30 minutes to confirm the details.</p>
+      <p class="success-p">We've opened WhatsApp with your booking details — just hit <strong>Send</strong> to confirm with our team.</p>
       <div class="success-actions">
         <a href="/" class="btn-rose">Back to Home</a>
         <a href="https://wa.me/916394584794" target="_blank" class="btn-soft">WhatsApp Us</a>
@@ -561,30 +559,27 @@ var submitBtn=document.getElementById('submitBtn');
 var successEl=document.getElementById('formSuccess');
 form.addEventListener('submit',function(e){
   e.preventDefault();
-  submitBtn.disabled=true;
-  submitBtn.textContent='Confirming...';
-  var data=new FormData(form);
-  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
-    .then(function(r){return r.json();})
-    .then(function(r){
-      if(r.success){
-        document.getElementById('step3').style.display='none';
-        document.getElementById('stepIndicator').style.display='none';
-        document.querySelector('.form-top').style.display='none';
-        successEl.classList.add('show');
-      } else {
-        submitBtn.disabled=false;
-        submitBtn.textContent='Confirm Booking →';
-        alert('Something went wrong. Please call us directly on +91 63945 84794.');
-      }
-    })
-    .catch(function(){
-      submitBtn.disabled=false;
-      submitBtn.textContent='Confirm Booking →';
-      alert('Something went wrong. Please call us directly on +91 63945 84794.');
-    });
+  var name=form.querySelector('[name="name"]').value;
+  var phone=form.querySelector('[name="phone"]').value;
+  var email=form.querySelector('[name="email"]').value;
+  var date=form.querySelector('[name="date"]').value;
+  var time=form.querySelector('[name="time"]').value;
+  var address=form.querySelector('[name="address"]').value;
+  var message=form.querySelector('[name="message"]').value;
+  var lines=['Hi Haya Makeover! 🌸 I\'d like to book an appointment.','','Service: '+selectedService,'Name: '+name,'Phone: '+phone];
+  if(email) lines.push('Email: '+email);
+  lines.push('Date: '+(date||'Flexible'));
+  lines.push('Time: '+(time||'Flexible'));
+  if(address) lines.push('Location: '+address);
+  if(message) lines.push('Special Requests: '+message);
+  lines.push('','Please confirm availability. Thank you! 🙏');
+  window.open('https://wa.me/916394584794?text='+encodeURIComponent(lines.join('\n')),'_blank');
+  document.getElementById('step3').style.display='none';
+  document.getElementById('stepIndicator').style.display='none';
+  document.querySelector('.form-top').style.display='none';
+  successEl.classList.add('show');
 });
-
+  
 /* SIDEBAR */
 function toggleSidebar(){
   var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');
