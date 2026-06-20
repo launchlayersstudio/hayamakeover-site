@@ -165,10 +165,10 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .plan-bronze .plan-body-label,.plan-titanium .plan-body-label{color:var(--muted);}
 .plan-gold .plan-body-label{color:rgba(255,255,255,0.35);}
 .plan-benefits{list-style:none;display:flex;flex-direction:column;gap:0.75rem;}
-.plan-benefits li{font-size:0.84rem;display:flex;align-items:flex-start;gap:0.625rem;line-height:1.5;}
+.plan-benefits li{font-size:0.84rem;position:relative;padding-left:1.125rem;line-height:1.55;}
 .plan-bronze .plan-benefits li,.plan-titanium .plan-benefits li{color:var(--muted);}
 .plan-gold .plan-benefits li{color:rgba(255,255,255,0.55);}
-.plan-benefits li::before{content:'✦';font-size:0.55rem;margin-top:0.2rem;flex-shrink:0;}
+.plan-benefits li::before{content:'✦';font-size:0.55rem;position:absolute;left:0;top:0.3rem;}
 .plan-bronze .plan-benefits li::before{color:var(--gold);}
 .plan-gold .plan-benefits li::before{color:var(--gold2);}
 .plan-titanium .plan-benefits li::before{color:var(--rose);}
