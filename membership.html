@@ -101,10 +101,11 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .sec-sub{font-size:0.9375rem;color:var(--muted);max-width:540px;margin:1rem auto 0;line-height:1.8;}
 
 /* VALUE BAR */
-.value-bar{background:var(--dark);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;}
-.value-item{display:flex;align-items:center;gap:0.625rem;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:500;}
+.value-bar{background:var(--dark);padding:1.5rem 4rem;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;column-gap:2.5rem;row-gap:0.75rem;}
+.value-item{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:rgba(255,255,255,0.5);font-weight:500;white-space:nowrap;}
 .value-item strong{color:var(--gold2);}
-.value-dot{width:3px;height:3px;border-radius:50%;background:rgba(184,149,106,0.3);}
+.value-item::before{content:'';width:3px;height:3px;border-radius:50%;background:rgba(184,149,106,0.3);margin-right:0.5rem;}
+.value-item:first-child::before{display:none;}
 
 /* PLANS INTRO */
 .plans-intro{padding:5rem 4rem 2rem;text-align:center;background:var(--ivory);}
@@ -235,7 +236,8 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .page-hero-sub{font-size:0.875rem;margin-top:0.75rem;}
   .page-hero-badge{font-size:0.6rem;}
   .tc-grid{grid-template-columns:1fr;}
-  .value-bar{gap:1.25rem;padding:1.25rem;}
+  .value-bar{flex-direction:column;align-items:flex-start;column-gap:1.25rem;row-gap:0.75rem;padding:1.5rem 1.25rem;}
+  .value-item{font-size:0.78rem;white-space:normal;}
   .plans-grid{gap:1.25rem;}
   .plan-head{padding:1.75rem 1.5rem 1.25rem;}
   .plan-body{padding:1.5rem 1.5rem;}
@@ -337,11 +339,8 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <!-- VALUE BAR -->
 <div class="value-bar">
   <div class="value-item"><strong>More Value</strong> — Pay ₹4K, get ₹5K+</div>
-  <div class="value-dot"></div>
-  <div class="value-item"><strong>Free Home Visits</strong> — under membership cards</div>
-  <div class="value-dot"></div>
+  <div class="value-item"><strong>No Conveyance Charges</strong> (under membership cards)</div>
   <div class="value-item"><strong>Complimentary Extras</strong> — Massages, hair spa &amp; more</div>
-  <div class="value-dot"></div>
   <div class="value-item"><strong>Bring a Guest</strong> — Share with family</div>
 </div>
 
