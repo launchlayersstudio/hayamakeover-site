@@ -308,10 +308,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
     <h2 class="form-h">Tell Us What<br><em>You Need.</em></h2>
     <p class="form-sub">Fill in your details and we'll get back to you within 30 minutes to confirm your booking.</p>
 
-    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
-      <input type="hidden" name="subject" value="New Booking Enquiry — Haya Makeover">
-      <input type="hidden" name="redirect" value="">
+    <form id="contactForm">
 
       <div class="form-row-2">
         <div class="form-row">
@@ -347,7 +344,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
       </div>
       <button type="submit" class="btn-submit" id="submitBtn">Send Message →</button>
       <div class="form-success" id="formSuccess">
-        <p>✓ Message sent! We'll confirm your booking within 30 minutes.</p>
+        <p>✓ WhatsApp opened! Just hit <strong>Send</strong> in WhatsApp to complete your enquiry.</p>
       </div>
     </form>
   </div>
@@ -467,29 +464,21 @@ var btn=document.getElementById('submitBtn');
 var success=document.getElementById('formSuccess');
 form.addEventListener('submit',function(e){
   e.preventDefault();
-  btn.disabled=true;
-  btn.textContent='Sending...';
-  var data=new FormData(form);
-  fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
-    .then(function(r){return r.json();})
-    .then(function(r){
-      if(r.success){
-        form.reset();
-        success.classList.add('show');
-        btn.textContent='Sent ✓';
-      } else {
-        btn.disabled=false;
-        btn.textContent='Send Message →';
-        alert('Something went wrong. Please call us directly.');
-      }
-    })
-    .catch(function(){
-      btn.disabled=false;
-      btn.textContent='Send Message →';
-      alert('Something went wrong. Please call us directly.');
-    });
+  var name=form.querySelector('[name="name"]').value;
+  var phone=form.querySelector('[name="phone"]').value;
+  var email=form.querySelector('[name="email"]').value;
+  var service=form.querySelector('[name="service"]').value;
+  var message=form.querySelector('[name="message"]').value;
+  var lines=['Hi Haya Makeover! 🌸 I\'d like to enquire.','','Name: '+name,'Phone: '+phone];
+  if(email) lines.push('Email: '+email);
+  if(service) lines.push('Service: '+service);
+  if(message) lines.push('Message: '+message);
+  lines.push('','Please confirm availability. Thank you! 🙏');
+  window.open('https://wa.me/916394584794?text='+encodeURIComponent(lines.join('\n')),'_blank');
+  form.reset();
+  success.classList.add('show');
+  btn.textContent='Opened in WhatsApp ✓';
 });
-
 function toggleSidebar(){
   var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');
   var open=s.classList.toggle('open');
