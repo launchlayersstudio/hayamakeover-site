@@ -157,11 +157,19 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 /* BRANDS */
 .brands{background:var(--ivory);padding:4rem;border-top:1px solid var(--border);}
 .brands-label{text-align:center;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2.5rem;}
-.brands-row{display:grid;grid-template-columns:repeat(7,1fr);gap:1rem;align-items:center;}
-.brand-card{background:transparent;border:none;padding:0.5rem 1rem;display:flex;align-items:center;justify-content:center;height:56px;transition:all 0.2s;filter:grayscale(1);opacity:0.45;}
-.brand-card:hover{filter:grayscale(0);opacity:1;transform:translateY(-2px);}
-.brand-card img{max-width:100%;max-height:44px;object-fit:contain;}
-.brand-card.txt{font-family:'Aboreto',serif;font-weight:700;font-size:1.1rem;letter-spacing:0.06em;color:var(--dark);}
+.brands-row{overflow:hidden;}
+.brands-track{display:flex;align-items:center;animation:brandscroll 50s linear infinite;will-change:transform;transform:translateZ(0);backface-visibility:hidden;}
+.brand-card{flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0 3rem;height:80px;filter:grayscale(1);opacity:0.5;transition:all 0.25s;}
+.brand-card:hover{filter:grayscale(0);opacity:1;}
+.brand-card img{width:120px;height:54px;object-fit:contain;}
+.brand-card.txt{font-family:'Aboreto',serif;font-weight:700;font-size:1.6rem;letter-spacing:0.06em;color:var(--dark);width:120px;text-align:center;}
+@keyframes brandscroll{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
+@media(max-width:768px){
+  .brands-track{animation-duration:10s;}
+  .brand-card{padding:0 1.5rem;height:60px;}
+  .brand-card img{width:90px;height:40px;}
+  .brand-card.txt{font-size:1.2rem;width:90px;}
+}
 
 /* INFO + CTA */
 .info-cta{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
@@ -207,7 +215,6 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.08);padding:1rem;}
   .stat-item:nth-child(even){border-bottom:1px solid rgba(255,255,255,0.08);}
   .info-cta{grid-template-columns:1fr;}
-  .brands-row{grid-template-columns:repeat(4,1fr);}
   footer{padding-left:2rem;padding-right:2rem;}
 }
 @media(max-width:768px){
@@ -223,13 +230,11 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   .mission-img.tall{grid-row:auto;}
   .mission-img.tall img{height:200px;}
   .mission-quote{grid-column:1;}
-  .brands-row{grid-template-columns:repeat(3,1fr);}
   footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.25rem;}
   .ft-links{justify-content:center;}
 }
 @media(max-width:480px){
   .stats-bar{grid-template-columns:1fr 1fr;}
-  .brands-row{grid-template-columns:repeat(2,1fr);}
 }
 .reveal{opacity:0;transform:translateY(32px);}
 .wa-float{position:fixed;bottom:1.75rem;right:1.75rem;z-index:9999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(37,211,102,0.45);transition:all 0.25s;text-decoration:none;}
@@ -437,30 +442,47 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
   </div>
 </section>
 
-<!-- BRANDS -->
 <div class="brands">
   <p class="brands-label">Products We Use</p>
   <div class="brands-row">
-    <div class="brand-card"><img src="/mac.png" alt="MAC"></div>
-    <div class="brand-card"><img src="/loreal.png" alt="L'Oréal"></div>
-    <div class="brand-card"><img src="/Schwarzkopf.png" alt="Schwarzkopf"></div>
-    <div class="brand-card"><img src="/lakme.png" alt="Lakmé"></div>
-    <div class="brand-card"><img src="/vlcc.png" alt="VLCC"></div>
-    <div class="brand-card"><img src="/lotus.png" alt="Lotus"></div>
-    <div class="brand-card txt">O3+</div>
-    <div class="brand-card"><img src="/kanpeki.png" alt="Kanpeki"></div>
-    <div class="brand-card"><img src="/casmara.png" alt="Casmara"></div>
-    <div class="brand-card txt" style="font-style:italic;">Dior</div>
-    <div class="brand-card"><img src="/kiko-milano.png" alt="Kiko Milano"></div>
-    <div class="brand-card"><img src="/pac.png" alt="PAC"></div>
-    <div class="brand-card"><img src="/forever52.png" alt="Forever 52"></div>
-    <div class="brand-card"><img src="/sara.png" alt="Sara"></div>
-    <div class="brand-card"><img src="/aroma.png" alt="Aroma"></div>
-    <div class="brand-card"><img src="/sugar.png" alt="Sugar"></div>
-    <div class="brand-card"><img src="/vega.png" alt="Vega"></div>
+    <div class="brands-track">
+      <div class="brand-card"><img src="/mac.png" alt="MAC"></div>
+      <div class="brand-card"><img src="/loreal.png" alt="L'Oréal"></div>
+      <div class="brand-card"><img src="/Schwarzkopf.png" alt="Schwarzkopf"></div>
+      <div class="brand-card"><img src="/lakme.png" alt="Lakmé"></div>
+      <div class="brand-card"><img src="/vlcc.png" alt="VLCC"></div>
+      <div class="brand-card"><img src="/lotus.png" alt="Lotus"></div>
+      <div class="brand-card txt">O3+</div>
+      <div class="brand-card"><img src="/kanpeki.png" alt="Kanpeki"></div>
+      <div class="brand-card"><img src="/casmara.png" alt="Casmara"></div>
+      <div class="brand-card txt" style="font-style:italic;">Dior</div>
+      <div class="brand-card"><img src="/kiko-milano.png" alt="Kiko Milano"></div>
+      <div class="brand-card"><img src="/pac.png" alt="PAC"></div>
+      <div class="brand-card"><img src="/forever52.png" alt="Forever 52"></div>
+      <div class="brand-card"><img src="/sara.png" alt="Sara"></div>
+      <div class="brand-card"><img src="/aroma.png" alt="Aroma"></div>
+      <div class="brand-card"><img src="/sugar.png" alt="Sugar"></div>
+      <div class="brand-card"><img src="/vega.png" alt="Vega"></div>
+      <div class="brand-card"><img src="/mac.png" alt="MAC"></div>
+      <div class="brand-card"><img src="/loreal.png" alt="L'Oréal"></div>
+      <div class="brand-card"><img src="/Schwarzkopf.png" alt="Schwarzkopf"></div>
+      <div class="brand-card"><img src="/lakme.png" alt="Lakmé"></div>
+      <div class="brand-card"><img src="/vlcc.png" alt="VLCC"></div>
+      <div class="brand-card"><img src="/lotus.png" alt="Lotus"></div>
+      <div class="brand-card txt">O3+</div>
+      <div class="brand-card"><img src="/kanpeki.png" alt="Kanpeki"></div>
+      <div class="brand-card"><img src="/casmara.png" alt="Casmara"></div>
+      <div class="brand-card txt" style="font-style:italic;">Dior</div>
+      <div class="brand-card"><img src="/kiko-milano.png" alt="Kiko Milano"></div>
+      <div class="brand-card"><img src="/pac.png" alt="PAC"></div>
+      <div class="brand-card"><img src="/forever52.png" alt="Forever 52"></div>
+      <div class="brand-card"><img src="/sara.png" alt="Sara"></div>
+      <div class="brand-card"><img src="/aroma.png" alt="Aroma"></div>
+      <div class="brand-card"><img src="/sugar.png" alt="Sugar"></div>
+      <div class="brand-card"><img src="/vega.png" alt="Vega"></div>
+    </div>
   </div>
 </div>
-
 <!-- INFO + CTA -->
 <div class="info-cta">
   <div class="info-block">
