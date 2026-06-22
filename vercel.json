@@ -1,15 +1,23 @@
 {
   "redirects": [
+    { "source": "/home/", "destination": "/", "permanent": true },
     { "source": "/hair/", "destination": "/services.html?cat=hair", "permanent": true },
     { "source": "/hair", "destination": "/services.html?cat=hair", "permanent": true },
     { "source": "/skin/", "destination": "/services.html?cat=skin", "permanent": true },
     { "source": "/skin", "destination": "/services.html?cat=skin", "permanent": true },
     { "source": "/makeup/", "destination": "/services.html?cat=makeup", "permanent": true },
     { "source": "/makeup", "destination": "/services.html?cat=makeup", "permanent": true },
+    { "source": "/mehendi/", "destination": "/services.html?cat=mehndi", "permanent": true },
+    { "source": "/mehendi", "destination": "/services.html?cat=mehndi", "permanent": true },
+    { "source": "/packages/", "destination": "/services.html?cat=skin", "permanent": true },
+    { "source": "/packages", "destination": "/services.html?cat=skin", "permanent": true },
     { "source": "/portfolio/", "destination": "/portfolio.html", "permanent": true },
+    { "source": "/membership/", "destination": "/membership.html", "permanent": true },
     { "source": "/salon-services-at-home/", "destination": "/about.html", "permanent": true },
-    { "source": "/book-appointment/", "destination": "/book.html", "permanent": true },
+    { "source": "/book-appointment/", "destination": "/contact.html", "permanent": true },
+    { "source": "/book-appointment", "destination": "/contact.html", "permanent": true },
     { "source": "/contact/", "destination": "/contact.html", "permanent": true },
+    { "source": "/contact-us/", "destination": "/contact.html", "permanent": true },
     { "source": "/casmara-ocean-miracle-facial-flat-50-discount-casmara-ocean-miracle-facial-treatment-in-just-rs-5000-rs-2499/", "destination": "/services.html?cat=skin", "permanent": true },
     { "source": "/lotus-facial-bleach-d-tan-threading-package-599-955/", "destination": "/services.html?cat=skin", "permanent": true }
   ]
