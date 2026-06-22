@@ -1016,7 +1016,14 @@ document.querySelectorAll('.filter-tab').forEach(function(tab){
 
 var urlCat=new URLSearchParams(window.location.search).get('cat');
 var validCats=['makeup','hair','skin','mehndi','nail'];
-showCategory(validCats.includes(urlCat)?urlCat:'makeup',false);
+var hasUrlCat=validCats.includes(urlCat);
+showCategory(hasUrlCat?urlCat:'makeup',false);
+if(hasUrlCat){
+  setTimeout(function(){
+    var bar=document.getElementById('filterBar');
+    window.scrollTo({top:bar.offsetTop-10,behavior:'smooth'});
+  },150);
+}
 
 /* SIDEBAR */
 function toggleSidebar(){
