@@ -226,14 +226,12 @@ nav.scrolled{top:0;border-radius:0;width:100%;max-width:100%;box-shadow:0 2px 24
 .brands{background:var(--ivory);padding:3rem 4rem;border-top:1px solid var(--border);}
 .brands-label{text-align:center;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);font-weight:800;margin-bottom:2.5rem;}
 .brands-row{overflow:hidden;}
-.brands-track{display:flex;align-items:center;animation:brandscroll 50s linear infinite;will-change:transform;transform:translateZ(0);backface-visibility:hidden;}
+.brands-track{display:flex;align-items:center;will-change:transform;backface-visibility:hidden;}
 .brand-card{flex-shrink:0;display:flex;align-items:center;justify-content:center;padding:0 3rem;height:80px;filter:grayscale(1);opacity:0.5;transition:all 0.25s;}
 .brand-card:hover{filter:grayscale(0);opacity:1;}
 .brand-card img{width:120px;height:54px;object-fit:contain;}
 .brand-card.txt{font-family:'Aboreto',serif;font-weight:700;font-size:1.6rem;letter-spacing:0.06em;color:var(--dark);width:120px;text-align:center;}
-@keyframes brandscroll{from{transform:translate3d(0,0,0);}to{transform:translate3d(-50%,0,0);}}
-  @media(max-width:768px){
-  .brands-track{animation-duration:10s;}
+@media(max-width:768px){
   .brand-card{padding:0 1.5rem;height:60px;}
   .brand-card img{width:90px;height:40px;}
   .brand-card.txt{font-size:1.2rem;width:90px;}
@@ -513,7 +511,7 @@ footer{background:var(--dark2);padding:2.25rem 4rem;display:flex;align-items:cen
 <div class="brands">
   <p class="brands-label">Products We Use</p>
   <div class="brands-row">
-    <div class="brands-track">
+    <div class="brands-track" id="brandsTrack">
       <div class="brand-card"><img src="/mac.png" alt="MAC"></div>
       <div class="brand-card"><img src="/loreal.png" alt="L'Oréal"></div>
       <div class="brand-card"><img src="/Schwarzkopf.png" alt="Schwarzkopf"></div>
@@ -617,6 +615,29 @@ gsap.utils.toArray('.port-item').forEach(function(el,i){gsap.fromTo(el,{opacity:
 function toggleSidebar(){var s=document.getElementById('sidebar'),o=document.getElementById('overlay'),h=document.getElementById('ham');var open=s.classList.toggle('open');o.classList.toggle('show',open);h.classList.toggle('open',open);document.body.style.overflow=open?'hidden':'';}
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');document.getElementById('ham').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSidebar();});
+
+/* BRANDS MARQUEE — JS-driven, measured width, true infinite loop with no reset */
+(function(){
+  var track=document.getElementById('brandsTrack');
+  if(!track) return;
+  var halfWidth=0;
+  function measure(){ halfWidth=track.scrollWidth/2; }
+  measure();
+  window.addEventListener('resize',measure);
+  var speed=window.innerWidth<=768?70:35;
+  var offset=0,lastTime=null;
+  function step(time){
+    if(lastTime===null) lastTime=time;
+    var dt=(time-lastTime)/1000;
+    lastTime=time;
+    offset+=speed*dt;
+    while(halfWidth>0&&offset>=halfWidth) offset-=halfWidth;
+    track.style.transform='translate3d('+(-offset)+'px,0,0)';
+    requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+})();
+
 gsap.fromTo('.about-img-wrap',{opacity:0,y:40},{opacity:1,y:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
 gsap.fromTo('.about > div:last-child',{opacity:0,y:40},{opacity:1,y:0,duration:1.6,ease:'power3.out',scrollTrigger:{trigger:'.about',start:'top 75%'}});
 gsap.fromTo('.astat',{opacity:0,y:20},{opacity:1,y:0,duration:0.9,stagger:0.22,ease:'power3.out',scrollTrigger:{trigger:'.about-stats',start:'top 88%'}});
